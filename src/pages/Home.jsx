@@ -18,7 +18,7 @@ export default function Component() {
     className="absolute inset-0"
     style={{
       clipPath: "polygon(75% 0%, 50% 50%, 75% 100%, 0% 100%, 0% 0%)",
-      backgroundColor: "rgba(0, 0, 0, 0.5)" // Negro con opacidad
+      backgroundColor: "rgba(0, 0, 0, 0.5)" 
     }}
   />
   <div className="absolute inset-0" />

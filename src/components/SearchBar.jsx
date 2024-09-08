@@ -248,7 +248,6 @@ export default function SearchBar() {
                 onClick={() => setShowPeopleSelector(!showPeopleSelector)}
               >
                 <div className="flex items-center gap-2">
-                  {/* Aquí podrías agregar un ícono si lo deseas */}
                   <span>{`${totalPeople} personas`}</span>
                 </div>
               </button>
