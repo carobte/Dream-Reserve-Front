@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { UsersIcon,ChevronsUpDownIcon } from '../icons';
 
 export default function SearchBar() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [people, setPeople] = useState({ adults: 2, children: 0, babies: 0 });
+  const [totalPeople, setTotalPeople] = useState(2); 
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [showPeopleSelector, setShowPeopleSelector] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleCheckboxChange = (value) => {
+    setSelectedOption(selectedOption === value ? null : value);
+  };
 
   const today = new Date();
 
@@ -26,15 +30,17 @@ export default function SearchBar() {
 
   return (
     <>
-      {/* opciones de selecion  */}
+      {/* Opciones de selección */}
       <div className="flex items-center space-x-4 mb-8 md:mb-12 lg:mb-16">
-    
+        {/* Paquete completo */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
             id="paquete-completo"
             name="opciones"
             value="paquete-completo"
+            checked={selectedOption === 'paquete-completo'}
+            onChange={() => handleCheckboxChange('paquete-completo')}
             className="hidden peer"
           />
           <label
@@ -43,7 +49,7 @@ export default function SearchBar() {
           >
             <div className="w-5 h-5 flex items-center justify-center border-2 border-white rounded-md peer-checked:bg-blue-500 peer-checked:border-transparent">
               <svg
-                className="hidden peer-checked:block w-4 h-4 text-white"
+                className={`w-4 h-4 text-white ${selectedOption === 'paquete-completo' ? '' : 'hidden'}`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -61,12 +67,15 @@ export default function SearchBar() {
           </label>
         </div>
 
+        {/* Solo hotel */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
             id="solo-hotel"
             name="opciones"
             value="solo-hotel"
+            checked={selectedOption === 'solo-hotel'}
+            onChange={() => handleCheckboxChange('solo-hotel')}
             className="hidden peer"
           />
           <label
@@ -75,7 +84,7 @@ export default function SearchBar() {
           >
             <div className="w-5 h-5 flex items-center justify-center border-2 border-white rounded-md peer-checked:bg-blue-500 peer-checked:border-transparent">
               <svg
-                className="hidden peer-checked:block w-4 h-4 text-white"
+                className={`w-4 h-4 text-white ${selectedOption === 'solo-hotel' ? '' : 'hidden'}`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -93,12 +102,15 @@ export default function SearchBar() {
           </label>
         </div>
 
+        {/* Vuelos */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
             id="vuelos"
             name="opciones"
             value="vuelos"
+            checked={selectedOption === 'vuelos'}
+            onChange={() => handleCheckboxChange('vuelos')}
             className="hidden peer"
           />
           <label
@@ -107,7 +119,7 @@ export default function SearchBar() {
           >
             <div className="w-5 h-5 flex items-center justify-center border-2 border-white rounded-md peer-checked:bg-blue-500 peer-checked:border-transparent">
               <svg
-                className="hidden peer-checked:block w-4 h-4 text-white"
+                className={`w-4 h-4 text-white ${selectedOption === 'vuelos' ? '' : 'hidden'}`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -125,21 +137,24 @@ export default function SearchBar() {
           </label>
         </div>
 
+        {/* Tours */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
-            id="vuelos"
+            id="tours"
             name="opciones"
-            value="vuelos"
+            value="tours"
+            checked={selectedOption === 'tours'}
+            onChange={() => handleCheckboxChange('tours')}
             className="hidden peer"
           />
           <label
-            htmlFor="vuelos"
+            htmlFor="tours"
             className="flex items-center cursor-pointer text-white space-x-2"
           >
             <div className="w-5 h-5 flex items-center justify-center border-2 border-white rounded-md peer-checked:bg-blue-500 peer-checked:border-transparent">
               <svg
-                className="hidden peer-checked:block w-4 h-4 text-white"
+                className={`w-4 h-4 text-white ${selectedOption === 'tours' ? '' : 'hidden'}`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -156,130 +171,102 @@ export default function SearchBar() {
             <span>Tours</span>
           </label>
         </div>
-        
       </div>
 
-       {/* barra de busqeuda */}
-      <div className="bg-custom-navy-blue-opacity bg-opacity-75 p-4 rounded-full flex flex-col md:flex-row  items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
+      {/* Barra de búsqueda */}
+      <div className="bg-custom-navy-blue-opacity sm:rounded-none  md:rounded-full  bg-opacity-75 p-4 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
         <form className="flex flex-col md:flex-row items-center gap-4 w-full">
-          {/*Lugar de origen Desde*/}
-          <div className="relative flex-1">
-            <input
-              type="text"
-              value={origin}
-              onChange={(e) => setOrigin(e.target.value)}
-              placeholder="Desde"
-              className="bg-transparent text-white px-3 py-2 w-full placeholder-white dark:placeholder-white placeholder-opacity-100 border-r-2 focus:outline-none focus:ring-0 focus:border-white"
-            />
+          {selectedOption !== 'solo-hotel' && selectedOption !== 'tours' && (
+            <>
+              {/* Lugar de origen Desde */}
+              <div className="relative flex-1">
+                <input
+                  type="text"
+                  value={origin}
+                  onChange={(e) => setOrigin(e.target.value)}
+                  placeholder="Desde"
+                  className="bg-transparent border-r-2 text-white px-3 py-2 w-full placeholder-white dark:placeholder-white placeholder-opacity-100  focus:outline-none focus:ring-0 focus:border-white"
+                />
+              </div>
+            </>
+          )}
 
-
-          </div>
-
-          {/*Lugar de destino Hasta*/}
+          {/* Lugar de destino Hasta / Destino */}
           <div className="relative flex-1">
             <input
               type="text"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              placeholder="Hasta"
+              placeholder={selectedOption === 'tours' ? 'Ciudad del tour' : 'Hasta'}
               className="bg-transparent text-white px-3 py-2 w-full placeholder-white dark:placeholder-white placeholder-opacity-100 border-r-2 focus:outline-none focus:ring-0 focus:border-white"
             />
           </div>
 
-          {/* Campo de Fechas */}
-          <div className="relative flex-1">
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              customInput={
-                <CustomInput
-                  value={startDate ? startDate.toLocaleDateString() : "Desde"}
+          {selectedOption !== 'tours' && (
+            <>
+              {/* Campo de Fechas */}
+              <div className="relative flex-1">
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  customInput={
+                    <CustomInput
+                      value={startDate ? startDate.toLocaleDateString() : "Desde"}
+                    />
+                  }
+                  className="bg-white dark:bg-gray-800 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-0 focus:border-white"
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Selecciona una fecha"
+                  minDate={today}
                 />
-              }
-              className="bg-white dark:bg-gray-800 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-0 focus:border-white"
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Selecciona una fecha"
-              minDate={today}
-            />
-          </div>
+              </div>
 
-          <div className="relative flex-1">
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              customInput={
-                <CustomInput
-                  value={endDate ? endDate.toLocaleDateString() : "Hasta"}
+              <div className="relative flex-1">
+                <DatePicker
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  customInput={
+                    <CustomInput
+                      value={endDate ? endDate.toLocaleDateString() : "Hasta"}
+                    />
+                  }
+                  className="bg-white dark:bg-gray-800 border border-gray-300 rounded-md p-2"
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Selecciona una fecha"
+                  minDate={startDate || today}
                 />
-              }
-              className="bg-white dark:bg-gray-800 border border-gray-300 rounded-md p-2"
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Selecciona una fecha"
-              minDate={startDate || today}
-            />
-          </div>
+              </div>
+            </>
+          )}
 
           {/* Campo de Personas */}
-          <div className="relative flex-1">
-            <button
-              type="button"
-              className="bg-transparent text-white px-3 py-2 w-full placeholder-white dark:placeholder-white placeholder-opacity-100 border-r-2"
-              onClick={() => setShowPeopleSelector(!showPeopleSelector)}
-            >
-              <div className="flex items-center gap-2">
-                <UsersIcon className="w-5 h-5" />
-                <span>{`${people.adults} adultos, ${people.children} niños, bebes ${people.babies}`}</span>
-              </div>
-            </button>
-            {showPeopleSelector && (
-              <div className="absolute top-full left-0 mt-2 z-10 bg-white  rounded-md shadow-lg p-4 w-[300px]">
-                <div className="grid grid-cols-1 gap-4">
+          {(selectedOption !== 'tours' || showPeopleSelector) && (
+            <div className="relative flex-1">
+              <button
+                type="button"
+                className="bg-transparent text-white px-3 py-2 w-full placeholder-white dark:placeholder-white placeholder-opacity-100 border-r-2"
+                onClick={() => setShowPeopleSelector(!showPeopleSelector)}
+              >
+                <div className="flex items-center gap-2">
+                  {/* Aquí podrías agregar un ícono si lo deseas */}
+                  <span>{`${totalPeople} personas`}</span>
+                </div>
+              </button>
+              {showPeopleSelector && (
+                <div className="absolute top-full left-0 mt-2 z-10 bg-white rounded-md shadow-lg p-4 w-[300px]">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Adultos</span>
+                    <span className="text-sm font-medium">Total de personas</span>
                     <input
                       type="number"
-                      value={people.adults}
-                      onChange={(e) =>
-                        setPeople({
-                          ...people,
-                          adults: parseInt(e.target.value, 10),
-                        })
-                      }
-                      className="bg-gray-100  border border-gray-300 rounded-md p-1 w-16 text-center"
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Niños</span>
-                    <input
-                      type="number"
-                      value={people.children}
-                      onChange={(e) =>
-                        setPeople({
-                          ...people,
-                          children: parseInt(e.target.value, 10),
-                        })
-                      }
-                      className="bg-gray-100  border border-gray-300 rounded-md p-1 w-16 text-center"
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Bebés</span>
-                    <input
-                      type="number"
-                      value={people.babies}
-                      onChange={(e) =>
-                        setPeople({
-                          ...people,
-                          babies: parseInt(e.target.value, 10),
-                        })
-                      }
-                      className="bg-gray-100  border border-gray-300 rounded-md p-1 w-16 text-center"
+                      value={totalPeople}
+                      onChange={(e) => setTotalPeople(parseInt(e.target.value, 10))}
+                      className="bg-gray-100 border border-gray-300 rounded-md p-1 w-16 text-center"
                     />
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
           {/* Botón de Buscar */}
           <button
@@ -293,6 +280,5 @@ export default function SearchBar() {
         </form>
       </div>
     </>
-    
   );
 }

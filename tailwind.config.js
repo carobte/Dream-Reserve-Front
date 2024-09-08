@@ -18,3 +18,10 @@ export default {
   },
   plugins: [],
 }
+// note
+// las medidades de respnsive 
+// sm: Para pantallas de 640px o más.
+// md: Para pantallas de 768px o más.
+// lg: Para pantallas de 1024px o más.
+// xl: Para pantallas de 1280px o más.
+// 2xl: Para pantallas de 1536px o más.

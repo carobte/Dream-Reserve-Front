@@ -8,7 +8,7 @@ export default function Component() {
     <div
   className="relative w-full h-screen"
   style={{
-    backgroundImage: "url(https://images.unsplash.com/photo-1622942857718-9e5da273f0d2?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+    backgroundImage: "url(https://images.unsplash.com/photo-1578115172582-b27c8cd114bb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat"
@@ -28,7 +28,7 @@ export default function Component() {
       <h1 className="text-2xl font-bold md:text-2xl lg:text-3xl">
         <span className="text-custom-navy-blue">D</span>reams <span className="text-custom-navy-blue">R</span>eserve
       </h1>
-      <h2 className="text-5xl font-bold md:text-6xl lg:text-7xl">
+      <h2 className="text-5xl text-balance font-bold md:text-6xl lg:text-8xl  lg:max-w-2xl ">
         ¿A qué <span className="text-custom-navy-blue">lugar</span> quiere <span className="text-custom-navy-blue">viajar</span>?
       </h2>
       <p className="text-lg text-gray-400 md:text-xl lg:text-2xl">
