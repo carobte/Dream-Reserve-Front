@@ -1,0 +1,32 @@
+[
+  {
+      "id": 1,
+      "name": "City Tour",
+      "price": 50.00,
+      "category": "Urban"
+  },
+  {
+      "id": 2,
+      "name": "Mountain Hiking",
+      "price": 120.50,
+      "category": "Adventure"
+  },
+  {
+      "id": 3,
+      "name": "Beach Getaway",
+      "price": 75.00,
+      "category": "Relaxation"
+  },
+  {
+      "id": 4,
+      "name": "Cultural Heritage Tour",
+      "price": 60.00,
+      "category": "Cultural"
+  },
+  {
+      "id": 5,
+      "name": "Safari Adventure",
+      "price": 200.00,
+      "category": "Wildlife"
+  }
+]
