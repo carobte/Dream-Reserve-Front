@@ -1,26 +1,26 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import {SearchBar, NavbarHome} from '../components/index';
 
-export default function Component() {
+export default function Home() {
 
 
   return (
     <div
-  className="relative w-full h-screen"
-  style={{
-    backgroundImage: "url(https://images.unsplash.com/photo-1578115172582-b27c8cd114bb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat"
-  }}
->
-  <div
-    className="absolute inset-0"
-    style={{
-      clipPath: "polygon(75% 0%, 50% 50%, 75% 100%, 0% 100%, 0% 0%)",
-      backgroundColor: "rgba(0, 0, 0, 0.5)" 
-    }}
-  />
+      className="relative w-full h-screen"
+      style={{
+        backgroundImage: "url(https://images.unsplash.com/photo-1578115172582-b27c8cd114bb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
+      }}
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          clipPath: "polygon(75% 0%, 50% 50%, 75% 100%, 0% 100%, 0% 0%)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)" 
+        }}
+      />
   <div className="absolute inset-0" />
   <div className="absolute inset-0 flex flex-col items-start justify-center px-8 md:px-16 lg:px-32">
     <NavbarHome />
@@ -37,7 +37,6 @@ export default function Component() {
     </div>
     <SearchBar />
   </div>
-</div>
-
+    </div>
   );
 }
