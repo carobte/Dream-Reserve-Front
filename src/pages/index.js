@@ -1,11 +1,11 @@
 import Home from './Home';
-import ExploreOffers from './ExploreOffers';
+// import ExploreOffers from './ExploreOffers';
 import Login from './Login';
-import Reservations from './Reservations';
+// import Reservations from './Reservations';
 
 export {
   Home,
-  ExploreOffers,
-  Login,
-  Reservations,
+  // ExploreOffers,
+  Login
+  // Reservations,
 };
