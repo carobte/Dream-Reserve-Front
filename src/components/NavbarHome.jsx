@@ -22,7 +22,8 @@ export default function Home() {
     navigate(path);
   };
 
-  const loginPath = '/login'; 
+  const loginPath = '/login';
+  const registerPath = '/register'; 
 
   return (
     <>
@@ -36,6 +37,12 @@ export default function Home() {
           onClick={() => handleButtonClick(loginPath)}
         >
           Iniciar sesión
+        </button>
+        <button 
+          className="bg-custom-green text-white py-2 px-4 rounded"
+          onClick={() => handleButtonClick(registerPath)}
+        >
+          Registrar
         </button>
       </div>
 
