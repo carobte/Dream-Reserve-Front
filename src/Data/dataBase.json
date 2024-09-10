@@ -1,32 +1,286 @@
-[
-  {
-      "id": 1,
-      "name": "City Tour",
-      "price": 50.00,
-      "category": "Urban"
-  },
-  {
-      "id": 2,
-      "name": "Mountain Hiking",
-      "price": 120.50,
-      "category": "Adventure"
-  },
-  {
-      "id": 3,
-      "name": "Beach Getaway",
-      "price": 75.00,
-      "category": "Relaxation"
-  },
-  {
-      "id": 4,
-      "name": "Cultural Heritage Tour",
-      "price": 60.00,
-      "category": "Cultural"
-  },
-  {
-      "id": 5,
-      "name": "Safari Adventure",
-      "price": 200.00,
-      "category": "Wildlife"
-  }
-]
+{
+    "tour": [
+        {
+            "id": 1,
+            "name": "graffiti tour comuna 13",
+            "price": 30000,
+            "category": "cultural",
+            "description": "tour cultural por uno de los barrios más emblemáticos de Medellín, conocido por su arte urbano, murales, escaleras eléctricas y vibrante historia de transformación social."
+        },
+        {
+            "id": 2,
+            "name": "tour montaña",
+            "price": 150000,
+            "category": "al aire libre",
+            "description": "explora las montañas de Medellín con caminatas que ofrecen vistas panorámicas de la ciudad, contacto con la naturaleza y una experiencia relajante en entornos naturales."
+        },
+        {
+            "id": 3,
+            "name": "recorrido histórico",
+            "price": 20000,
+            "category": "cultural",
+            "description": "visita lugares icónicos como la Plaza Botero, el Museo de Antioquia y el Pueblito Paisa, descubriendo la historia y el patrimonio cultural de Medellín."
+        },
+        {
+            "id": 4,
+            "name": "jardin botánico",
+            "price": 20000,
+            "category": "Culturalal aire libre",
+            "description": "espacio verde lleno de flora local y exótica, ideal para paseos relajantes, con áreas como el Orquideorama y senderos que celebran la biodiversidad."
+        },
+        {
+            "id": 5,
+            "name": "parque explora",
+            "price": 48000,
+            "category": "educativo",
+            "description": "museo interactivo de ciencia y tecnología, con acuario y exhibiciones dinámicas, perfecto para aprender mientras te diviertes"
+        }
+    ],
+    "hotel": [
+        {
+            "id": 1,
+            "name": "aura",
+            "nit": 1254021,
+            "address": "tv 39B # 70-111 laureles  estadio medellin ",
+            "phone": "3015641214",
+            "email": "aurahotel@gmail.com",
+            "description": "moderno y cómodo hotel en el centro de Medellín, ideal para viajeros de negocios y turistas. Ofrece habitaciones con Wi-Fi, restaurante, gimnasio y cercanía a puntos turísticos clave."
+        },
+        {
+            "id": 2,
+            "name": "hotel estrella",
+            "nit": 900123456,
+            "address": "calle 10 #20-30",
+            "phone": "3001234567",
+            "email": "estrella@hotel.com",
+            "description": "moderno y cómodo hotel en el centro de Medellín, ideal para viajeros de negocios y turistas. Ofrece habitaciones con Wi-Fi, restaurante, gimnasio y cercanía a puntos turísticos clave."
+        },
+        {
+            "id": 3,
+            "name": "hotel sol",
+            "nit": 900654321,
+            "address": "avenida 5 #15-25",
+            "phone": "3009876543",
+            "email": "sol@hotel.com",
+            "description": "moderno y cómodo hotel en el centro de Medellín, ideal para viajeros de negocios y turistas. Ofrece habitaciones con Wi-Fi, restaurante, gimnasio y cercanía a puntos turísticos clave."
+        },
+        {
+            "id": 4,
+            "name": "hotel luna",
+            "nit": 900789012,
+            "address": "carrera 12 #8-22",
+            "phone": "3106543210",
+            "email": "luna@hotel.com",
+            "description": "moderno y cómodo hotel en el centro de Medellín, ideal para viajeros de negocios y turistas. Ofrece habitaciones con Wi-Fi, restaurante, gimnasio y cercanía a puntos turísticos clave."
+        },
+        {
+            "id": 5,
+            "name": "hotel mar",
+            "nit": 900456789,
+            "address": "calle 45 #12-15",
+            "phone": "3201237890",
+            "email": "mar@hotel.com",
+            "description": "moderno y cómodo hotel en el centro de Medellín, ideal para viajeros de negocios y turistas. Ofrece habitaciones con Wi-Fi, restaurante, gimnasio y cercanía a puntos turísticos clave."
+        }
+    ],
+    "room": [
+        {
+            "id": 1,
+            "type": "Sencilla",
+            "room_number": 101,
+            "price": 50000,
+            "status": "Disponible",
+            "hotel_id": 1,
+            "description":" equipada con una cama individual o doble pequeña, baño privado, escritorio y servicios básicos como Wi-Fi, televisión y aire acondicionado.",
+            "people_capacity": 1
+        },
+        {
+            "id": 2,
+            "type": "Doble",
+            "room_number": 202,
+            "price": 80000,
+            "status": "No disponible",
+            "hotel_id": 2,
+            "description": "con una cama doble o dos camas individuales. Incluye baño privado, televisión, Wi-Fi y otras comodidades, como armario, escritorio y, en algunos casos, minibar.",
+            "people_capacity":2
+        },
+        {
+            "id": 3,
+            "type": "Familiar",
+            "room_number": 303,
+            "price": 120000,
+            "status": "Disponible",
+           "hotel_id": 3,
+            "description": "equipada con una cama doble para los adultos y una o más camas individuales o literas para los niños. Ofrece servicios como Wi-Fi, televisión, baño privado y espacio adicional para acomodar a más personas de manera cómoda.",
+            "people_capacity":4
+        },
+        {
+            "id": 4,
+            "type": "Doble",
+            "room_number": 404,
+            "price": 85000,
+            "status": "Disponible",
+            "hotel_id": 4,
+            "description": "con una cama doble o dos camas individuales. Incluye baño privado, televisión, Wi-Fi y otras comodidades, como armario, escritorio y, en algunos casos, minibar.",
+            "people_capacity":2
+        }
+    ],
+    "reserve": [
+        {
+            "id": 1,
+            "person_id": 1,
+            "room_id": 2,
+            "food_id": 3,
+            "flight_id": 1,
+            "tour_id": 2,
+            "check_in":"2024-09-12 01:33:24" ,
+            "check_out":"2024-09-15 01:33:24" ,
+            "people_capacity": 4,
+            "total":5240000
+        },
+        {
+            "id": 2,
+            "person_id": 2,
+            "room_id": 1,
+            "food_id": 1,   
+            "flight_id": 1,
+            "tour_id": 1,
+            "check_in":"2024-09-12 01:33:24" ,
+            "check_out":"2024-09-20 01:33:24" ,
+            "people_capacity": 3,
+            "total":3975000
+        }
+    ],
+    "person": [
+        {
+            "id": 1,
+            "name": "valeria",
+            "last_name": "piedrahita",
+            "document_number": "1000662024",
+            "email": "vale@correo.com",
+            "password": "123456",
+            "document_type_id": 1
+        },
+        {
+            "id": 2,
+            "name": "carlos",
+            "last_name": "ramírez",
+            "document_number": "1000662025",
+            "email": "carlos@correo.com",
+            "password": "789012",
+            "document_type_id": 1
+        },
+        {
+            "id": 3,
+            "name": "ana",
+            "last_name": "gomez",
+            "document_number": "1000662026",
+            "email": "ana@correo.com",
+            "password": "345678",
+            "document_type_id": 1
+        },
+        {
+            "id": 4,
+            "name": "luis",
+            "last_name": "martinez",
+            "document_number": "1000662027",
+            "email": "luis@correo.com",
+            "password": "901234",
+            "document_type_id": 1
+        },
+        {
+            "id": 5,
+            "name": "laura",
+            "last_name": "fernandez",
+            "document_number": "1000662028",
+            "email": "laura@correo.com",
+            "password": "567890",
+            "document_type_id": 1
+        }
+    ],
+    "document_type": [
+        {
+            "id": 3,
+            "abrevation": "CC",
+            "name": "cédula de Ciudadania"
+        },
+        {
+            "id": 2,
+            "abrevation": "PA",
+            "name": "pasaporte"
+        }
+    ],
+    "flight": [
+      {
+        "id": 1,
+        "name": "vuelo 101",
+        "date": "2024-09-20 00:00:00",
+        "duration":"1h 30min" ,
+        "price": 1000000,
+        "seat": "a01",
+        "origin":"bogota" ,
+        "destinty": "medellin"
+      },
+      {
+       "id": 2,
+        "name": "vuelo 202",
+        "date": "2024-09-21 00:00:00",
+        "duration":"30min" ,
+        "price": 580000,
+        "seat": "b50",
+        "origin":"cali" ,
+        "destinty": "medellin"
+      },
+      {"id": 3,
+        "name": "vuelo 303",
+        "date": "2024-09-22 00:00:00",
+        "duration":"2h" ,
+        "price": 2000000,
+        "seat": "j07",
+        "origin":"pereira" ,
+        "destinty": "medellin"
+      },
+      {
+        "id": 4,
+        "name": "vuelo 404",
+        "date": "2024-09-23 00:00:00",
+        "duration":"1h" ,
+        "price": 800000,
+        "seat": "k01",
+        "origin":"miami" ,
+        "destinty": "medellin"
+      }
+    ],
+    "food": [
+      {
+        "id": 1,
+        "cuantity": 1,
+        "price": 25000,
+        "description": "una comida al día de tu elección"
+      },
+      {
+        "id": 2,
+        "cuantity": 2,
+        "price": 45000,
+        "description":"dos comidas al día de tu elección" 
+      },
+      {
+        "id": 3,
+        "cuantity": 3,
+        "price": 80000,
+        "description":"tres comidas al día de tu elección" 
+      },
+      {
+        "id": 4,
+        "cuantity": "todas",
+        "price": 120000,
+        "description":"comidas ilimitadas" 
+      },
+      {
+        "id": 5,
+        "cuantity": 0,
+        "price": 0,
+        "description":"sin alimentación" 
+      }
+    ]
+}
