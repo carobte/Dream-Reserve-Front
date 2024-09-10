@@ -19,7 +19,7 @@ export default function Login() {
     try {
       // Solicitud al endpoint de autenticación
       const response = await fetch('http://localhost:3000/person', {
-        method: 'GET', 
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -32,7 +32,7 @@ export default function Login() {
 
         if (user) {
           alert('Inicio de sesión exitoso');
-          // Redirige a la página de inicio pero esta pendiente por definir la redirrecion depues
+          // Redirige a la página de inicio
           navigate('/');
         } else {
           setError('Email o contraseña incorrectos');
@@ -158,7 +158,14 @@ export default function Login() {
             )}
           </form>
           <div className="mt-4 text-sm text-white text-center">
-            <p>Aun no tienes una cuenta ? <a href="#" className="text-custom-navy-blue hover:underline">Registrar Aqui</a></p>
+            <p>Aún no tienes una cuenta? 
+              <button
+                onClick={() => navigate('/register')}
+                className="text-custom-navy-blue hover:underline ml-1"
+              >
+                Regístrate aquí
+              </button>
+            </p>
           </div>
         </div>
       </div>
