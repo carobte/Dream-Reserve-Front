@@ -1,5 +1,5 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom';
-import { Home, Login, Register } from '../pages';
+import { Home, Login, Register, AboutUs   } from '../pages';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -9,6 +9,7 @@ export const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       {/* <Route path="/reservations" element={<Reservations />} /> */}
+      <Route path="/about-us" element={<AboutUs />} />
     </>
   )
 );

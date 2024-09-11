@@ -4,10 +4,13 @@ import Login from './Login';
 // import Reservations from './Reservations';
 import Register from './Register';
 
+import AboutUs from './AboutUs';
+
 export {
   Home,
   // ExploreOffers,
   Login,
-  Register
+  Register,
+  AboutUs,
   // Reservations,
 };
