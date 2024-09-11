@@ -18,32 +18,49 @@ export default function AboutUsPage() {
                     </nav>
 
                 </header>
-
-                <div className="max-w-8xl mx-auto h-96 p-4 border-solid border-4 border-black mt-4 flex flex-row space-x-4">
-
-                    <div className="w-3/4 border-solid border-4 border-black">
-                    textoooooo
-
-                    </div>
-
-                    <div className="w-1/2 border-solid border-4 border-black flex flex-col space-y-4 p-4 ">
-
-                        <div className=" border-solid  border-4 border-black rounded-xl w-full h-full flex flex-col space-y-4">
-
-                            <div className=' w-full h-1/2 border-solid border-4 border-black'>
-                            imagen
-                            </div>
-
-                            <div className=' w-full h-1/2 border-solid border-4 border-black'>
-                                texto
-                            </div>
-
+                {/* banner */}
+                <section>
+                    <div className="relative h-[80vh] w-full overflow-hidden bg-gray-800 text-white mt-5">
+                        <div className="absolute inset-0 z-0">
+                            <img
+                                src="https://i.pinimg.com/originals/e3/ec/a6/e3eca6e54c62a90611e131a1327414c3.jpg"
+                                alt="Vista panorámica de ciudad montañosa"
+                                className="h-full w-full object-cover opacity-50"
+                            />
                         </div>
-
+                        <div className="relative z-10 flex h-full">
+                            <div className="w-1/2 bg-gray-800 bg-opacity-70 p-12">
+                                <h2 className="mb-6 text-5xl font-bold text-teal-400">
+                                    Acerca de <br />
+                                    nosotros.
+                                </h2>
+                                <p className="text-lg leading-relaxed">
+                                    En <span className="font-semibold">Dreams Reserve</span>, transformamos el
+                                    concepto de viajar a un nuevo nivel, ofreciendo
+                                    experiencias únicas que se ajustan
+                                    perfectamente a tus deseos y necesidades. A
+                                    diferencia de otras agencias de turismo, nos
+                                    especializamos en diseñar viajes completamente
+                                    personalizables, garantizando que cada aspecto
+                                    de tu aventura sea tan único como tú.
+                                </p>
+                            </div>
+                            <div className="flex w-1/2 items-center justify-center">
+                                <div className="rounded-lg bg-teal-600 bg-opacity-80 p-6 text-center">
+                                    <h3 className="mb-4 text-xl font-semibold">Nuestros Fundadores</h3>
+                                    <img
+                                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                        alt="Fundadores de Dreams Reserve"
+                                        className="mb-4 h-48 w-full rounded-lg object-cover"
+                                    />
+                                    <button className="rounded bg-teal-500 px-4 py-2 font-semibold text-white hover:bg-teal-600 transition duration-300">
+                                        conocer mas
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                </div>
-
+                </section>
             </div>
         </>
     );
