@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la redirección
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -10,9 +11,25 @@ export default function SearchBar() {
   const [destination, setDestination] = useState('');
   const [showPeopleSelector, setShowPeopleSelector] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const navigate = useNavigate(); 
 
   const handleCheckboxChange = (value) => {
     setSelectedOption(selectedOption === value ? null : value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault(); 
+    const searchParams = new URLSearchParams({
+      startDate: startDate ? startDate.toISOString() : '',
+      endDate: endDate ? endDate.toISOString() : '',
+      totalPeople,
+      origin,
+      destination,
+      selectedOption
+    }).toString();
+    
+
+    navigate(`/search-results?${searchParams}`);
   };
 
   const today = new Date();
@@ -175,7 +192,7 @@ export default function SearchBar() {
 
       {/* Barra de búsqueda */}
       <div className="bg-custom-navy-blue-opacity sm:rounded-none  md:rounded-full  bg-opacity-75 p-4 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
-        <form className="flex flex-col md:flex-row items-center gap-4 w-full">
+        <form className="flex flex-col md:flex-row items-center gap-4 w-full" onSubmit={handleSearch}>
           {selectedOption !== 'solo-hotel' && selectedOption !== 'tours' && (
             <>
               {/* Lugar de origen Desde */}

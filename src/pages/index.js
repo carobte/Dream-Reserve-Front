@@ -3,11 +3,13 @@ import Home from './Home';
 import Login from './Login';
 // import Reservations from './Reservations';
 import Register from './Register';
+import SearchResults from './SearchResults';
 
 export {
   Home,
   // ExploreOffers,
   Login,
-  Register
+  Register,
+  SearchResults,
   // Reservations,
 };
