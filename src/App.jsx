@@ -1,9 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Routes/Router'; 
+import { PriceProvider } from './context/PriceContext'; 
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <PriceProvider>
+      <RouterProvider router={router} />
+    </PriceProvider>
   );
 }
 
