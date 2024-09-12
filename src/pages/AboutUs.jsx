@@ -28,30 +28,34 @@ export default function AboutUsPage() {
                                 className="h-full w-full object-cover opacity-50"
                             />
                         </div>
-                        <div className="relative z-10 flex h-full">
-                            <div className="w-1/2 bg-gray-800 bg-opacity-70 p-12">
-                                <h2 className="mb-6 text-5xl font-bold text-teal-400">
-                                    Acerca de <br />
-                                    nosotros.
-                                </h2>
-                                <p className="text-lg leading-relaxed">
-                                    En <span className="font-semibold">Dreams Reserve</span>, transformamos el
-                                    concepto de viajar a un nuevo nivel, ofreciendo
-                                    experiencias únicas que se ajustan
-                                    perfectamente a tus deseos y necesidades. A
-                                    diferencia de otras agencias de turismo, nos
-                                    especializamos en diseñar viajes completamente
-                                    personalizables, garantizando que cada aspecto
-                                    de tu aventura sea tan único como tú.
-                                </p>
+                        <div className="relative z-10 flex h-full border">
+                            <div className="w-3/4 bg-gray-800 bg-opacity-70 p-12 border">
+                                <div className="border p-6 max-w-xl">
+                                    <h2 className="mb-6 text-8xl font-bold text-custom-green border">
+                                        Acerca de <br />
+                                        
+                                        nosotros.
+                                    </h2>
+                                    <p className="text-xl font- leading-relaxed border ">
+                                        En <span className="font-semibold">Dreams Reserve</span>, transformamos el
+                                        concepto de viajar a un nuevo nivel, ofreciendo
+                                        experiencias únicas que se ajustan
+                                        perfectamente a tus deseos y necesidades. A
+                                        diferencia de otras agencias de turismo, nos
+                                        especializamos en diseñar viajes completamente
+                                        personalizables, garantizando que cada aspecto
+                                        de tu aventura sea tan único como tú.
+                                    </p>
+                                </div>
+
                             </div>
                             <div className="flex w-1/2 items-center justify-center">
-                                <div className="rounded-lg bg-teal-600 bg-opacity-80 p-6 text-center">
+                                <div className="rounded-lg bg-teal-600 bg-opacity-80 p-6 text-center ">
                                     <h3 className="mb-4 text-xl font-semibold">Nuestros Fundadores</h3>
                                     <img
                                         src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
                                         alt="Fundadores de Dreams Reserve"
-                                        className="mb-4 h-48 w-full rounded-lg object-cover"
+                                        className="mb-4 max-h-64  w-full rounded-lg object-cover"
                                     />
                                     <button className="rounded bg-teal-500 px-4 py-2 font-semibold text-white hover:bg-teal-600 transition duration-300">
                                         conocer mas
