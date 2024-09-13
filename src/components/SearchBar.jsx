@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+
+
 export default function SearchBar() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -31,6 +33,7 @@ export default function SearchBar() {
 
     navigate(`/search-results?${searchParams}`);
   };
+
 
   const today = new Date();
 

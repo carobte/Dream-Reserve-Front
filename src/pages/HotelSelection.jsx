@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { usePrice } from '../context/PriceContext';
-import { ChevronDown, Star } from 'lucide-react';
+import { Star, Calendar, Users, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HOTELS_PER_PAGE = 4;
@@ -16,9 +16,6 @@ export default function HotelSelection() {
   const [roomNotAvailable, setRoomNotAvailable] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [checkInDate, setCheckInDate] = useState('2024-10-01');
-  const [checkOutDate, setCheckOutDate] = useState('2024-10-07');
-  const [numPeople, setNumPeople] = useState(2);
 
   const { selectedHotel: contextSelectedHotel, setSelectedHotel: setContextSelectedHotel, totalPrice, setTotalPrice } = usePrice();
   const navigate = useNavigate(); 
@@ -167,25 +164,28 @@ export default function HotelSelection() {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Información de búsqueda */}
-      <div className="mb-6 p-4 border rounded-lg shadow-md bg-white">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-green-800">Selecciona el hotel</h2>
-        <p className="text-xl font-semibold text-gray-800">PRECIO GENERAL: COP {totalPrice.toLocaleString()}</p>
-      </div>
-        <div className="flex flex-col md:flex-row md:space-x-4">
-          <div className="flex-1 mb-2 md:mb-0">
-            <p className="text-gray-800 font-semibold">Ciudad: <span className="font-normal">Medellín</span></p>
-          </div>
-          <div className="flex-1 mb-2 md:mb-0">
-            <p className="text-gray-800 font-semibold">Personas: <span className="font-normal">{numPeople}</span></p>
-          </div>
-          <div className="flex-1 mb-2 md:mb-0">
-            <p className="text-gray-800 font-semibold">Fecha de Llegada: <span className="font-normal">{checkInDate}</span></p>
-          </div>
-          <div className="flex-1">
-            <p className="text-gray-800 font-semibold">Fecha de Salida: <span className="font-normal">{checkOutDate}</span></p>
-          </div>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <div className="flex justify-between items-start mb-6 flex-col">
+            <h2 className="text-3xl font-bold text-green-800 mb-4 md:mb-0">Selecciona tu vuelo</h2>
+            <h3 className="text-xl font-semibold text-green-800">Precio Total: COP {totalPrice.toLocaleString()}</h3>
+        </div>
+        <div className="flex space-x-2">
+          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+            <MapPin />
+            dato ciudad destino
+          </button>
+          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+            <Calendar className="mr-2 h-4 w-4" />
+            fecha ida
+          </button>
+          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+            <Calendar className="mr-2 h-4 w-4" />
+            fecha regreso
+          </button>
+          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+            <Users className="mr-2 h-4 w-4" />
+            cantidad personas
+          </button>
         </div>
       </div>
 
