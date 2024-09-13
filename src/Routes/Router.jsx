@@ -1,6 +1,7 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom';
 import { Home, Login, Register } from '../pages';
 
+
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
