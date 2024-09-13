@@ -29,14 +29,17 @@ export default function AboutUsPage() {
                             />
                         </div>
                         <div className="relative z-10 flex h-full border">
-                            <div className="w-3/4 bg-gray-800 bg-opacity-70 p-12 border">
-                                <div className="border p-6 max-w-xl">
-                                    <h2 className="mb-6 text-8xl font-bold text-custom-green border">
+                            <div className="w-3/4 bg-gray-800 bg-opacity-50 p-28 "
+                                style={{
+                                    clipPath: "polygon(0 0, 100% 0, 50% 100%, 0% 100%)",
+                                    backgroundColor: "rgba(0, 0, 0, 0.5)"
+                                }}>
+                                <div className="p-10 max-w-xl">
+                                    <h2 className="mb-12 text-8xl font-bold text-custom-green ">
                                         Acerca de <br />
-                                        
                                         nosotros.
                                     </h2>
-                                    <p className="text-xl font- leading-relaxed border ">
+                                    <p className="text-xl leading-relaxed">
                                         En <span className="font-semibold">Dreams Reserve</span>, transformamos el
                                         concepto de viajar a un nuevo nivel, ofreciendo
                                         experiencias únicas que se ajustan
@@ -47,10 +50,9 @@ export default function AboutUsPage() {
                                         de tu aventura sea tan único como tú.
                                     </p>
                                 </div>
-
                             </div>
                             <div className="flex w-1/2 items-center justify-center">
-                                <div className="rounded-lg bg-teal-600 bg-opacity-80 p-6 text-center ">
+                                <div className="rounded-lg bg-teal-600 bg-opacity-40 p-6 text-center ">
                                     <h3 className="mb-4 text-xl font-semibold">Nuestros Fundadores</h3>
                                     <img
                                         src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
