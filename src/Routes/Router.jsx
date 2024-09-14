@@ -1,5 +1,5 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom';
-import { Home, Login, Register, SearchResults, FlightSelection } from '../pages'; 
+import { Home, Login, Register, SearchResults, FlightSelection, TourSelection, AddToursPrompt} from '../pages'; 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -8,7 +8,8 @@ export const router = createBrowserRouter(
       <Route path="/register" element={<Register />} />
       <Route path="/search-results" element={<SearchResults />} />
       <Route path="/flight-selection" element={<FlightSelection />} />
-
+      <Route path="/tour-selection" element={<TourSelection />} />
+      <Route path="/add-tours" element={<AddToursPrompt />} />
     </>
   )
 );
