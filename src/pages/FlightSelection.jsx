@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { usePrice } from '../context/PriceContext';
-import { Plane, Users, ArrowRight, Calendar, MapPin } from 'lucide-react';
+import { Plane, Users, ArrowRight, PlaneTakeoff, Building, Calendar, MapPin, MapPin as MapPinArrival } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const flights = [
@@ -51,12 +51,10 @@ const flightClasses = [
 export default function FlightSelection() {
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [selectedClass, setSelectedClass] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
   const [previousFlightPrice, setPreviousFlightPrice] = useState(0); // Nueva variable para guardar el precio anterior
   const navigate = useNavigate();
 
   const { selectedHotel, totalPrice, setTotalPrice } = usePrice();
-
 
   const calculateFlightTotalPrice = (basePrice, classId) => {
     const flightClass = flightClasses.find(fc => fc.id === classId);
@@ -73,10 +71,8 @@ export default function FlightSelection() {
 
   useEffect(() => {
     if (selectedFlight) {
-
       const flight = flights.find(flight => flight.id === selectedFlight);
       if (flight) {
-
         const flightTotalPrice = calculateFlightTotalPrice(flight.price, selectedClass[selectedFlight] || flightClasses[0].id);
         const hotelPrice = selectedHotel?.price || 0;
 
@@ -95,13 +91,11 @@ export default function FlightSelection() {
       const flightTotalPrice = calculateFlightTotalPrice(flight.price, selectedClass[selectedFlight] || flightClasses[0].id);
       const hotelPrice = selectedHotel?.price || 0;
 
-
       setTotalPrice(prevTotalPrice => {
         const updatedTotal = prevTotalPrice - previousFlightPrice + flightTotalPrice;
         setPreviousFlightPrice(flightTotalPrice); 
         return updatedTotal;
       });
-
 
       navigate('/add-tours'); 
     }
@@ -159,20 +153,24 @@ export default function FlightSelection() {
               </div>
               <div className="flex flex-col md:flex-row justify-between mt-4">
                 <div className="flex items-center mb-4 md:mb-0">
-                  <div className="text-center mr-8">
-                    <p className="text-2xl font-bold">{flight.departureTime}</p>
-                    <p className="text-sm text-gray-600">{flight.departureAirport}</p>
+                  <div className="flex flex-col items-center mr-8">
+                    <MapPinArrival className="text-green-800" />
+                    <p className="text-center text-sm text-gray-600">{flight.departureTime}</p>
+                    <p className="text-center text-xs text-gray-500">{flight.departureAirport}</p>
                   </div>
+                  <p>________________________________________</p>
                   <div className="flex flex-col items-center mx-4">
-                    <ArrowRight className="w-6 h-6 text-gray-400" />
+                    <PlaneTakeoff className="w-6 h-6 text-gray-400" />
                     <p className="text-xs text-gray-500">{flight.duration}</p>
                     {flight.stops > 0 && (
                       <p className="text-xs text-gray-500">{flight.stops} escala{flight.stops > 1 ? 's' : ''}</p>
                     )}
                   </div>
-                  <div className="text-center ml-8">
-                    <p className="text-2xl font-bold">{flight.arrivalTime}</p>
-                    <p className="text-sm text-gray-600">{flight.arrivalAirport}</p>
+                  <p>________________________________________</p>
+                  <div className="flex flex-col items-center ml-8">
+                    <Building className="text-green-800" />
+                    <p className="text-center text-sm text-gray-600">{flight.arrivalTime}</p>
+                    <p className="text-center text-xs text-gray-500">{flight.arrivalAirport}</p>
                   </div>
                 </div>
                 <div className="flex flex-col items-end">
