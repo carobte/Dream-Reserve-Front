@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { usePrice } from '../context/PriceContext';
 import { Star, Calendar, Users, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const HOTELS_PER_PAGE = 4;
+
+const HOTELS_PER_PAGE = 5;
 
 export default function HotelSelection() {
   const [hotels, setHotels] = useState([]);
@@ -17,51 +19,47 @@ export default function HotelSelection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   const { selectedHotel: contextSelectedHotel, setSelectedHotel: setContextSelectedHotel, totalPrice, setTotalPrice } = usePrice();
   const navigate = useNavigate(); 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const hotelResponse = await fetch('http://localhost:3000/hotel');
-        const hotelData = await hotelResponse.json();
-        
-        const roomResponse = await fetch('http://localhost:3000/room');
-        const roomData = await roomResponse.json();
-        
-        const foodResponse = await fetch('http://localhost:3000/food');
-        const foodData = await foodResponse.json();
-        
-        setHotels(hotelData);
-        setRooms(roomData);
-        setFoods(foodData);
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const [hotelResponse, roomResponse, foodResponse] = await Promise.all([
+        axios.get('http://localhost:3000/hotel'),
+        axios.get('http://localhost:3000/room'),
+        axios.get('http://localhost:3000/food'),
+      ]);
+      
+      setHotels(hotelResponse.data);
+      setRooms(roomResponse.data);
+      setFoods(foodResponse.data);
+  
+      if (hotelResponse.data.length > 0) {
 
-        if (hotelData.length > 0) {
-          setSelectedHotel(hotelData[0].id);
-        }
-      } catch (error) {
-        setError('Lo lamento, el backend no ha desplegado el servidor');
-      } finally {
-        setLoading(false);
+        const hotelRoomTypes = {};
+        hotelResponse.data.forEach(hotel => {
+          const hotelRooms = roomResponse.data.filter(room => room.hotel_id === hotel.id);
+          const availableRoomTypes = hotelRooms.map(room => room.type);
+          const defaultRoomType = availableRoomTypes.length > 0 ? availableRoomTypes[0] : null;
+          if (defaultRoomType) {
+            hotelRoomTypes[hotel.id] = defaultRoomType;
+          }
+        });
+        setSelectedRoomTypes(hotelRoomTypes);
       }
-    };
+    } catch (error) {
+      setError('Lo lamento, el backend no ha desplegado el servidor');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {
-    if (selectedHotel) {
-      const hotelRooms = rooms.filter(room => room.hotel_id === selectedHotel);
-      const availableRoomTypes = hotelRooms.map(room => room.type);
-      const defaultRoomType = availableRoomTypes.length > 0 ? availableRoomTypes[0] : null;
-      setSelectedRoomTypes(prevState => ({
-        ...prevState,
-        [selectedHotel]: defaultRoomType
-      }));
-    }
-  }, [selectedHotel, rooms]);
 
   const handleRoomTypeChange = (hotelId, roomType) => {
     const hotelRooms = rooms.filter(room => room.hotel_id === hotelId);
@@ -161,7 +159,6 @@ export default function HotelSelection() {
       </div>
     );
   }
-
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -193,7 +190,7 @@ export default function HotelSelection() {
         {paginatedHotels.map((hotel) => (
           <div 
             key={hotel.id} 
-            className={`overflow-hidden border rounded-lg shadow-md ${selectedHotel === hotel.id ? 'ring-2 ring-yellow-400' : ''}`}
+            className={`border rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl`}
             onClick={() => setSelectedHotel(hotel.id)}
           >
             <div className="flex flex-col md:flex-row">
@@ -268,7 +265,11 @@ export default function HotelSelection() {
                         </div>
                         <div className="mt-2 flex justify-between items-center">
                           <div className='flex gap-2'>
-                            <button className="text-white border bg-custom-green border-green-800 rounded px-4 py-2">Ver Fotos</button>
+                          <button 
+                            className="text-white border bg-custom-green border-green-800 rounded px-4 py-2"
+                          >
+                            Ver Fotos
+                          </button>
                             <button
                               className="text-white border bg-custom-green rounded px-4 py-2"
                               onClick={() => handleReserveClick(hotel.id, room)}

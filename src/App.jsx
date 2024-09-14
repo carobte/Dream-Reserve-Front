@@ -5,7 +5,7 @@ import { PriceProvider } from './context/PriceContext';
 function App() {
   return (
     <PriceProvider>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
     </PriceProvider>
   );
 }
