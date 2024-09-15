@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; 
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Login() {
@@ -9,7 +10,8 @@ export default function Login() {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate(); // Hook para manejar la navegación
+  const navigate = useNavigate(); 
+  const { login } = useAuth(); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,7 +19,6 @@ export default function Login() {
     setError('');
 
     try {
-      // Solicitud al endpoint de autenticación
       const response = await fetch('http://localhost:3000/person', {
         method: 'GET',
         headers: {
@@ -31,9 +32,8 @@ export default function Login() {
         const user = data.find(person => person.email === email && person.password === password);
 
         if (user) {
-          alert('Inicio de sesión exitoso');
-          // Redirige a la página de inicio
-          navigate('/');
+          login(user); 
+          navigate('/'); 
         } else {
           setError('Email o contraseña incorrectos');
           alert('Email o contraseña incorrectos');
@@ -76,7 +76,6 @@ export default function Login() {
         <div className="max-w-md text-center">
           <div className="flex-1 flex items-center justify-center max-w-screen-lg px-4">
             <div className="text-white text-center lg:text-left max-w-screen-lg">
-
               <div className="pb-10">
                 <button
                   type="button"
@@ -86,7 +85,6 @@ export default function Login() {
                   Volver al inicio
                 </button>
               </div>
-
               <h1 className="text-2xl font-bold md:text-3xl lg:text-4xl">
                 <span className="text-custom-navy-blue">D</span>reams
                 <span className="text-custom-navy-blue">R</span>eserve
