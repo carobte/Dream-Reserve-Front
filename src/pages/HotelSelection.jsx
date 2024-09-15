@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { usePrice } from '../context/PriceContext';
 import { Star, Calendar, Users, MapPin } from 'lucide-react';
+import { SearchContext } from '../context/SearchContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +10,20 @@ import axios from 'axios';
 const HOTELS_PER_PAGE = 5;
 
 export default function HotelSelection() {
+
+    const {
+      origin,
+      destination,
+      startDate,
+      endDate,
+      totalPeople
+    } = useContext(SearchContext);
+
+
+  const formattedStartDate = startDate ? startDate.toLocaleDateString() : 'Fecha de inicio';
+  const formattedEndDate = endDate ? endDate.toLocaleDateString() : 'Fecha de fin';
+  const peopleText = totalPeople ? `${totalPeople} adultos` : 'Número de personas';
+
   const [hotels, setHotels] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [foods, setFoods] = useState([]);
@@ -162,29 +178,31 @@ export default function HotelSelection() {
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-        <div className="flex justify-between items-start mb-6 flex-col">
-            <h2 className="text-3xl font-bold text-green-800 mb-4 md:mb-0">Selecciona tu vuelo</h2>
-            <h3 className="text-xl font-semibold text-green-800">Precio Total: COP {totalPrice.toLocaleString()}</h3>
-        </div>
-        <div className="flex space-x-2">
-          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-            <MapPin />
-            dato ciudad destino
-          </button>
-          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-            <Calendar className="mr-2 h-4 w-4" />
-            fecha ida
-          </button>
-          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-            <Calendar className="mr-2 h-4 w-4" />
-            fecha regreso
-          </button>
-          <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-            <Users className="mr-2 h-4 w-4" />
-            cantidad personas
-          </button>
-        </div>
+      <div className="flex justify-between items-start mb-6 flex-col">
+        <h2 className="text-3xl font-bold text-green-800 mb-4 md:mb-0">Selecciona tu vuelo</h2>
+        <h3 className="text-xl font-semibold text-green-800">
+          Precio Total: COP {totalPrice ? totalPrice.toLocaleString() : '0'}
+        </h3>
       </div>
+      <div className="flex space-x-2">
+        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+          <MapPin className="mr-2 h-4 w-4" />
+          {origin || 'Desde'}
+        </button>
+        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+          <Calendar className="mr-2 h-4 w-4" />
+          {formattedStartDate}
+        </button>
+        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+          <Calendar className="mr-2 h-4 w-4" />
+          {formattedEndDate}
+        </button>
+        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+          <Users className="mr-2 h-4 w-4" />
+          {peopleText}
+        </button>
+      </div>
+    </div>
 
       <div className="space-y-4">
         {paginatedHotels.map((hotel) => (

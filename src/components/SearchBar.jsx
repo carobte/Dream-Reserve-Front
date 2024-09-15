@@ -1,18 +1,26 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-
+import { SearchContext } from '../context/SearchContext'; 
 
 export default function SearchBar() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [totalPeople, setTotalPeople] = useState(2); 
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
+  const {
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    totalPeople,
+    setTotalPeople,
+    origin,
+    setOrigin,
+    destination,
+    setDestination,
+    selectedOption,
+    setSelectedOption,
+  } = useContext(SearchContext);
+
   const [showPeopleSelector, setShowPeopleSelector] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   const navigate = useNavigate(); 
 
   const handleCheckboxChange = (value) => {
@@ -29,11 +37,9 @@ export default function SearchBar() {
       destination,
       selectedOption
     }).toString();
-    
 
     navigate(`/search-results?${searchParams}`);
   };
-
 
   const today = new Date();
 

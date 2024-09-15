@@ -1,9 +1,9 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
-const SearchContext = createContext();
+// Crear el contexto
+export const SearchContext = createContext();
 
-export const useSearch = () => useContext(SearchContext);
-
+// Proveedor del contexto
 export const SearchProvider = ({ children }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -12,23 +12,23 @@ export const SearchProvider = ({ children }) => {
   const [destination, setDestination] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const value = {
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    totalPeople,
-    setTotalPeople,
-    origin,
-    setOrigin,
-    destination,
-    setDestination,
-    selectedOption,
-    setSelectedOption,
-  };
-
   return (
-    <SearchContext.Provider value={value}>
+    <SearchContext.Provider
+      value={{
+        startDate,
+        setStartDate,
+        endDate,
+        setEndDate,
+        totalPeople,
+        setTotalPeople,
+        origin,
+        setOrigin,
+        destination,
+        setDestination,
+        selectedOption,
+        setSelectedOption
+      }}
+    >
       {children}
     </SearchContext.Provider>
   );
