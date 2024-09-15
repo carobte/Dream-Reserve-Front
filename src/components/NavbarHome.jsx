@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Asegúrate de ajustar la ruta según tu estructura de archivos
 
 const buttonOptions = [
   {
@@ -17,6 +18,7 @@ const buttonOptions = [
 
 export default function Home() {
   const navigate = useNavigate(); 
+  const { user, logout } = useAuth(); // Desestructuramos user y logout del contexto de autenticación
 
   const handleButtonClick = (path) => {
     navigate(path);
@@ -27,23 +29,37 @@ export default function Home() {
 
   return (
     <>
-      {/* Sección botón para login */}
+      {/* Sección botón para login/logout */}
       <div className="flex items-center space-x-4 mb-8 md:mb-12 lg:mb-16">
         <div className="w-16 h-16 bg-custom-green rounded-full flex items-center justify-center">
           <span className="text-white text-xl">U</span>
         </div>
-        <button 
-          className="bg-custom-green text-white py-2 px-4 rounded"
-          onClick={() => handleButtonClick(loginPath)}
-        >
-          Iniciar sesión
-        </button>
-        <button 
-          className="bg-custom-green text-white py-2 px-4 rounded"
-          onClick={() => handleButtonClick(registerPath)}
-        >
-          Registrar
-        </button>
+        {user ? (
+          <button 
+            className="bg-custom-green text-white py-2 px-4 rounded"
+            onClick={() => {
+              logout(); // Llama a la función logout del contexto
+              navigate('/'); // Redirige a la página principal después de cerrar sesión
+            }}
+          >
+            Cerrar sesión
+          </button>
+        ) : (
+          <>
+            <button 
+              className="bg-custom-green text-white py-2 px-4 rounded"
+              onClick={() => handleButtonClick(loginPath)}
+            >
+              Iniciar sesión
+            </button>
+            <button 
+              className="bg-custom-green text-white py-2 px-4 rounded"
+              onClick={() => handleButtonClick(registerPath)}
+            >
+              Registrar
+            </button>
+          </>
+        )}
       </div>
 
       {/* Navbar con los botones */}
