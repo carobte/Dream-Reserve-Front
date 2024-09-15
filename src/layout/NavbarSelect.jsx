@@ -1,54 +1,149 @@
-import { PhoneCall } from 'lucide-react';
-import { Calendar, Users, MapPin } from 'lucide-react';
+import { useState, useContext } from 'react';
+import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building } from 'lucide-react';
 import { SearchContext } from '../context/SearchContext';
-import { useContext } from 'react';
+import { usePrice } from '../context/PriceContext';
 
-export default function NavbarSelect({totalPrice}) {
-    const {
-        origin,
-        destination,
-        startDate,
-        endDate,
-        totalPeople
-    } = useContext(SearchContext);
-    
-    
+export default function NavbarSelect() {
+    const { selectedHotel, totalPrice } = usePrice();
+    const { origin, destination, startDate, endDate, totalPeople } = useContext(SearchContext);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [itineraryOpen, setItineraryOpen] = useState(false);
+
     const formattedStartDate = startDate ? startDate.toLocaleDateString() : 'Fecha de inicio';
     const formattedEndDate = endDate ? endDate.toLocaleDateString() : 'Fecha de fin';
     const peopleText = totalPeople ? `${totalPeople} adultos` : 'Número de personas';
 
+    const toggleMenu = () => setMenuOpen(prev => !prev);
+    const toggleItinerary = () => setItineraryOpen(prev => !prev);
+
     return (
-        <header className="bg-custom-green text-custom-navy-blue py-2 px-4 w-full fixed top-0 left-0 z-50">
-            <nav className='flex justify-between'>
-                <ul className="flex justify-start space-x-4">
-                    <li><a href="#" className="hover:underline">Reseñas</a></li>
-                    <li>|</li>
-                    <li><a href="#" className="hover:underline">¿Ya Has Reservado?</a></li>
-                    <li>|</li>
-                    <li><a href="#" className="hover:underline">Sobre Nosotros</a></li>
-                    <li>|</li>
-                    <li><a href="#" className="hover:underline"><PhoneCall className="inline mr-1 text-custom-navy-blue" />+57 123 456 789</a></li>
-                </ul>
-                <div className="flex space-x-2">
-                    <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded text-white">
-                        <MapPin className="mr-2 h-4 w-4" />
-                        {origin || 'Desde'}
-                    </button>
-                    <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded text-white">
-                        <Calendar className="mr-2 h-4 w-4" />
-                        {formattedStartDate}
-                    </button>
-                    <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded text-white">
-                        <Calendar className="mr-2 h-4 w-4" />
-                        {formattedEndDate}
-                    </button>
-                    <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded text-white">
-                        <Users className="mr-2 h-4 w-4" />
-                        {peopleText}
-                    </button>
-                </div>
-                <h2 className='text-white '>Precio Reserva :  <span className='text-green-400 font-bold'>COP $ {totalPrice ? totalPrice.toLocaleString() : '0'}</span> </h2>
-            </nav>
-        </header>
+        <>
+            {/* Navbar */}
+            <section className="text-custom-navy-blue py-2 px-4 w-full fixed top-0 left-0 z-50 bg-custom-green shadow-md">
+                <nav className="flex justify-between items-center">
+                    {/* Menú de navegación */}
+                    <ul className="flex justify-start space-x-4 text-sm">
+                        <li><a href="/" className="hover:underline">Inicio</a></li>
+                        <li>|</li>
+                        <li><a href="#" className="hover:underline">Mis Reservas</a></li>
+                        <li>|</li>
+                        <li><a href="#" className="hover:underline">Sobre Nosotros</a></li>
+                        <li>|</li>
+                        <li><a href="#" className="hover:underline flex items-center">
+                            <PhoneCall className="inline mr-1 mr-2 h-4 w-4" />+57 123 456 789</a>
+                        </li>
+                    </ul>
+
+                    {/* Sección botones usuario y itinerario */}
+                    <div className="relative flex items-center space-x-4">
+                        {/* Boton "Mi Itinerario" */}
+                        <button onClick={toggleItinerary} className="text-sm text-gray-700 hover:underline text-white">
+                            Mi Itinerario
+                        </button>
+
+                        {/* Boton usuario */}
+                        <button onClick={toggleMenu} className="relative h-8 w-8 rounded-full focus:outline-none">
+                            <div className="h-8 w-8 rounded-full bg-gray-200">
+                                <img src="https://img.freepik.com/foto-gratis/leon-gafas-estudio_23-2150813334.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723248000&semt=ais_hybrid" alt="Foto de perfil" className="rounded-full" width={32} height={32} />
+                            </div>
+                        </button>
+
+                        {/* Menu de usuario con sus opciones */}
+                        {menuOpen && (
+                            <div className="absolute top-full mt-2 right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
+                                <div className="py-2">
+                                    <div className="px-4 py-2">
+                                        <p className="text-sm font-medium leading-none text-custom-green">Usuario</p>
+                                        <p className="text-xs text-gray-500">usuario@ejemplo.com</p>
+                                    </div>
+                                    <div className="border-t border-gray-100"></div>
+                                    <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                                        <Settings className="mr-2 h-4 w-4" />
+                                        Configuración
+                                    </button>
+                                    <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                                        <LogOut className="mr-2 h-4 w-4" />
+                                        Cerrar sesión
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Panel de itinerario */}
+                        {itineraryOpen && (
+                            <>
+                                {/* Fondo oscuro */}
+                                <div onClick={toggleItinerary} className="fixed inset-0 bg-black opacity-50 z-40"></div>
+
+                                {/* Panel deslizante con animacion */}
+                                <div className={`fixed right-0 top-0 h-full w-80 bg-white shadow-lg z-50 transform ${itineraryOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 ease-in-out`}>
+                                    <div className="p-4 text-black">
+                                        <div className="flex justify-between items-center mb-4">
+                                            <h2 className="text-lg font-bold">Mi Itinerario</h2>
+                                            <button onClick={toggleItinerary} className="text-gray-700 hover:text-gray-900">
+                                                <X className="h-6 w-6" />
+                                            </button>
+                                        </div>
+
+                                        {/* Informacion del itinerario */}
+                                        <p className="text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+                                            <MapPin className="mr-2 h-4 w-4" />
+                                            {origin || 'Desde'}
+                                        </p>
+                                        <p className="text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+                                            <Building className="mr-2 h-4 w-4" />
+                                            {destination || 'Medellín'}
+                                        </p>
+                                        <p className="text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+                                            <Calendar className="mr-2 h-4 w-4" />
+                                            {formattedStartDate}
+                                        </p>
+                                        <p className="text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+                                            <Calendar className="mr-2 h-4 w-4" />
+                                            {formattedEndDate}
+                                        </p>
+                                        <p className="text-gray-600 text-sm py-2 px-4 flex items-center rounded">
+                                            <Users className="mr-2 h-4 w-4" />
+                                            {peopleText}
+                                        </p>
+
+                                        {/* Detalles del hotel */}
+                                        <div className="mt-4">
+                                            <h3 className="text-md font-semibold">Hotel Seleccionado</h3>
+                                            <p className="text-gray-600">{selectedHotel?.name || 'No seleccionado'}</p>
+                                            <p className="text-gray-600">Dirección: {selectedHotel?.address || 'No especificada'}</p>
+                                            <p className="text-gray-600">Alimentación: {selectedHotel?.foodOptions || 'No especificado'}</p>
+                                            <p className="text-gray-600">Habitación: {selectedHotel?.room?.type || 'No especificada'}</p>
+                                            <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price.toLocaleString()}</p>
+                                        </div>
+
+                                        {/* Detalles del vuelo (ejemplo estatico) */}
+                                        <div className="mt-4">
+                                            <h3 className="text-md font-semibold">Vuelo</h3>
+                                            <p className="text-gray-600">Duración: 3 horas</p>
+                                            <p className="text-gray-600">Hora de salida: 08:00 AM</p>
+                                            <p className="text-gray-600">Hora de llegada: 11:00 AM</p>
+                                        </div>
+
+                                        {/* Detalles de los tours (ejemplo estatico) */}
+                                        <div className="mt-4">
+                                            <h3 className="text-md font-semibold">Tours</h3>
+                                            <p className="text-gray-600">Tour 1: City Tour</p>
+                                            <p className="text-gray-600">Tour 2: Excursión a la montaña</p>
+                                        </div>
+
+                                        {/* Precio total */}
+                                        <div className="mt-4">
+                                            <h3 className="text-md font-semibold">Precio Total</h3>
+                                            <p className="text-gray-600">COP {totalPrice.toLocaleString()}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </nav>
+            </section>
+        </>
     );
 }

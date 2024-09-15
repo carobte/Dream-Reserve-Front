@@ -3,11 +3,12 @@ import { router } from './Routes/Router';
 import { PriceProvider } from './context/PriceContext'; 
 import { SearchProvider } from './context/SearchContext';
 
+
 function App() {
   return (
     <PriceProvider>
       <SearchProvider> 
-        <RouterProvider router={router} />
+          <RouterProvider router={router} />
       </SearchProvider>
     </PriceProvider>
   );
