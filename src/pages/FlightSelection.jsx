@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useContext } from 'react';
 import { usePrice } from '../context/PriceContext';
-import { SearchContext } from '../context/SearchContext';
-import { Plane, Users, ArrowRight, PlaneTakeoff, Building, Calendar, MapPin, MapPin as MapPinArrival } from 'lucide-react';
+import { Plane, PlaneTakeoff, Building, MapPin as MapPinArrival } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../layout/NavbarSelect';
 
 const flights = [
   {
@@ -51,19 +50,6 @@ const flightClasses = [
 ];
 
 export default function FlightSelection() {
-
-  const {
-    origin,
-    destination,
-    startDate,
-    endDate,
-    totalPeople
-  } = useContext(SearchContext);
-
-
-  const formattedStartDate = startDate ? startDate.toLocaleDateString() : 'Fecha de inicio';
-  const formattedEndDate = endDate ? endDate.toLocaleDateString() : 'Fecha de fin';
-  const peopleText = totalPeople ? `${totalPeople} adultos` : 'Número de personas';
 
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [selectedClass, setSelectedClass] = useState({});
@@ -119,32 +105,7 @@ export default function FlightSelection() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-      <div className="flex justify-between items-start mb-6 flex-col">
-        <h2 className="text-3xl font-bold text-green-800 mb-4 md:mb-0">Selecciona tu vuelo</h2>
-        <h3 className="text-xl font-semibold text-green-800">
-          Precio Total: COP {totalPrice ? totalPrice.toLocaleString() : '0'}
-        </h3>
-      </div>
-      <div className="flex space-x-2">
-        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-          <MapPin className="mr-2 h-4 w-4" />
-          {origin || 'Desde'}
-        </button>
-        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-          <Calendar className="mr-2 h-4 w-4" />
-          {formattedStartDate}
-        </button>
-        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-          <Calendar className="mr-2 h-4 w-4" />
-          {formattedEndDate}
-        </button>
-        <button className="border border-gray-300 text-gray-600 text-sm py-2 px-4 flex items-center rounded">
-          <Users className="mr-2 h-4 w-4" />
-          {peopleText}
-        </button>
-      </div>
-      </div>
+      <Header totalPrice={totalPrice} />
       <div className="grid gap-6">
         {flights.map((flight) => (
           <div 
