@@ -21,14 +21,38 @@ export default function SearchBar() {
   } = useContext(SearchContext);
 
   const [showPeopleSelector, setShowPeopleSelector] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate(); 
 
   const handleCheckboxChange = (value) => {
     setSelectedOption(selectedOption === value ? null : value);
   };
 
+  const validateForm = () => {
+    if (!selectedOption) {
+      setError('Por favor, selecciona una opción.');
+      return false;
+    }
+    if (selectedOption !== 'tours' && (!origin || !destination)) {
+      setError('Por favor, completa todos los campos de ubicación.');
+      return false;
+    }
+    if (selectedOption !== 'tours' && (!startDate || !endDate)) {
+      setError('Por favor, selecciona las fechas.');
+      return false;
+    }
+    if (selectedOption !== 'tours' && totalPeople <= 0) {
+      setError('Por favor, ingresa el número de personas.');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
   const handleSearch = (e) => {
     e.preventDefault(); 
+    if (!validateForm()) return; 
+
     const searchParams = new URLSearchParams({
       startDate: startDate ? startDate.toISOString() : '',
       endDate: endDate ? endDate.toISOString() : '',
@@ -56,6 +80,7 @@ export default function SearchBar() {
 
   return (
     <>
+      {error && <p className="text-red-500 mb-4">{error}</p>} {/* Mensaje de error */}
       {/* Opciones de selección */}
       <div className="flex items-center space-x-4 mb-8 md:mb-12 lg:mb-16">
         {/* Paquete completo */}

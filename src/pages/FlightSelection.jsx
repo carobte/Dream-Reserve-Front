@@ -53,7 +53,7 @@ export default function FlightSelection() {
 
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [selectedClass, setSelectedClass] = useState({});
-  const [previousFlightPrice, setPreviousFlightPrice] = useState(0); // Nueva variable para guardar el precio anterior
+  const [previousFlightPrice, setPreviousFlightPrice] = useState(0); 
   const navigate = useNavigate();
 
   const { selectedHotel, totalPrice, setTotalPrice } = usePrice();
@@ -65,7 +65,6 @@ export default function FlightSelection() {
 
   useEffect(() => {
     if (selectedHotel) {
-      // Si hay un hotel seleccionado, inicializa el totalPrice con el precio del hotel
       const initialTotalPrice = selectedHotel.price;
       setTotalPrice(prev => prev || initialTotalPrice);
     }

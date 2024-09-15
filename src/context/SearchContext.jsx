@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 // Crear el contexto
 export const SearchContext = createContext();
@@ -11,6 +11,9 @@ export const SearchProvider = ({ children }) => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
+
+  // Calcular el número de noches
+  const numberOfNights = startDate && endDate ? Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) : 0;
 
   return (
     <SearchContext.Provider
@@ -26,7 +29,8 @@ export const SearchProvider = ({ children }) => {
         destination,
         setDestination,
         selectedOption,
-        setSelectedOption
+        setSelectedOption,
+        numberOfNights
       }}
     >
       {children}
