@@ -1,11 +1,13 @@
 import { useState, useContext } from 'react';
-import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building } from 'lucide-react';
+import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building, User } from 'lucide-react';
 import { SearchContext } from '../context/SearchContext';
 import { usePrice } from '../context/PriceContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function NavbarSelect() {
     const { selectedHotel, totalPrice } = usePrice();
     const { origin, destination, startDate, endDate, totalPeople } = useContext(SearchContext);
+    const { user, logout } = useAuth(); // Obtener el usuario y el método de logout del contexto
     const [menuOpen, setMenuOpen] = useState(false);
     const [itineraryOpen, setItineraryOpen] = useState(false);
 
@@ -43,8 +45,18 @@ export default function NavbarSelect() {
 
                         {/* Boton usuario */}
                         <button onClick={toggleMenu} className="relative h-8 w-8 rounded-full focus:outline-none">
-                            <div className="h-8 w-8 rounded-full bg-gray-200">
-                                <img src="https://img.freepik.com/foto-gratis/leon-gafas-estudio_23-2150813334.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723248000&semt=ais_hybrid" alt="Foto de perfil" className="rounded-full" width={32} height={32} />
+                            <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                {user ? (
+                                    <img
+                                        src={user.photoURL || "https://img.freepik.com/foto-gratis/leon-gafas-estudio_23-2150813334.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723248000&semt=ais_hybrid"}
+                                        alt="Foto de perfil"
+                                        className="rounded-full"
+                                        width={32}
+                                        height={32}
+                                    />
+                                ) : (
+                                    <User className="h-8 w-8 text-gray-500" />
+                                )}
                             </div>
                         </button>
 
@@ -52,19 +64,38 @@ export default function NavbarSelect() {
                         {menuOpen && (
                             <div className="absolute top-full mt-2 right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
                                 <div className="py-2">
-                                    <div className="px-4 py-2">
-                                        <p className="text-sm font-medium leading-none text-custom-green">Usuario</p>
-                                        <p className="text-xs text-gray-500">usuario@ejemplo.com</p>
-                                    </div>
+                                    {user ? (
+                                        <div className="px-4 py-2">
+                                            <p className="text-sm font-medium leading-none text-custom-green">Usuario</p>
+                                            <p className="text-xs text-gray-500">{user.email || 'usuario@ejemplo.com'}</p>
+                                        </div>
+                                    ) : (
+                                        <div className="px-4 py-2">
+                                            <p className="text-sm font-medium leading-none text-custom-green">Invitado</p>
+                                            <p className="text-xs text-gray-500">No registrado</p>
+                                        </div>
+                                    )}
                                     <div className="border-t border-gray-100"></div>
-                                    <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
-                                        <Settings className="mr-2 h-4 w-4" />
-                                        Configuración
-                                    </button>
-                                    <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
-                                        <LogOut className="mr-2 h-4 w-4" />
-                                        Cerrar sesión
-                                    </button>
+                                    {user ? (
+                                        <button
+                                            className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
+                                            onClick={logout}
+                                        >
+                                            <LogOut className="mr-2 h-4 w-4" />
+                                            Cerrar sesión
+                                        </button>
+                                    ) : (
+                                        <>
+                                            <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                                                <Settings className="mr-2 h-4 w-4" />
+                                                Configuración
+                                            </button>
+                                            <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                                                <LogOut className="mr-2 h-4 w-4" />
+                                                Iniciar sesión
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -75,7 +106,7 @@ export default function NavbarSelect() {
                                 {/* Fondo oscuro */}
                                 <div onClick={toggleItinerary} className="fixed inset-0 bg-black opacity-50 z-40"></div>
 
-                                {/* Panel deslizante con animacion */}
+                                {/* Panel deslizante con animación */}
                                 <div className={`fixed right-0 top-0 h-full w-80 bg-white shadow-lg z-50 transform ${itineraryOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 ease-in-out`}>
                                     <div className="p-4 text-black">
                                         <div className="flex justify-between items-center mb-4">
@@ -85,7 +116,7 @@ export default function NavbarSelect() {
                                             </button>
                                         </div>
 
-                                        {/* Informacion del itinerario */}
+                                        {/* Información del itinerario */}
                                         <p className="text-gray-600 text-sm py-2 px-4 flex items-center rounded">
                                             <MapPin className="mr-2 h-4 w-4" />
                                             {origin || 'Desde'}
@@ -117,7 +148,7 @@ export default function NavbarSelect() {
                                             <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price.toLocaleString()}</p>
                                         </div>
 
-                                        {/* Detalles del vuelo (ejemplo estatico) */}
+                                        {/* Detalles del vuelo (ejemplo estático) */}
                                         <div className="mt-4">
                                             <h3 className="text-md font-semibold">Vuelo</h3>
                                             <p className="text-gray-600">Duración: 3 horas</p>
@@ -125,7 +156,7 @@ export default function NavbarSelect() {
                                             <p className="text-gray-600">Hora de llegada: 11:00 AM</p>
                                         </div>
 
-                                        {/* Detalles de los tours (ejemplo estatico) */}
+                                        {/* Detalles de los tours (ejemplo estático) */}
                                         <div className="mt-4">
                                             <h3 className="text-md font-semibold">Tours</h3>
                                             <p className="text-gray-600">Tour 1: City Tour</p>
