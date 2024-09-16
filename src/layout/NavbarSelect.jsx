@@ -1,12 +1,14 @@
 import { useState, useContext } from 'react';
-import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building, User } from 'lucide-react';
+import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building, User, Plane } from 'lucide-react';
 import { SearchContext } from '../context/SearchContext';
 import { usePrice } from '../context/PriceContext';
+import { useReserva } from '../context/ReserveContext';
 import { useAuth } from '../context/AuthContext';
 
 export default function NavbarSelect() {
     const { selectedHotel, totalPrice } = usePrice();
     const { origin, destination, startDate, endDate, totalPeople } = useContext(SearchContext);
+    const { reserva } = useReserva(); // Obtener la reserva del contexto
     const { user, logout } = useAuth(); // Obtener el usuario y el método de logout del contexto
     const [menuOpen, setMenuOpen] = useState(false);
     const [itineraryOpen, setItineraryOpen] = useState(false);
@@ -148,25 +150,32 @@ export default function NavbarSelect() {
                                             <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price.toLocaleString()}</p>
                                         </div>
 
-                                        {/* Detalles del vuelo (ejemplo estático) */}
-                                        <div className="mt-4">
-                                            <h3 className="text-md font-semibold">Vuelo</h3>
-                                            <p className="text-gray-600">Duración: 3 horas</p>
-                                            <p className="text-gray-600">Hora de salida: 08:00 AM</p>
-                                            <p className="text-gray-600">Hora de llegada: 11:00 AM</p>
-                                        </div>
+                                        {/* Detalles del vuelo */}
+                                        {reserva.vueloIda && (
+                                            <div className="mt-4">
+                                                <h3 className="text-md font-semibold">Vuelo de Ida</h3>
+                                                <p className="text-gray-600">Aerolínea: {reserva.vueloIda.airline}</p>
+                                                <p className="text-gray-600">Hora de salida: {reserva.vueloIda.departureTime}</p>
+                                                <p className="text-gray-600">Hora de llegada: {reserva.vueloIda.arrivalTime}</p>
+                                                <p className="text-gray-600">Duración: {reserva.vueloIda.duration}</p>
+                                                <p className="text-gray-600">Precio: COP {reserva.vueloIda.price.toLocaleString()}</p>
+                                            </div>
+                                        )}
+                                        {reserva.vueloVuelta && (
+                                            <div className="mt-4">
+                                                <h3 className="text-md font-semibold">Vuelo de Vuelta</h3>
+                                                <p className="text-gray-600">Aerolínea: {reserva.vueloVuelta.airline}</p>
+                                                <p className="text-gray-600">Hora de salida: {reserva.vueloVuelta.departureTime}</p>
+                                                <p className="text-gray-600">Hora de llegada: {reserva.vueloVuelta.arrivalTime}</p>
+                                                <p className="text-gray-600">Duración: {reserva.vueloVuelta.duration}</p>
+                                                <p className="text-gray-600">Precio: COP {reserva.vueloVuelta.price.toLocaleString()}</p>
+                                            </div>
+                                        )}
 
-                                        {/* Detalles de los tours (ejemplo estático) */}
+                                        {/* Total */}
                                         <div className="mt-4">
-                                            <h3 className="text-md font-semibold">Tours</h3>
-                                            <p className="text-gray-600">Tour 1: City Tour</p>
-                                            <p className="text-gray-600">Tour 2: Excursión a la montaña</p>
-                                        </div>
-
-                                        {/* Precio total */}
-                                        <div className="mt-4">
-                                            <h3 className="text-md font-semibold">Precio Total</h3>
-                                            <p className="text-gray-600">COP {totalPrice.toLocaleString()}</p>
+                                            <h3 className="text-md font-semibold">Total</h3>
+                                            <p className="text-gray-600">COP {reserva.valorTotal.toLocaleString()}</p>
                                         </div>
                                     </div>
                                 </div>
