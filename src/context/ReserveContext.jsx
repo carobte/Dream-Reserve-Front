@@ -34,7 +34,7 @@ export const ReservaProvider = ({ children }) => {
     destino: destination,
     vueloIda: null,
     vueloVuelta: null,
-    tours: [],
+    tours: [], // Asegúrate de inicializar con una lista vacía
     valorTotal: totalPrice
   });
 

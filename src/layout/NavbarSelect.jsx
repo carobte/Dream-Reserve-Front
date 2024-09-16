@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 
 export default function NavbarSelect() {
     const { selectedHotel, totalPrice } = usePrice();
-    const { origin, destination, startDate, endDate, totalPeople } = useContext(SearchContext);
+    const { origin, destination, startDate, endDate, totalPeople, planType } = useContext(SearchContext);
     const { reserva } = useReserva(); // Obtener la reserva del contexto
     const { user, logout } = useAuth(); // Obtener el usuario y el método de logout del contexto
     const [menuOpen, setMenuOpen] = useState(false);
@@ -141,14 +141,16 @@ export default function NavbarSelect() {
                                         </p>
 
                                         {/* Detalles del hotel */}
-                                        <div className="mt-4">
-                                            <h3 className="text-md font-semibold">Hotel Seleccionado</h3>
-                                            <p className="text-gray-600">{selectedHotel?.name || 'No seleccionado'}</p>
-                                            <p className="text-gray-600">Dirección: {selectedHotel?.address || 'No especificada'}</p>
-                                            <p className="text-gray-600">Alimentación: {selectedHotel?.foodOptions || 'No especificado'}</p>
-                                            <p className="text-gray-600">Habitación: {selectedHotel?.room?.type || 'No especificada'}</p>
-                                            <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price.toLocaleString()}</p>
-                                        </div>
+                                        {planType === 'hotel' && (
+                                            <div className="mt-4">
+                                                <h3 className="text-md font-semibold">Hotel Seleccionado</h3>
+                                                <p className="text-gray-600">{selectedHotel?.name || 'No seleccionado'}</p>
+                                                <p className="text-gray-600">Dirección: {selectedHotel?.address || 'No especificada'}</p>
+                                                <p className="text-gray-600">Alimentación: {selectedHotel?.foodOptions || 'No especificado'}</p>
+                                                <p className="text-gray-600">Habitación: {selectedHotel?.room?.type || 'No especificada'}</p>
+                                                <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price.toLocaleString()}</p>
+                                            </div>
+                                        )}
 
                                         {/* Detalles del vuelo */}
                                         {reserva.vueloIda && (
@@ -172,10 +174,25 @@ export default function NavbarSelect() {
                                             </div>
                                         )}
 
+                                        {/* Detalles de tours */}
+                                        {reserva.tours && reserva.tours.length > 0 && (
+                                            <div className="mt-4">
+                                                <h3 className="text-md font-semibold">Tours</h3>
+                                                {reserva.tours.map((tour, index) => (
+                                                    <div key={index} className="mb-2">
+                                                        <p className="text-gray-600">Nombre: {tour.name}</p>
+                                                        <p className="text-gray-600">Fecha: {tour.date}</p>
+                                                        <p className="text-gray-600">Descripción: {tour.description}</p>
+                                                        <p className="text-gray-600">Precio: COP {tour.price.toLocaleString()}</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+
                                         {/* Total */}
                                         <div className="mt-4">
                                             <h3 className="text-md font-semibold">Total</h3>
-                                            <p className="text-gray-600">COP {reserva.valorTotal.toLocaleString()}</p>
+                                            <p className="text-gray-600">COP {totalPrice.toLocaleString()}</p>
                                         </div>
                                     </div>
                                 </div>
