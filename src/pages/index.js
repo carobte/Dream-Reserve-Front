@@ -7,6 +7,7 @@ import SearchResults from './HotelSelection';
 import FlightSelection from './FlightSelection';
 import AddToursPrompt from './AddToursPrompt';
 import TourSelection from './TourSelection';
+import DateReserve from './DateReserve';
 
 export {
   Home,
@@ -16,6 +17,7 @@ export {
   SearchResults,
   FlightSelection,
   AddToursPrompt,
-  TourSelection
+  TourSelection,
+  DateReserve
   // Reservations,
 };

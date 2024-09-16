@@ -1,19 +1,21 @@
 import { RouterProvider } from 'react-router-dom';
-import { router } from './Routes/Router'; 
-import { PriceProvider } from './context/PriceContext'; 
+import { router } from './Routes/Router';
+import { PriceProvider } from './context/PriceContext';
 import { SearchProvider } from './context/SearchContext';
 import { AuthProvider } from './context/AuthContext';
-
+import { ReservaProvider } from './context/ReserveContext'; 
 
 function App() {
   return (
     <PriceProvider>
-      <SearchProvider>
-        <AuthProvider> {/* Asegúrate de envolver los demás proveedores */}
+    <SearchProvider>
+      <AuthProvider>
+        <ReservaProvider>
           <RouterProvider router={router} />
-        </AuthProvider>
-      </SearchProvider>
-    </PriceProvider>
+        </ReservaProvider>
+      </AuthProvider>
+    </SearchProvider>
+  </PriceProvider>
   );
 }
 

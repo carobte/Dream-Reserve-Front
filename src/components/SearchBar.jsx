@@ -18,6 +18,7 @@ export default function SearchBar() {
     setDestination,
     selectedOption,
     setSelectedOption,
+    setPlanType,
   } = useContext(SearchContext);
 
   const [showPeopleSelector, setShowPeopleSelector] = useState(false);
@@ -26,6 +27,7 @@ export default function SearchBar() {
 
   const handleCheckboxChange = (value) => {
     setSelectedOption(selectedOption === value ? null : value);
+    setPlanType(value);  
   };
 
   const validateForm = () => {
@@ -33,21 +35,28 @@ export default function SearchBar() {
       setError('Por favor, selecciona una opción.');
       return false;
     }
-    if (selectedOption !== 'tours' && (!origin || !destination)) {
-      setError('Por favor, completa todos los campos de ubicación.');
+
+    if (selectedOption !== 'solo-hotel' && !origin) {
+      setError('Por favor, completa el campo de origen.');
       return false;
     }
-    if (selectedOption !== 'tours' && (!startDate || !endDate)) {
+    if (!destination) {
+      setError('Por favor, completa el campo de destino.');
+      return false;
+    }
+    if (!startDate || !endDate) {
       setError('Por favor, selecciona las fechas.');
       return false;
     }
-    if (selectedOption !== 'tours' && totalPeople <= 0) {
+    if (totalPeople <= 0) {
       setError('Por favor, ingresa el número de personas.');
       return false;
     }
+  
     setError('');
     return true;
   };
+  
 
   const handleSearch = (e) => {
     e.preventDefault(); 
@@ -62,7 +71,23 @@ export default function SearchBar() {
       selectedOption
     }).toString();
 
-    navigate(`/search-results?${searchParams}`);
+    // Redireccionar según la opción seleccionada
+    switch (selectedOption) {
+      case 'paquete-completo':
+        navigate(`/search-results?${searchParams}`); 
+        break;
+      case 'solo-hotel':
+        navigate(`/search-results?${searchParams}`);
+        break;
+      case 'vuelos':
+        navigate(`/flight-selection?${searchParams}`); 
+        break;
+      case 'tours':
+        navigate(`/tour-selection?${searchParams}`); 
+        break;
+      default:
+        navigate(`/`); 
+    }
   };
 
   const today = new Date();

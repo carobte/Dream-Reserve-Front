@@ -104,7 +104,7 @@ export default function NavbarSelect() {
                         {itineraryOpen && (
                             <>
                                 {/* Fondo oscuro */}
-                                <div onClick={toggleItinerary} className="fixed inset-0 bg-black opacity-50 z-40"></div>
+                                <div onClick={toggleItinerary} className="fixed inset-0 bg-black opacity-50 z-40 w-full"></div>
 
                                 {/* Panel deslizante con animación */}
                                 <div className={`fixed right-0 top-0 h-full w-80 bg-white shadow-lg z-50 transform ${itineraryOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 ease-in-out`}>
