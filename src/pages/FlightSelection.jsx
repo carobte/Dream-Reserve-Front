@@ -104,7 +104,7 @@ export default function FlightSelection() {
 
   return (
     <div className="container mx-auto p-4">
-      <Header totalPrice={totalPrice} />
+      <Header/>
       <div className="grid gap-6">
         {flights.map((flight) => (
           <div 

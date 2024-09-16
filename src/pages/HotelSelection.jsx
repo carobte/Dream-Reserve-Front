@@ -22,6 +22,8 @@ export default function HotelListingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
+  const { planType } = useContext(SearchContext);
   const { selectedHotel: contextSelectedHotel, setSelectedHotel: setContextSelectedHotel, totalPrice, setTotalPrice } = usePrice();
   const { numberOfNights } = useContext(SearchContext);
   const navigate = useNavigate();
@@ -132,10 +134,16 @@ export default function HotelListingPage() {
   const handleReserveClick = (hotelId, room) => {
     const selectedHotel = hotels.find(hotel => hotel.id === hotelId);
     const price = calculatePrice(room.price, selectedFoodType[hotelId] || 'Sin Alimentación');
-
+  
     setContextSelectedHotel({ ...selectedHotel, room });
     setTotalPrice(price);
-    navigate('/flight-selection'); 
+  
+    console.log(planType);
+    if (planType === 'solo-hotel') {
+      navigate('/date-reserve');
+    } else {
+      navigate('/flight-selection');
+    }
   };
 
   const paginatedHotels = hotels.slice((currentPage - 1) * HOTELS_PER_PAGE, currentPage * HOTELS_PER_PAGE);
