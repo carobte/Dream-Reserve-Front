@@ -1,5 +1,4 @@
-import { createContext, useContext, useState } from 'react';
-import { useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useSearch } from './SearchContext'; 
 import { usePrice } from './PriceContext';
 
@@ -41,25 +40,31 @@ export const ReservaProvider = ({ children }) => {
 
   // Actualiza `reserva` cuando cambian los datos de los contextos
   useEffect(() => {
-    setReserva({
+    setReserva(prev => ({
+      ...prev,
       hotel: selectedHotel,
       habitacion: "Suite Deluxe",
       alimentacion: planType === "todo incluido" ? "Todo incluido" : "Solo hotel",
       personas: totalPeople,
       origen: origin,
       destino: destination,
-      vueloIda: null,
-      vueloVuelta: null,
-      tours: [],
       valorTotal: totalPrice
-    });
+    }));
   }, [selectedHotel, totalPrice, planType, totalPeople, origin, destination]);
+
+  const updateFlight = (flight, flightType) => {
+    setReserva(prev => ({
+      ...prev,
+      [flightType]: flight,
+      valorTotal: prev.valorTotal + flight.price
+    }));
+  };
 
   return (
     <ReservaContext.Provider value={{
       reserva,
       setReserva,
-      // Pasar los setters individuales si se necesitan en otros componentes
+      updateFlight, 
     }}>
       {children}
     </ReservaContext.Provider>
