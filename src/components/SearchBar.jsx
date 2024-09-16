@@ -30,32 +30,43 @@ export default function SearchBar() {
     setPlanType(value);  
   };
 
+  // validaciones de opcon selecionada 
   const validateForm = () => {
     if (!selectedOption) {
       setError('Por favor, selecciona una opción.');
       return false;
     }
-
-    if (selectedOption !== 'solo-hotel' && !origin) {
-      setError('Por favor, completa el campo de origen.');
-      return false;
-    }
-    if (!destination) {
-      setError('Por favor, completa el campo de destino.');
-      return false;
-    }
-    if (!startDate || !endDate) {
-      setError('Por favor, selecciona las fechas.');
-      return false;
-    }
-    if (totalPeople <= 0) {
-      setError('Por favor, ingresa el número de personas.');
-      return false;
+  
+    // solo validar el campo de destino (ciudad)
+    if (selectedOption === 'tours') {
+      if (!destination) {
+        setError('Por favor, ingresa la ciudad del tour.');
+        return false;
+      }
+    } else {
+      // Validaciones para las otras opciones (paquete completo, solo-hotel, vuelos)
+      if (!origin) {
+        setError('Por favor, completa el campo de origen.');
+        return false;
+      }
+      if (!destination) {
+        setError('Por favor, completa el campo de destino.');
+        return false;
+      }
+      if (!startDate || !endDate) {
+        setError('Por favor, selecciona las fechas.');
+        return false;
+      }
+      if (totalPeople <= 0) {
+        setError('Por favor, ingresa el número de personas.');
+        return false;
+      }
     }
   
     setError('');
     return true;
   };
+  
   
 
   const handleSearch = (e) => {
