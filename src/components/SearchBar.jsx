@@ -37,14 +37,28 @@ export default function SearchBar() {
       return false;
     }
   
-    // solo validar el campo de destino (ciudad)
+    // Validar solo el campo de destino para la opción de "tours"
     if (selectedOption === 'tours') {
       if (!destination) {
         setError('Por favor, ingresa la ciudad del tour.');
         return false;
       }
+    } else if (selectedOption === 'solo-hotel') {
+      // Validación solo para la opción de "solo-hotel"
+      if (!destination) {
+        setError('Por favor, completa el campo de destino.');
+        return false;
+      }
+      if (!startDate || !endDate) {
+        setError('Por favor, selecciona las fechas.');
+        return false;
+      }
+      if (totalPeople <= 0) {
+        setError('Por favor, ingresa el número de personas.');
+        return false;
+      }
     } else {
-      // Validaciones para las otras opciones (paquete completo, solo-hotel, vuelos)
+      // Validaciones para las otras opciones (paquete completo, vuelos, etc.)
       if (!origin) {
         setError('Por favor, completa el campo de origen.');
         return false;

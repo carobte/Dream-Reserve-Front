@@ -20,6 +20,9 @@ export default function NavbarSelect() {
     const toggleMenu = () => setMenuOpen(prev => !prev);
     const toggleItinerary = () => setItineraryOpen(prev => !prev);
 
+    console.log("desde navbar");
+    console.log(selectedHotel);
+
     return (
         <>
             {/* Navbar */}
@@ -141,7 +144,7 @@ export default function NavbarSelect() {
                                         </p>
 
                                         {/* Detalles del hotel */}
-                                        {planType === 'hotel' && (
+                                        { selectedHotel && (
                                             <div className="mt-4">
                                                 <h3 className="text-md font-semibold">Hotel Seleccionado</h3>
                                                 <p className="text-gray-600">{selectedHotel?.name || 'No seleccionado'}</p>
@@ -192,7 +195,7 @@ export default function NavbarSelect() {
                                         {/* Total */}
                                         <div className="mt-4">
                                             <h3 className="text-md font-semibold">Total</h3>
-                                            <p className="text-gray-600">COP {totalPrice.toLocaleString()}</p>
+                                            <p className="text-gray-600">Precio: COP {reserva.valorTotal.toLocaleString()}</p>
                                         </div>
                                     </div>
                                 </div>
