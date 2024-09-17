@@ -4,8 +4,8 @@ import { useAuth } from '../context/AuthContext'; // Asegúrate de ajustar la ru
 const buttonOptions = [
   {
     id: 1,
-    text: 'Explorar Ofertas',
-    path: '/explore-offers',
+    text: '¿ Quienes Somos ?',
+    path: '/about-us',
     className: 'cursor-pointer bg-custom-green-opacity text-white py-2 px-4 rounded border border-none',
   },
   {

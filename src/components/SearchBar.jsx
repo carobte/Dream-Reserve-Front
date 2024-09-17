@@ -58,7 +58,7 @@ export default function SearchBar() {
         return false;
       }
     } else {
-      // Validaciones para las otras opciones (paquete completo, vuelos, etc.)
+      // Validaciones para las otras opciones (paquete completo, vuelos)
       if (!origin) {
         setError('Por favor, completa el campo de origen.');
         return false;

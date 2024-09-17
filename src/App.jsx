@@ -5,6 +5,7 @@ import { SearchProvider } from './context/SearchContext';
 import { AuthProvider } from './context/AuthContext';
 import { ReservaProvider } from './context/ReserveContext'; 
 
+
 function App() {
   return (
     <PriceProvider>

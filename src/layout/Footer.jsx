@@ -1,4 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Footer() {
+
+  const navigate = useNavigate();
+
+  const handleFrequentClick = function(){
+    navigate('/frequent-questions');
+  }
+  
+  
   return (
     <footer className="bg-custom-green text-white py-8">
     <div className="container mx-auto px-4">
@@ -10,7 +20,14 @@ export default function Footer() {
         <div>
           <h4 className="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="text-sm hover:text-gray-300">Preguntas Frecuentes</a></li>
+            <li>
+              <button 
+              className="text-sm hover:text-gray-300"
+              onClick={handleFrequentClick}
+              >
+                Preguntas Frecuentes
+              </button>
+            </li>
             <li><a href="#" className="text-sm hover:text-gray-300">Política de Privacidad</a></li>
             <li><a href="#" className="text-sm hover:text-gray-300">Términos y Condiciones</a></li>
           </ul>

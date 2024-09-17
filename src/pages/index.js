@@ -8,6 +8,8 @@ import FlightSelection from './FlightSelection';
 import AddToursPrompt from './AddToursPrompt';
 import TourSelection from './TourSelection';
 import DateReserve from './DateReserve';
+import AboutUs from './AboutUs';
+import FrequentQuestion from './FrequentQuestions';
 
 export {
   Home,
@@ -18,6 +20,8 @@ export {
   FlightSelection,
   AddToursPrompt,
   TourSelection,
-  DateReserve
+  DateReserve,
+  AboutUs,
+  FrequentQuestion
   // Reservations,
 };

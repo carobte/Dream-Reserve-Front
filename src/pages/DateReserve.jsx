@@ -1,7 +1,7 @@
 import { PlaneIcon, HotelIcon, UtensilsIcon, UsersIcon, MapPinIcon, CalendarIcon, MapIcon, LuggageIcon, UmbrellaIcon } from "lucide-react";
 import NavbarSelect from "../layout/NavbarSelect";
 import Footer from "../layout/Footer";
-import { useReserva } from "../context/ReserveContext"; // Verifica que la ruta sea correcta
+import { useReserva } from "../context/ReserveContext"; 
 
 export default function DetallesReserva() {
   const { reserva } = useReserva();
