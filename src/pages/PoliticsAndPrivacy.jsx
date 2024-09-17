@@ -40,7 +40,7 @@ export default function PrivacyPolicy() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
             <NavbarSelect />
-            <div className="bg-gradient-to-b from-blue-50 to-teal-50 min-h-screen pt-24 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen pt-24 py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-4xl font-bold text-center text-teal-700 mb-8">Política de Privacidad</h1>
                     <div className="bg-white shadow-xl rounded-lg overflow-hidden">
