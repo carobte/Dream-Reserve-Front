@@ -86,10 +86,8 @@ export default function FlightSelection() {
   };
 
   const handleReserve = () => {
-    // Sumar el precio total del vuelo al valor actual en totalPrice
     setTotalPrice(prevTotal => prevTotal + flightTotalPrice);
 
-    // Redirigir a la ruta que desees (ejemplo: página de confirmación)
     navigate('/date-reserve');
   };
 
