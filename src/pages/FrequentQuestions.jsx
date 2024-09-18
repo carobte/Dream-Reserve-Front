@@ -6,27 +6,27 @@ import Footer from '../layout/Footer';
 const faqs = [ 
   {
     question: "¿Cómo puedo reservar un paquete de viaje con Dream Reserve?",
-    answer: "Reservar un paqute de viaje con Dream Reserve es súper fácil. Simplemente visita nuestra página principal, introduce los detalles del plan que quieras realizar dentro de la barra del buscador, selecciona el lugar donde te encuentras, al igual que la fecha en la que quieres viajar y hasta cuando vas a viajar y por último, la cantidad de personas con las que realizaras el viaje. Le das clic en la lupa y seleccionas tu hotel, habitación y alimentación de preferencia, luego le das clic en reservas y la página te mostrará los tipos de vuelvos que ofrecemos en Dream Reserve, escoge con el que más te acomodes. Por ultimo, reserva "
+    answer: "Reservar un paqute de viaje con Dream Reserve es súper fácil. Simplemente visita nuestra página principal, introduce los detalles del plan que quieras realizar dentro de la barra del buscador, selecciona el lugar donde te encuentras, al igual que la fecha en la que quieres viajar y hasta cuando vas a viajar y por último, la cantidad de personas con las que realizaras el viaje. Le das clic en la lupa y seleccionas tu hotel, habitación y alimentación de preferencia, luego le das clic en reservar este y la página te mostrará los tipos de vuelvos que ofrecemos en Dream Reserve, escoge con el que más te acomodes. Por ultimo, reserva "
   },
   {
     question: "¿Qué pasa si necesito cambiar o cancelar mi reserva?",
-    answer: "Entendemos que los planes pueden cambiar. Puedes modificar o cancelar tu reserva a través de tu cuenta en nuestro sitio web. Ten en cuenta que pueden aplicarse cargos dependiendo de la política de la aerolínea y el tipo de tarifa que hayas seleccionado. Te recomendamos revisar los términos y condiciones de tu reserva."
+    answer: "Entendemos que los planes pueden cambiar.No puedes modificar tu reserva pero la puedes cancelar a través de tu cuenta en nuestro sitio web. Ten en cuenta que pueden aplicarse cargos dependiendo de la política de la aerolínea y el tipo de tarifa que hayas seleccionado. Te recomendamos revisar los términos y condiciones de tu reserva además de ello, recuerda que para cancelar reserva se debe hacer con mínimo 3 días de antelación."
   },
   {
     question: "¿Ofrecen paquetes de vuelo + hotel?",
-    answer: "Sí, ofrecemos paquetes de vuelo + hotel que pueden ahorrarte dinero en tu viaje. Puedes buscar estas ofertas en nuestra sección de 'Paquetes' o contactar con nuestro equipo para opciones personalizadas que se ajusten a tus necesidades y presupuesto."
+    answer: "No, ofreceremos paquetes de vuelo + hotel en un próximo alcance de Dream Reserve, para este este primer alcance te podemos ofrecer un paquete completo que pueden ahorrarte dinero en tu viaje la cual contiene(hotel, vuelo, alimentación y toures). Puedes buscar esta oferta en nuestra sección de 'Paquete completo'."
   },
   {
     question: "¿Cómo puedo obtener el mejor precio para mi vuelo?",
-    answer: "Para obtener los mejores precios, te recomendamos reservar con anticipación, ser flexible con tus fechas de viaje y suscribirte a nuestras alertas de ofertas. También ofrecemos una garantía de mejor precio: si encuentras un precio más bajo para el mismo vuelo dentro de las 24 horas posteriores a tu reserva, igualaremos ese precio."
+    answer: "Para obtener los mejores precios, te recomendamos reservar con anticipación, ser flexible con tus fechas y horarios de viaje. Los precios de vuelos dependen directamented de las aerolíneas, por ende, mantenemos los precios originales, siendo así, en las temporadas más bajas podrás conseguir vuelos con precios más favorables."
   },
   {
     question: "¿Qué servicios adicionales ofrece Dream Reserve?",
-    answer: "Además de la reserva de vuelos, ofrecemos servicios de alquiler de coches, reservas de hotel, seguros de viaje y asistencia para la planificación de itinerarios personalizados. Nuestro objetivo es ser tu socio de viaje completo, cubriendo todas tus necesidades desde el momento en que planificas tu viaje hasta que regresas a casa."
+    answer: "Además de la reserva de vuelos, ofrecemos servicios de reservas de hotel, con la habitación de tu preferencia, además de que podrás elegir que tipo de alimentación deseas para tu viaje, en Dream Reserve brindamos asistencia para la planificación de itinerarios personalizados. Nuestro objetivo es ser tu socio de viaje completo, cubriendo todas tus necesidades desde el momento en que planificas tu viaje recorriendo hoteles y destinos turísticos hasta que regresas a casa."
   },
   {
     question: "¿Cómo puedo contactar con el servicio de atención al cliente?",
-    answer: "Nuestro equipo de atención al cliente está disponible 24/7. Puedes contactarnos por teléfono, email o chat en vivo a través de nuestro sitio web. También ofrecemos asistencia de emergencia para viajeros que ya están en ruta. Tu satisfacción y seguridad son nuestra prioridad."
+    answer: "Te podemos ofrecer un número de contacto por si tienes alguna duda o inconveniente con las reservas de tu viaje, pero como tal, no te ofrecemos una atención del servicio al cliente por si te general dudas o conflictos con el vuelo u hoteles directamente"
   },
   {
     question: "¿Puedo reservar solo el vuelo sin alojamiento?",
@@ -34,19 +34,19 @@ const faqs = [
   },
   {
     question: "¿Cómo recibo la confirmación de mi reserva?",
-    answer: "Una vez que completes tu reserva, recibirás un correo electrónico de confirmación con todos los detalles de tu vuelo o paquete. También puedes acceder a tu reserva desde tu cuenta en nuestro sitio web."
+    answer: "Una vez que completes los detalles de tu viaje, dentro del sitio web encontrarás un itinerario dónde podrás ver las reservas que tienes pendientes."
   },
   {
     question: "¿Cuáles son las formas de pago disponibles?",
-    answer: "Aceptamos tarjetas de crédito, débito, transferencias bancarias y pagos a través de plataformas seguras como PayPal. También puedes optar por pagar en cuotas dependiendo de tu ubicación."
+    answer: "No nos encargamos de pagos, simplemente segun las opciones que elegiste para tu reserva, te generamos un valor apróximado de lo que deberías pagar, pero el sitio web no se reciben los pagos"
   },
   {
     question: "¿Es seguro reservar a través de Dream Reserve?",
-    answer: "Sí, garantizamos que todas tus transacciones están protegidas con los más altos estándares de seguridad. Utilizamos tecnología de cifrado SSL para proteger tu información personal y financiera."
+    answer: "Sí, garantizamos la seguridad de tu viaje, además te ofrecemos sitios con la mejor calidad"
   },
   {
     question: "¿Cómo puedo hacer el check-in para mi vuelo?",
-    answer: "El check-in se puede hacer directamente desde la página web de la aerolínea o, en algunos casos, te proporcionaremos un enlace para que puedas hacerlo fácilmente. El check-in online suele estar disponible entre 24 y 48 horas antes del vuelo."
+    answer: "El check-in se puede hacer directamente desde el sitio web de la aerolínea o, en algunos casos, te proporcionaremos un enlace para que puedas hacerlo fácilmente. El check-in online suele estar disponible entre 24 y 48 horas antes del vuelo."
   },
   {
     question: "¿Puedo reservar un viaje para un grupo grande?",
