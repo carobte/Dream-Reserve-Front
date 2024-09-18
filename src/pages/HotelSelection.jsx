@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { usePrice } from '../context/PriceContext';
-import { Star } from 'lucide-react';
+import { Loader, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavbarSelect from '../layout/NavbarSelect';
 import { AsideFilters } from '../components';
-import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+import Footer from '../layout/Footer';
+import TravelLoader from '../components/TravelLoader';
 
-const HOTELS_PER_PAGE = 3;
+const HOTELS_PER_PAGE = 4;
 
 export default function HotelListingPage() {
   const [hotels, setHotels] = useState([]);
@@ -22,7 +23,6 @@ export default function HotelListingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   const { planType } = useContext(SearchContext);
   const { selectedHotel: contextSelectedHotel, setSelectedHotel: setContextSelectedHotel, totalPrice, setTotalPrice } = usePrice();
   const { numberOfNights } = useContext(SearchContext);
@@ -33,9 +33,9 @@ export default function HotelListingPage() {
     setError(null);
     try {
       const [hotelResponse, roomResponse, foodResponse] = await Promise.all([
-        axios.get('http://localhost:3000/hotel'),
-        axios.get('http://localhost:3000/room'),
-        axios.get('http://localhost:3000/food'),
+        axios.get('https://dreamreserve.azurewebsites.net/api/V1/Hotel'),
+        axios.get('https://dreamreserve.azurewebsites.net/api/V1/Room'),
+        axios.get('https://dreamreserve.azurewebsites.net/api/V1/Food'),
       ]);
       
       setHotels(hotelResponse.data);
@@ -43,10 +43,9 @@ export default function HotelListingPage() {
       setFoods(foodResponse.data);
 
       if (hotelResponse.data.length > 0) {
-
         const hotelRoomTypes = {};
         hotelResponse.data.forEach(hotel => {
-          const hotelRooms = roomResponse.data.filter(room => room.hotel_id === hotel.id);
+          const hotelRooms = roomResponse.data.filter(room => room.hotelId === hotel.id);
           const availableRoomTypes = hotelRooms.map(room => room.type);
           const defaultRoomType = availableRoomTypes.length > 0 ? availableRoomTypes[0] : null;
           if (defaultRoomType) {
@@ -67,7 +66,7 @@ export default function HotelListingPage() {
   }, []);
 
   const handleRoomTypeChange = (hotelId, roomType) => {
-    const hotelRooms = rooms.filter(room => room.hotel_id === hotelId);
+    const hotelRooms = rooms.filter(room => room.hotelId === hotelId);
     const availableRoomTypes = hotelRooms.map(room => room.type);
   
     if (availableRoomTypes.includes(roomType)) {
@@ -95,7 +94,7 @@ export default function HotelListingPage() {
   };
 
   const getHotelRooms = (hotelId) => {
-    return rooms.filter(room => room.hotel_id === hotelId);
+    return rooms.filter(room => room.hotelId === hotelId);
   };
 
   const getFoodOptions = () => {
@@ -138,7 +137,6 @@ export default function HotelListingPage() {
     setContextSelectedHotel({ ...selectedHotel, room });
     setTotalPrice(price);
   
-    console.log(planType);
     if (planType === 'solo-hotel') {
       navigate('/date-reserve');
     } else {
@@ -159,9 +157,7 @@ export default function HotelListingPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-16 h-16 border-4 border-t-4 border-green-800 border-solid rounded-full animate-spin"></div>
-      </div>
+      <TravelLoader />
     );
   }
 
@@ -185,7 +181,6 @@ export default function HotelListingPage() {
         <h2 className="text-3xl font-bold mb-6 text-custom-green">Hoteles Disponibles</h2>
         
         <div className="flex flex-col md:flex-row gap-8">
-          {/* aside filtros */}
           <AsideFilters />
           
           <section className="flex-grow space-y-6">
@@ -198,7 +193,7 @@ export default function HotelListingPage() {
                 <div className="flex flex-col md:flex-row">
                   <div className="w-full md:w-1/3 relative">
                     <img 
-                      src="https://images.unsplash.com/photo-1718606267789-de728d02f064?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                      src={hotel.urlImages.split(' ')[0]}  // Mostrar la primera imagen del hotel
                       alt={hotel.name} 
                       className="w-full h-full object-cover absolute inset-0"
                     />
@@ -206,23 +201,18 @@ export default function HotelListingPage() {
                   <div className="p-4 flex-1">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="text-xl font-semibold">{hotel.name}</h3>
+                        <h3 className="text-xl font-semibold capitalize">{hotel.name}</h3>
                         <div className="flex items-center">
                           {[...Array(hotel.rating)].map((_, i) => (
                             <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                           ))}
                         </div>
                       </div>
-                      {hotel.popular && (
-                        <span className="bg-yellow-400 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                          Popular
-                        </span>
-                      )}
                     </div>
                     <p className="text-sm text-gray-600 mt-2">{hotel.description}</p>
                     <div className="mt-4">
                       <div className="flex flex-wrap gap-2 border-b border-gray-200">
-                        {['Sencilla', 'Doble', 'Triple', 'Familiar'].map((type) => {
+                        {['sencilla', 'doble', 'triple', 'familiar'].map((type) => {
                           const isAvailable = getHotelRooms(hotel.id).some(room => room.type === type);
                           return (
                             isAvailable && (
@@ -253,40 +243,43 @@ export default function HotelListingPage() {
                       </div>
                       {getHotelRooms(hotel.id)
                         .filter(room => room.type === selectedRoomTypes[hotel.id])
-                        .map((room) => (
-                          <div key={room.id} className="mt-2">
-                            <div className="grid grid-cols-4 gap-1 mb-1">
-                              {[1, 2, 3].map((index) => (
-                                <img
-                                  key={index}
-                                  src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGFiaXRhY2lvbmVzJTIwaG90ZWxlc3xlbnwwfHwwfHx8MA%3D%3D" 
-                                  alt={`${room.type} room ${index}`} 
-                                  className="w-full h-32 object-cover rounded-md"
-                                />
-                              ))}
-                            </div>
-                            <div className="mt-2 flex justify-between items-center">
-                              <div className='flex gap-2'>
-                                <button 
-                                  className="text-white border bg-custom-green border-green-800 rounded px-4 py-2"
-                                >
-                                  Ver Fotos
-                                </button>
-                                <button
-                                  className="text-white border bg-custom-green rounded px-4 py-2"
-                                  onClick={() => handleReserveClick(hotel.id, room)}
-                                >
-                                  Reservar Este
-                                </button>
+                        .map((room) => {
+                          const imageUrls = room.urlImages ? room.urlImages.split(' ') : []; // Asegúrate de tener `urlImages` en los datos de habitación
+                          return (
+                            <div key={room.id} className="mt-2">
+                              <div className="grid grid-cols-4 gap-1 mb-1">
+                                {imageUrls.map((url, index) => (
+                                  <img
+                                    key={index}
+                                    src={url}
+                                    alt={`Room image ${index}`}
+                                    className="w-full h-32 object-cover rounded-md"
+                                  />
+                                ))}
                               </div>
-                              <div className="text-right">
-                                <p className="text-2xl font-bold text-custom-green">COP {calculatePrice(room.price, selectedFoodType[hotel.id] || 'Sin Alimentación').toLocaleString()}</p>
-                                <p className="text-sm text-gray-600">{numberOfNights} noches, 2 adultos</p>
-                                <p className="text-xs text-gray-500">Impuestos y cargos incluidos <span className='text-custom-green font-bold'>Precio por Habitacion</span></p>
+                              <div className="mt-2 flex justify-between items-center">
+                                <div className='flex gap-2'>
+                                  <button 
+                                    className="text-white border bg-custom-green border-green-800 rounded px-4 py-2"
+                                  >
+                                    Ver Fotos
+                                  </button>
+                                  <button
+                                    className="text-white border bg-custom-green rounded px-4 py-2"
+                                    onClick={() => handleReserveClick(hotel.id, room)}
+                                  >
+                                    Reservar Este
+                                  </button>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-2xl font-bold text-custom-green">COP {calculatePrice(room.price, selectedFoodType[hotel.id] || 'Sin Alimentación').toLocaleString()}</p>
+                                  <p className="text-sm text-gray-600">{numberOfNights} noches, 2 adultos</p>
+                                  <p className="text-xs text-gray-500">Impuestos y cargos incluidos <span className='text-custom-green font-bold'>Precio por Habitacion</span></p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
@@ -295,7 +288,6 @@ export default function HotelListingPage() {
           </section>
         </div>
       </main>
-      {/* Paginación */}
       <div className="flex justify-center mt-6">
         <div className="flex space-x-2">
           {pageNumbers.map((number) => (
@@ -309,6 +301,7 @@ export default function HotelListingPage() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
