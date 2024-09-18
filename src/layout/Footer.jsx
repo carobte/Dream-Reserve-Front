@@ -8,6 +8,10 @@ export default function Footer() {
     navigate('/frequent-questions');
   }
 
+  const handlePrivacyClick = function(){
+    navigate('/politics-and-privacy');
+  }
+
   const handleTermsClick = function(){
     navigate('/terms-and-conditions');
   }
@@ -32,7 +36,14 @@ export default function Footer() {
                 Preguntas Frecuentes
               </button>
             </li>
-            <li><a href="#" className="text-sm hover:text-gray-300">Política de Privacidad</a></li>
+            <li>
+              <button 
+              className="text-sm hover:text-gray-300"
+              onClick={handlePrivacyClick}
+              >
+                Politica de Privacidad
+              </button>
+            </li>
             <li>
               <button 
               className="text-sm hover:text-gray-300"
