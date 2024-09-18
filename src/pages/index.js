@@ -11,6 +11,7 @@ import DateReserve from './DateReserve';
 import AboutUs from './AboutUs';
 import FrequentQuestion from './FrequentQuestions';
 import PoliticsAndPrivacy from './PoliticsAndPrivacy';
+import TermsAndConditions from './TermsAndConditions';
 
 export {
   Home,
@@ -24,6 +25,7 @@ export {
   DateReserve,
   AboutUs,
   FrequentQuestion,
-  PoliticsAndPrivacy
+  PoliticsAndPrivacy,
+  TermsAndConditions
   // Reservations,
 };
