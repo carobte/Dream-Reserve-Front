@@ -7,6 +7,9 @@ export default function Footer() {
   const handleFrequentClick = function(){
     navigate('/frequent-questions');
   }
+  const handlePrivacyClick = function(){
+    navigate('/Politics-and-privacy');
+  }
   
   
   return (
@@ -28,7 +31,14 @@ export default function Footer() {
                 Preguntas Frecuentes
               </button>
             </li>
-            <li><a href="#" className="text-sm hover:text-gray-300">Política de Privacidad</a></li>
+            <li>
+              <button 
+              className="text-sm hover:text-gray-300"
+              onClick={handlePrivacyClick}
+              >
+                Politica de Privacidad
+              </button>
+            </li>
             <li><a href="#" className="text-sm hover:text-gray-300">Términos y Condiciones</a></li>
           </ul>
         </div>
@@ -54,7 +64,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="mt-8 text-center text-sm">
-        © 2023 Dream Reserve. Todos los derechos reservados.
+        © 2024 Dream Reserve. Todos los derechos reservados.
       </div>
     </div>
   </footer>
