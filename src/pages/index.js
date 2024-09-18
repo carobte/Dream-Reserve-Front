@@ -10,6 +10,7 @@ import TourSelection from './TourSelection';
 import DateReserve from './DateReserve';
 import AboutUs from './AboutUs';
 import FrequentQuestion from './FrequentQuestions';
+import PoliticsAndPrivacy from './PoliticsAndPrivacy';
 import TermsAndConditions from './TermsAndConditions';
 
 export {
@@ -24,6 +25,7 @@ export {
   DateReserve,
   AboutUs,
   FrequentQuestion,
+  PoliticsAndPrivacy,
   TermsAndConditions
   // Reservations,
 };
