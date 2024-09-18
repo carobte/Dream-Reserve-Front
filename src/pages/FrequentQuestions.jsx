@@ -3,10 +3,10 @@ import { Search, Mail, ChevronDown, ChevronUp } from 'lucide-react'
 import NavbarSelect from '../layout/NavbarSelect';
 import Footer from '../layout/Footer';
 
-const faqs = [
+const faqs = [ 
   {
-    question: "¿Cómo puedo reservar un vuelo con Dream Reserve?",
-    answer: "Reservar un vuelo con Dream Reserve es fácil. Simplemente visita nuestra página principal, introduce tus detalles de viaje en el buscador, selecciona tu vuelo preferido y sigue los pasos para completar tu reserva. También puedes contactar con nuestro equipo de atención al cliente para asistencia personalizada."
+    question: "¿Cómo puedo reservar un paquete de viaje con Dream Reserve?",
+    answer: "Reservar un paqute de viaje con Dream Reserve es súper fácil. Simplemente visita nuestra página principal, introduce los detalles del plan que quieras realizar dentro de la barra del buscador, selecciona el lugar donde te encuentras, al igual que la fecha en la que quieres viajar y hasta cuando vas a viajar y por último, la cantidad de personas con las que realizaras el viaje. Le das clic en la lupa y seleccionas tu hotel, habitación y alimentación de preferencia, luego le das clic en reservas y la página te mostrará los tipos de vuelvos que ofrecemos en Dream Reserve, escoge con el que más te acomodes. Por ultimo, reserva "
   },
   {
     question: "¿Qué pasa si necesito cambiar o cancelar mi reserva?",
