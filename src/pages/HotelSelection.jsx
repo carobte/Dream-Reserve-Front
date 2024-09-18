@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { usePrice } from '../context/PriceContext';
-import { Loader, Star } from 'lucide-react';
+import { Loader, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavbarSelect from '../layout/NavbarSelect';
@@ -37,7 +37,7 @@ export default function HotelListingPage() {
         axios.get('https://dreamreserve.azurewebsites.net/api/V1/Room'),
         axios.get('https://dreamreserve.azurewebsites.net/api/V1/Food'),
       ]);
-      
+
       setHotels(hotelResponse.data);
       setRooms(roomResponse.data);
       setFoods(foodResponse.data);
@@ -68,7 +68,7 @@ export default function HotelListingPage() {
   const handleRoomTypeChange = (hotelId, roomType) => {
     const hotelRooms = rooms.filter(room => room.hotelId === hotelId);
     const availableRoomTypes = hotelRooms.map(room => room.type);
-  
+
     if (availableRoomTypes.includes(roomType)) {
       setSelectedRoomTypes(prevState => ({
         ...prevState,
@@ -133,10 +133,10 @@ export default function HotelListingPage() {
   const handleReserveClick = (hotelId, room) => {
     const selectedHotel = hotels.find(hotel => hotel.id === hotelId);
     const price = calculatePrice(room.price, selectedFoodType[hotelId] || 'Sin Alimentación');
-  
+
     setContextSelectedHotel({ ...selectedHotel, room });
     setTotalPrice(price);
-  
+
     if (planType === 'solo-hotel') {
       navigate('/date-reserve');
     } else {
@@ -179,22 +179,21 @@ export default function HotelListingPage() {
 
       <main className="flex-grow container mx-auto my-8 px-4">
         <h2 className="text-3xl font-bold mb-6 text-custom-green">Hoteles Disponibles</h2>
-        
         <div className="flex flex-col md:flex-row gap-8">
           <AsideFilters />
-          
+
           <section className="flex-grow space-y-6">
             {paginatedHotels.map((hotel) => (
-              <div 
-                key={hotel.id} 
+              <div
+                key={hotel.id}
                 className={`border rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl`}
                 onClick={() => setSelectedHotel(hotel.id)}
               >
                 <div className="flex flex-col md:flex-row">
                   <div className="w-full md:w-1/3 relative">
-                    <img 
+                    <img
                       src={hotel.urlImages.split(' ')[0]}  // Mostrar la primera imagen del hotel
-                      alt={hotel.name} 
+                      alt={hotel.name}
                       className="w-full h-full object-cover absolute inset-0"
                     />
                   </div>
@@ -259,7 +258,7 @@ export default function HotelListingPage() {
                               </div>
                               <div className="mt-2 flex justify-between items-center">
                                 <div className='flex gap-2'>
-                                  <button 
+                                  <button
                                     className="text-white border bg-custom-green border-green-800 rounded px-4 py-2"
                                   >
                                     Ver Fotos
@@ -285,22 +284,44 @@ export default function HotelListingPage() {
                 </div>
               </div>
             ))}
+            <div className='w-full h-20 flex flex-row justify-between items-center'>
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="p-2 bg-custom-green text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
+                aria-label="Previous page"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+
+              <div className="flex space-x-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-10 h-10  ${currentPage === page
+                      ? 'bg-custom-green text-white'
+                      : 'bg-white text-teal-600 border border-teal-600'
+                      }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="p-2  bg-custom-green text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
+                aria-label="Next page"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </section>
         </div>
       </main>
-      <div className="flex justify-center mt-6 pb-6">
-        <div className="flex space-x-2">
-          {pageNumbers.map((number) => (
-            <button
-              key={number}
-              className={`border border-gray-300 px-4 py-2 rounded-md text-sm ${currentPage === number ? 'bg-custom-green text-white' : 'text-gray-700'}`}
-              onClick={() => handlePageChange(number)}
-            >
-              {number}
-            </button>
-          ))}
-        </div>
-      </div>
+
       <Footer />
     </div>
   );
