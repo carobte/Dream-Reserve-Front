@@ -7,6 +7,10 @@ export default function Footer() {
   const handleFrequentClick = function(){
     navigate('/frequent-questions');
   }
+
+  const handleTermsClick = function(){
+    navigate('/terms-and-conditions');
+  }
   
   
   return (
@@ -29,7 +33,14 @@ export default function Footer() {
               </button>
             </li>
             <li><a href="#" className="text-sm hover:text-gray-300">Política de Privacidad</a></li>
-            <li><a href="#" className="text-sm hover:text-gray-300">Términos y Condiciones</a></li>
+            <li>
+              <button 
+              className="text-sm hover:text-gray-300"
+              onClick={handleTermsClick}
+              >
+                Terminos y Condiciones
+              </button>
+            </li>
           </ul>
         </div>
         <div>

@@ -84,7 +84,7 @@ export default function TermsAndConditions() {
                         </div>
 
                         <p className="mt-8 text-sm text-gray-600 text-center">
-                            Estos términos y condiciones fueron actualizados por última vez el 1 de junio de 2023.
+                            Estos términos y condiciones fueron actualizados por última vez el 17 de septiembre de 2024.
                         </p>
                     </div>
                 </div>
