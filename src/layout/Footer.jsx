@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 text-center text-sm">
-          © 2023 Dream Reserve. Todos los derechos reservados.
+          © 2024 Dream Reserve. Todos los derechos reservados.
         </div>
       </div>
     </footer>

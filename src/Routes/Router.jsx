@@ -1,5 +1,6 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom';
-import { Home, Login, Register, SearchResults, FlightSelection, TourSelection, AddToursPrompt, DateReserve, AboutUs, FrequentQuestion, PoliticsAndPrivacy,  TermsAndConditions} from '../pages'; 
+import { Home, Login, Register, SearchResults, FlightSelection, TourSelection, AddToursPrompt, DateReserve, AboutUs, FrequentQuestion, PoliticsAndPrivacy, TermsAndConditions} from '../pages'; 
+
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
