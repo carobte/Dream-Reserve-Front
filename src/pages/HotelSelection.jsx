@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import { usePrice } from '../context/PriceContext';
-import { Star } from 'lucide-react';
+import { Loader, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavbarSelect from '../layout/NavbarSelect';
 import { AsideFilters } from '../components';
 import { SearchContext } from '../context/SearchContext';
 import Footer from '../layout/Footer';
+import TravelLoader from '../components/TravelLoader';
 
 const HOTELS_PER_PAGE = 4;
 
@@ -156,9 +157,7 @@ export default function HotelListingPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-16 h-16 border-4 border-t-4 border-green-800 border-solid rounded-full animate-spin"></div>
-      </div>
+      <TravelLoader />
     );
   }
 
