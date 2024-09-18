@@ -218,7 +218,7 @@ export default function HotelListingPage() {
                             isAvailable && (
                               <button
                                 key={type}
-                                className={`py-1 px-3 text-sm font-medium rounded ${selectedRoomTypes[hotel.id] === type ? 'bg-green-800 text-white border border-green-800' : 'bg-gray-200 text-gray-700 border border-gray-300'} hover:bg-green-700 hover:text-white`}
+                                className={`py-1 px-3 text-sm font-medium rounded ${selectedRoomTypes[hotel.id] === type ? 'bg-custom-green text-white border border-green-800' : 'bg-gray-200 text-gray-700 border border-gray-300'} hover:bg-custom-green hover:text-white`}
                                 onClick={() => handleRoomTypeChange(hotel.id, type)}
                               >
                                 {type}
@@ -234,7 +234,7 @@ export default function HotelListingPage() {
                         {getFoodOptions().map((type) => (
                           <button
                             key={type}
-                            className={`py-1 px-3 text-sm font-medium rounded ${selectedFoodType[hotel.id] === type ? 'bg-green-800 text-white border border-green-800' : 'bg-gray-200 text-gray-700 border border-gray-300'} hover:bg-green-700 hover:text-white`}
+                            className={`py-1 px-3 text-sm font-medium rounded ${selectedFoodType[hotel.id] === type ? 'bg-custom-green text-white border border-green-800' : 'bg-gray-200 text-gray-700 border border-gray-300'} hover:bg-custom-green hover:text-white`}
                             onClick={() => handleFoodTypeChange(hotel.id, type)}
                           >
                             {type}
@@ -288,12 +288,12 @@ export default function HotelListingPage() {
           </section>
         </div>
       </main>
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-6 pb-6">
         <div className="flex space-x-2">
           {pageNumbers.map((number) => (
             <button
               key={number}
-              className={`border border-gray-300 px-4 py-2 rounded-md text-sm ${currentPage === number ? 'bg-green-800 text-white' : 'text-gray-700'}`}
+              className={`border border-gray-300 px-4 py-2 rounded-md text-sm ${currentPage === number ? 'bg-custom-green text-white' : 'text-gray-700'}`}
               onClick={() => handlePageChange(number)}
             >
               {number}
