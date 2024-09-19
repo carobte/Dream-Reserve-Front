@@ -11,7 +11,7 @@ const buttonOptions = [
   {
     id: 2,
     text: 'Reservas',
-    path: '/reservations',
+    path: '/my-reservations',
     className: 'cursor-pointer bg-custom-green-opacity text-white py-2 px-4 rounded border border-none',
   }
 ];
@@ -38,8 +38,8 @@ export default function Home() {
           <button 
             className="bg-custom-green text-white py-2 px-4 rounded"
             onClick={() => {
-              logout(); // Llama a la función logout del contexto
-              navigate('/'); // Redirige a la página principal después de cerrar sesión
+              logout();
+              navigate('/'); 
             }}
           >
             Cerrar sesión

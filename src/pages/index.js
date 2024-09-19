@@ -12,10 +12,10 @@ import AboutUs from './AboutUs';
 import FrequentQuestion from './FrequentQuestions';
 import PoliticsAndPrivacy from './PoliticsAndPrivacy';
 import TermsAndConditions from './TermsAndConditions';
+import MyReservations from './MyReservations';
 
 export {
   Home,
-  // ExploreOffers,
   Login,
   Register,
   SearchResults,
@@ -26,6 +26,6 @@ export {
   AboutUs,
   FrequentQuestion,
   PoliticsAndPrivacy,
-  TermsAndConditions
-  // Reservations,
+  TermsAndConditions,
+  MyReservations
 };
