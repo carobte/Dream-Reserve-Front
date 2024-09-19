@@ -5,18 +5,17 @@ import { SearchProvider } from './context/SearchContext';
 import { AuthProvider } from './context/AuthContext';
 import { ReservaProvider } from './context/ReserveContext'; 
 
-
 function App() {
   return (
     <PriceProvider>
-    <SearchProvider>
-      <AuthProvider>
-        <ReservaProvider>
-          <RouterProvider router={router} />
-        </ReservaProvider>
-      </AuthProvider>
-    </SearchProvider>
-  </PriceProvider>
+      <SearchProvider>
+        <AuthProvider>
+          <ReservaProvider>
+            <RouterProvider router={router} />
+          </ReservaProvider>
+        </AuthProvider>
+      </SearchProvider>
+    </PriceProvider>
   );
 }
 

@@ -1,10 +1,18 @@
-import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom';
+import { createBrowserRouter, Route, createRoutesFromElements, Outlet } from 'react-router-dom';
 import { Home, Login, Register, SearchResults, FlightSelection, TourSelection, AddToursPrompt, DateReserve, AboutUs, FrequentQuestion, PoliticsAndPrivacy, TermsAndConditions, MyReservations} from '../pages'; 
+import ScrollToTop from '../components/ScrollToTop';
 
+// Creamos el ScrollWrapper aquí, en el mismo archivo Router.jsx
+const ScrollWrapper = () => (
+  <>
+    <ScrollToTop />
+    <Outlet />
+  </>
+);
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
+    <Route element={<ScrollWrapper />}>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -18,6 +26,6 @@ export const router = createBrowserRouter(
       <Route path="/politics-and-privacy" element={<PoliticsAndPrivacy />} />
       <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="/my-reservations" element={<MyReservations />} />
-    </>
+    </Route>
   )
 );
