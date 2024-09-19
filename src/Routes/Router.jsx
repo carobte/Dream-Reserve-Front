@@ -2,7 +2,7 @@ import { createBrowserRouter, Route, createRoutesFromElements, Outlet } from 're
 import { Home, Login, Register, SearchResults, FlightSelection, TourSelection, AddToursPrompt, DateReserve, AboutUs, FrequentQuestion, PoliticsAndPrivacy, TermsAndConditions, MyReservations} from '../pages'; 
 import ScrollToTop from '../components/ScrollToTop';
 
-// Creamos el ScrollWrapper aquí, en el mismo archivo Router.jsx
+// funcion para scrollear a la parte superior
 const ScrollWrapper = () => (
   <>
     <ScrollToTop />
