@@ -4,7 +4,7 @@ import { Loader, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavbarSelect from '../layout/NavbarSelect';
-import { AsideFilters } from '../components';
+import { Advertising, AsideFilters } from '../components';
 import { SearchContext } from '../context/SearchContext';
 import Footer from '../layout/Footer';
 import TravelLoader from '../components/TravelLoader';
@@ -180,7 +180,7 @@ export default function HotelListingPage() {
       <main className="flex-grow container mx-auto my-8 px-4">
         <h2 className="text-3xl font-bold mb-6 text-custom-green">Hoteles Disponibles</h2>
         <div className="flex flex-col md:flex-row gap-8">
-          <AsideFilters />
+          <Advertising />
 
           <section className="flex-grow space-y-6">
             {paginatedHotels.map((hotel) => (
