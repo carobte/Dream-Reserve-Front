@@ -2,15 +2,25 @@ import { PlaneIcon, HotelIcon, UtensilsIcon, UsersIcon, MapPinIcon, CalendarIcon
 import NavbarSelect from "../layout/NavbarSelect";
 import Footer from "../layout/Footer";
 import { useReserva } from "../context/ReserveContext"; 
+import { useNavigate } from "react-router-dom";
 
 export default function DetallesReserva() {
+  const navigate = useNavigate();
   const { reserva } = useReserva();
   
   // Busqeuda de como llega reserva para posible error
   console.log("Reserva data:", reserva);
+  
 
+  const handleConfirmReserve = (reserva) => {
+
+    //Aca hay una alerta para estilar 
+    alert("Reserva confirmada");
+
+    navigate("/my-reservations");
+  }
   const formatoFecha = (fecha) => {
-    if (!fecha) return "Fecha no disponible"; // previenne el error undefined
+    if (!fecha) return "Fecha no disponible"; 
     return new Date(fecha).toLocaleString('es-CO', { 
       year: 'numeric', 
       month: 'long', 
@@ -126,7 +136,12 @@ export default function DetallesReserva() {
           </div>
           <div className="flex justify-end space-x-4">
             <button className="border border-gray-300 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Cancelar</button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Confirmar</button>
+            <button 
+              className="bg-custom-green text-white px-4 py-2 rounded-lg hover:bg-custom-green-form pointer"
+                onClick={handleConfirmReserve}
+            >
+              Confirmar
+            </button>
           </div>
         </div>
 
