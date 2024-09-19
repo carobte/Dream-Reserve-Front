@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PlaneTakeoff, PlaneLanding, Clock, Building2, Info } from 'lucide-react';
 import NavbarSelect from '../layout/NavbarSelect';
 import Footer from '../layout/Footer';
-import { AsideFilters, TravelLoader } from '../components';
+import { TravelLoader } from '../components';
 import { usePrice } from '../context/PriceContext';
 import { useReserva } from '../context/ReserveContext';
 
@@ -129,9 +129,7 @@ export default function FlightSelection() {
     <div className="min-h-screen flex flex-col">
       <NavbarSelect />
       <main className="flex-grow container mx-auto my-8 px-4 py-5">
-        <h2 className="text-3xl font-bold mb-6 text-custom-green">Vuelos Disponibles</h2>
         <div className="flex flex-col md:flex-row gap-8">
-          <AsideFilters />
           <div className="w-full max-w-4xl mx-auto border rounded-lg shadow-lg">
             <div className="p-4">
               <div className="mb-8">
@@ -154,7 +152,7 @@ export default function FlightSelection() {
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-4 flex items-center">
                   <PlaneLanding className="mr-2" />
-                  Vuelos de Regreso
+                  Vuelos de Retorno
                 </h2>
                 {returnFlights.map((flight) => (
                   <FlightCard
