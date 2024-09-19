@@ -34,11 +34,13 @@ export const ReservaProvider = ({ children }) => {
     destino: destination,
     vueloIda: null,
     vueloVuelta: null,
-    tours: [], // Asegúrate de inicializar con una lista vacía
-    valorTotal: totalPrice
+    tours: [],
+    valorTotal: totalPrice,
+    startDate, 
+    endDate      
   });
 
-  // Actualiza `reserva` cuando cambian los datos de los contextos
+  // Actualiza reserva cuando cambian los datos de los contextos
   useEffect(() => {
     setReserva(prev => ({
       ...prev,
@@ -48,9 +50,11 @@ export const ReservaProvider = ({ children }) => {
       personas: totalPeople,
       origen: origin,
       destino: destination,
-      valorTotal: totalPrice
+      valorTotal: totalPrice,
+      startDate, 
+      endDate     
     }));
-  }, [selectedHotel, totalPrice, planType, totalPeople, origin, destination]);
+  }, [selectedHotel, totalPrice, planType, totalPeople, origin, destination, startDate, endDate]);
 
   const updateFlight = (flight, flightType) => {
     setReserva(prev => ({
@@ -64,7 +68,7 @@ export const ReservaProvider = ({ children }) => {
     <ReservaContext.Provider value={{
       reserva,
       setReserva,
-      updateFlight, 
+      updateFlight
     }}>
       {children}
     </ReservaContext.Provider>
