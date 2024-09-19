@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building, User, Plane } from 'lucide-react';
+import { useState, useContext, useCallback } from 'react';
+import { PhoneCall, Calendar, Users, MapPin, Settings, LogOut, X, Building, User, Plane, Check } from 'lucide-react';
 import { SearchContext } from '../context/SearchContext';
 import { usePrice } from '../context/PriceContext';
 import { useReserva } from '../context/ReserveContext';
@@ -12,15 +12,26 @@ export default function NavbarSelect() {
     const { user, logout } = useAuth(); 
     const [menuOpen, setMenuOpen] = useState(false);
     const [itineraryOpen, setItineraryOpen] = useState(false);
+    const [copyFeedback, setCopyFeedback] = useState(false);
 
     const formattedStartDate = startDate ? startDate.toLocaleDateString() : 'Fecha de inicio';
     const formattedEndDate = endDate ? endDate.toLocaleDateString() : 'Fecha de fin';
     const peopleText = totalPeople ? `${totalPeople} adultos` : 'Número de personas';
 
+    const copyToClipboard = useCallback(async () => {
+        const phoneNumber = '+57 123 456 789';
+        try {
+            await navigator.clipboard.writeText(phoneNumber);
+            setCopyFeedback(true);
+            setTimeout(() => setCopyFeedback(false), 2000); // Hide feedback after 2 seconds
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }, []);
+
     const toggleMenu = () => setMenuOpen(prev => !prev);
     const toggleItinerary = () => setItineraryOpen(prev => !prev);
     
-
     return (
         <>
             {/* Navbar */}
@@ -32,10 +43,22 @@ export default function NavbarSelect() {
                         <li>|</li>
                         <li><a href="#" className="hover:underline">Mis Reservas</a></li>
                         <li>|</li>
-                        <li><a href="#" className="hover:underline">Sobre Nosotros</a></li>
+                        <li><a href=" ../../About-us" className="hover:underline">Sobre Nosotros</a></li>
                         <li>|</li>
-                        <li><a href="#" className="hover:underline flex items-center">
-                            <PhoneCall className="inline mr-1 mr-2 h-4 w-4" />+57 123 456 789</a>
+                        <li>
+                            <button 
+                                onClick={copyToClipboard} 
+                                className="hover:underline flex items-center relative"
+                            >
+                                <PhoneCall className="inline mr-1 mr-2 h-4 w-4" />
+                                +57 123 456 789
+                                {copyFeedback && (
+                                    <span className="absolute top-full left-0 mt-1 px-2 py-1 bg-white text-green-600 text-xs rounded shadow">
+                                        <Check className="inline h-3 w-3 mr-1" />
+                                        Copiado
+                                    </span>
+                                )}
+                            </button>
                         </li>
                     </ul>
 

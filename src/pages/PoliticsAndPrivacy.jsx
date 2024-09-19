@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
                                     Si tiene alguna pregunta sobre nuestra política de privacidad o cómo manejamos sus datos, no dude en contactarnos:
                                 </p>
                                 <ul className="list-disc list-inside text-teal-600">
-                                    <li>Email: privacy@dreamreserve.com</li>
+                                    <li>Email: contacto@dreamreserve.com</li>
                                     <li>Teléfono: +57 123 456 789</li>
                                     <li>Dirección: Cl. 16 #55-129, Piso 3,  Medellín, Colombia.</li>
                                 </ul>
