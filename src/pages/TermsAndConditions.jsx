@@ -1,7 +1,8 @@
 import NavbarSelect from '../layout/NavbarSelect';
 import Footer from '../layout/Footer';
 import { useState } from 'react';
-import { ChevronDown, Book, Briefcase, Scale, Calendar, AlertTriangle } from 'lucide-react';
+import { ChevronDown, BookUser, Briefcase, ScrollText, LockKeyhole, Scale, Calendar, AlertTriangle } from 'lucide-react';
+import { title } from 'framer-motion/client';
 
 export default function TermsAndConditions() {
     const [openSection, setOpenSection] = useState(null);
@@ -12,14 +13,39 @@ export default function TermsAndConditions() {
 
     const termsItems = [
         {
-            title: "Aceptación de los Términos",
-            content: "Al utilizar los servicios de Dream Reserve, usted acepta cumplir y estar sujeto a estos términos y condiciones. Si no está de acuerdo con alguna parte de estos términos, no podrá utilizar nuestros servicios.",
-            icon: <Book className="w-6 h-6" />
+            title: "Informacion de Contacto",
+            content: "Al utilizar los servicios de Dream Reserve, usted acepta el uso de sus datos personales. Usted puede cambiar sus datos personales en cualquier momento. Al utilizar los servicios de Dream Reserve, acepta la política de privacidad de Dream Reserve.",
+            icon: <BookUser className="w-6 h-6" />
         },
         {
             title: "Reservas y Pagos",
             content: "Las reservas están sujetas a disponibilidad y confirmación. Los precios pueden variar y no se garantizan hasta la confirmación. Se requiere un pago inicial para asegurar la reserva, y el pago completo debe realizarse antes de la fecha especificada en la confirmación de la reserva.",
             icon: <Briefcase className="w-6 h-6" />
+        },
+        {
+            title: "Condiciones de Uso",
+            content: [
+                " 1- Los usuarios deben ser mayores de 18 años para utilizar nuestros servicios.",
+                " 2- Está prohibido utilizar el servicio para actividades ilegales o no autorizadas.",
+                " 3- Los usuarios deben respetar los derechos de propiedad intelectual y no pueden copiar, distribuir o modificar el contenido sin permiso."
+            ],
+            icon: <ScrollText />
+        },
+        {
+            title: "Politica de Privacidad",
+            content: [
+            " 1- En Dream Reserve, valoramos tu privacidad y nos comprometemos a proteger tus datos personales. Esta política de privacidad describe cómo recopilamos, usamos y protegemos tu información.",
+
+            " 2- Información que Recopilamos",
+                " Datos Personales: Nombre, dirección de correo electrónico, número de teléfono.",
+                " Datos de Uso: Información sobre cómo utilizas nuestro sitio web y servicios.",
+
+            " 3- Utilizamos tu información para:",
+
+                " Proveer y mejorar nuestros servicios,",
+                " Comunicarnos contigo,",
+                " Cumplir con obligaciones legales."],
+            icon: <LockKeyhole />
         },
         {
             title: "Cancelaciones y Reembolsos",
@@ -41,7 +67,7 @@ export default function TermsAndConditions() {
     return (
         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen ">
             <NavbarSelect />
-            <div className="max-w-4xl mx-auto pt-16 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="min-h-screen mx-auto pt-24 py-12 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl font-bold text-center text-teal-700 mb-8">Términos y Condiciones</h1>
                 <div className="bg-white shadow-xl rounded-lg overflow-hidden">
                     <div className="p-6 sm:p-10">
@@ -77,7 +103,7 @@ export default function TermsAndConditions() {
                                 Si tiene alguna pregunta sobre estos términos y condiciones o si surge alguna disputa, por favor contáctenos:
                             </p>
                             <ul className="list-disc list-inside text-teal-600">
-                                <li>Email: legal@dreamreserve.com</li>
+                                <li>Email: contacto@dreamreserve.com</li>
                                 <li>Teléfono: +57 123 456 789</li>
                                 <li>Dirección: Cl. 16 #55-129, Piso 3,  Medellín, Colombia.</li>
                             </ul>
