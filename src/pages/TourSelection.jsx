@@ -3,7 +3,7 @@ import { usePrice } from '../context/PriceContext';
 import { useReserva } from '../context/ReserveContext'; // Importar useReserva
 import NavbarSelect from '../layout/NavbarSelect';
 import Footer from '../layout/Footer';
-import { AsideFilters } from '../components';
+import { Advertising, AsideFilters } from '../components';
 import { useNavigate } from 'react-router-dom';
 
 const tours = [
@@ -91,7 +91,7 @@ export default function Component() {
             )}
         </div>
         <div className="flex flex-col md:flex-row gap-8">
-          <AsideFilters />
+          <Advertising />
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             

@@ -4,27 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import { PlaneTakeoff, PlaneLanding, Clock, Building2, Info } from 'lucide-react';
 import NavbarSelect from '../layout/NavbarSelect';
 import Footer from '../layout/Footer';
-import { TravelLoader } from '../components';
+import { Advertising, TravelLoader } from '../components';
 import { usePrice } from '../context/PriceContext';
 import { useReserva } from '../context/ReserveContext';
 
 export default function FlightSelection() {
-
   const [tariffs, setTariffs] = useState([
     {
-      "name": "Economico",
-      "price": 0,
-      "features": ["Equipaje de mano", "Entretenimiento a bordo"]
+      name: "Economico",
+      price: 0,
+      features: ["Equipaje de mano", "Entretenimiento a bordo"]
     },
     {
-      "name": "Ejecutivo",
-      "price": 50000,
-      "features": ["Equipaje de mano", "Equipaje facturado", "Entretenimiento a bordo", "Selección de asiento"]
+      name: "Ejecutivo",
+      price: 50000,
+      features: ["Equipaje de mano", "Equipaje facturado", "Entretenimiento a bordo", "Selección de asiento"]
     },
     {
-      "name": "Premium",
-      "price": 100000,
-      "features": ["Equipaje de mano", "Equipaje facturado", "Entretenimiento a bordo", "Selección de asiento", "Reembolsable", "Embarque prioritario"]
+      name: "Premium",
+      price: 100000,
+      features: ["Equipaje de mano", "Equipaje facturado", "Entretenimiento a bordo", "Selección de asiento", "Reembolsable", "Embarque prioritario"]
     }
   ]);
 
@@ -44,26 +43,36 @@ export default function FlightSelection() {
         const response = await axios.get('https://dreamreserve.azurewebsites.net/api/V1/Flight');
         const flightsWithTimes = response.data.map(flight => ({
           ...flight,
-          randomTime: generateRandomMorningTime()
+          randomTime: generateRandomMorningTime(),
         }));
-        setFlights(flightsWithTimes);
+
+        const invertedFlights = flightsWithTimes.map(flight => ({
+          ...flight,
+          origin: flight.destiny,
+          destiny: flight.origin,
+        }));
+
+        const allFlights = [...flightsWithTimes, ...invertedFlights];
+
+        setFlights(allFlights);
       } catch (error) {
         console.error("Error al obtener los vuelos:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchFlights();
   }, []);
-
-  const departureFlights = flights.filter(flight => flight.origin === reserva.origen && flight.destiny === 'medellin');
-  const returnFlights = flights.filter(flight => flight.origin === 'medellin' && flight.destiny === reserva.origen);
 
   const generateRandomMorningTime = () => {
     const randomHour = Math.floor(Math.random() * 6) + 6;
     const randomMinutes = Math.floor(Math.random() * 60);
     return `${randomHour.toString().padStart(2, '0')}:${randomMinutes.toString().padStart(2, '0')} AM`;
   };
+
+  const departureFlights = flights.filter(flight => flight.origin === reserva.origen && flight.destiny === 'medellin');
+  const returnFlights = flights.filter(flight => flight.origin === 'medellin' && flight.destiny === reserva.origen);
 
   const departureDate = reserva.startDate ? new Date(reserva.startDate).toLocaleDateString() : 'Fecha no disponible';
   const returnDate = reserva.endDate ? new Date(reserva.endDate).toLocaleDateString() : 'Fecha no disponible';
@@ -129,84 +138,89 @@ export default function FlightSelection() {
     <div className="min-h-screen flex flex-col">
       <NavbarSelect />
       <main className="flex-grow container mx-auto my-8 px-4 py-5">
+        <h2 className="text-3xl font-bold mb-6 text-custom-green">Vuelos Disponibles</h2>
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="w-full max-w-4xl mx-auto border rounded-lg shadow-lg">
-            <div className="p-4">
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-4 flex items-center">
-                  <PlaneTakeoff className="mr-2" />
-                  Vuelos de Salida
-                </h2>
-                {departureFlights.map((flight) => (
-                  <FlightCard
-                    key={flight.id}
-                    flight={flight}
-                    isSelected={selectedDeparture === flight.id}
-                    onSelect={() => setSelectedDeparture(flight.id)}
-                    icon={PlaneTakeoff}
-                    date={departureDate}
-                  />
-                ))}
-              </div>
+          <Advertising />
 
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-4 flex items-center">
-                  <PlaneLanding className="mr-2" />
-                  Vuelos de Retorno
-                </h2>
-                {returnFlights.map((flight) => (
-                  <FlightCard
-                    key={flight.id}
-                    flight={flight}
-                    isSelected={selectedReturn === flight.id}
-                    onSelect={() => setSelectedReturn(flight.id)}
-                    icon={PlaneLanding}
-                    date={returnDate}
-                  />
-                ))}
-              </div>
-
-              {selectedDeparture && selectedReturn && (
+          <div className="flex-grow space-y-6">
+            <div className="w-full max-w-4xl mx-auto border rounded-lg shadow-lg">
+              <div className="p-4">
                 <div className="mb-8">
                   <h2 className="text-xl font-semibold mb-4 flex items-center">
-                    <Info className="mr-2" />
-                    Tarifa
+                    <PlaneTakeoff className="mr-2" />
+                    Vuelos de Salida
                   </h2>
-                  {tariffs.map((tariff) => (
-                    <div key={tariff.name} className={`p-2 border rounded-lg mb-4 ${selectedTariff === tariff.name ? 'border-custom-green border-2' : ''}`}>
-                      <div className="flex justify-between items-center">
-                        <span>{tariff.name}</span>
-                        <div className="text-right">
-                          <span className="font-bold text-custom-green">{formatPrice(tariff.price)}</span>
-                          <button
-                            onClick={() => setSelectedTariff(tariff.name)}
-                            className={`ml-2 px-2 py-1 rounded ${selectedTariff === tariff.name ? 'bg-custom-green text-white' : 'border border-custom-green text-custom-green'}`}
-                          >
-                            {selectedTariff === tariff.name ? "Seleccionado" : "Seleccionar"}
-                          </button>
-                        </div>
-                      </div>
-                      <ul className="mt-2 text-sm text-gray-600">
-                        {tariff.features.map((feature) => (
-                          <li key={feature}>{feature}</li>
-                        ))}
-                      </ul>
-                    </div>
+                  {departureFlights.map((flight) => (
+                    <FlightCard
+                      key={flight.id}
+                      flight={flight}
+                      isSelected={selectedDeparture === flight.id}
+                      onSelect={() => setSelectedDeparture(flight.id)}
+                      icon={PlaneTakeoff}
+                      date={departureDate}
+                    />
                   ))}
                 </div>
-              )}
 
-              <div className="mt-8 text-right">
-                <div className="text-2xl font-bold text-custom-green mb-4">
-                  Total: {formatPrice(flightTotalPrice)}
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold mb-4 flex items-center">
+                    <PlaneLanding className="mr-2" />
+                    Vuelos de Retorno
+                  </h2>
+                  {returnFlights.map((flight) => (
+                    <FlightCard
+                      key={flight.id}
+                      flight={flight}
+                      isSelected={selectedReturn === flight.id}
+                      onSelect={() => setSelectedReturn(flight.id)}
+                      icon={PlaneLanding}
+                      date={returnDate}
+                    />
+                  ))}
                 </div>
-                <button
-                  onClick={handleReserve}
-                  className="bg-custom-green text-white px-6 py-3 rounded-lg"
-                  disabled={!selectedDeparture || !selectedReturn}
-                >
-                  Reservar Ahora
-                </button>
+
+                {selectedDeparture && selectedReturn && (
+                  <div className="mb-8">
+                    <h2 className="text-xl font-semibold mb-4 flex items-center">
+                      <Info className="mr-2" />
+                      Tarifa
+                    </h2>
+                    {tariffs.map((tariff) => (
+                      <div key={tariff.name} className={`p-2 border rounded-lg mb-4 ${selectedTariff === tariff.name ? 'border-custom-green border-2' : ''}`}>
+                        <div className="flex justify-between items-center">
+                          <span>{tariff.name}</span>
+                          <div className="text-right">
+                            <span className="font-bold text-custom-green">{formatPrice(tariff.price)}</span>
+                            <button
+                              onClick={() => setSelectedTariff(tariff.name)}
+                              className={`ml-2 px-2 py-1 rounded ${selectedTariff === tariff.name ? 'bg-custom-green text-white' : 'border border-custom-green text-custom-green'}`}
+                            >
+                              {selectedTariff === tariff.name ? "Seleccionado" : "Seleccionar"}
+                            </button>
+                          </div>
+                        </div>
+                        <ul className="mt-2 text-sm text-gray-600">
+                          {tariff.features.map((feature) => (
+                            <li key={feature}>{feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="mt-8 text-right">
+                  <div className="text-2xl font-bold text-custom-green mb-4">
+                    Total: {formatPrice(flightTotalPrice)}
+                  </div>
+                  <button
+                    onClick={handleReserve}
+                    className="bg-custom-green text-white px-6 py-2 rounded"
+                    disabled={!selectedDeparture || !selectedReturn}
+                  >
+                    Continuar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
