@@ -41,7 +41,7 @@ export default function TermsAndConditions() {
     return (
         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen ">
             <NavbarSelect />
-            <div className="max-w-4xl mx-auto pt-16 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="min-h-screen mx-auto pt-24 py-12 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl font-bold text-center text-teal-700 mb-8">Términos y Condiciones</h1>
                 <div className="bg-white shadow-xl rounded-lg overflow-hidden">
                     <div className="p-6 sm:p-10">
