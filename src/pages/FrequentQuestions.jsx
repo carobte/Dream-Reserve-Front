@@ -103,7 +103,7 @@ export default function FrequentQuestion() {
         </div>
 
         {/* Card de contacto */}
-        <div className="bg-white/10 backdrop-blur-sm shadow-lg p-8">
+        <div className="bg-white/30 backdrop-blur-sm shadow-lg p-8">
           <h2 className="text-2xl font-semibold text-[#276F62] mb-4">¿No encuentras lo que buscas?</h2>
           <p className="text-gray-700 mb-6">
             Si no has encontrado la respuesta que buscabas, no dudes en contactarnos.
