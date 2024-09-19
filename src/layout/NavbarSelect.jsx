@@ -8,8 +8,8 @@ import { useAuth } from '../context/AuthContext';
 export default function NavbarSelect() {
     const { selectedHotel, totalPrice } = usePrice();
     const { origin, destination, startDate, endDate, totalPeople, planType } = useContext(SearchContext);
-    const { reserva } = useReserva(); // Obtener la reserva del contexto
-    const { user, logout } = useAuth(); // Obtener el usuario y el método de logout del contexto
+    const { reserva } = useReserva(); 
+    const { user, logout } = useAuth(); 
     const [menuOpen, setMenuOpen] = useState(false);
     const [itineraryOpen, setItineraryOpen] = useState(false);
 
@@ -19,9 +19,7 @@ export default function NavbarSelect() {
 
     const toggleMenu = () => setMenuOpen(prev => !prev);
     const toggleItinerary = () => setItineraryOpen(prev => !prev);
-
-    console.log("desde navbar");
-    console.log(selectedHotel);
+    
 
     return (
         <>
@@ -151,7 +149,7 @@ export default function NavbarSelect() {
                                                 <p className="text-gray-600">Dirección: {selectedHotel?.address || 'No especificada'}</p>
                                                 <p className="text-gray-600">Alimentación: {selectedHotel?.foodOptions || 'No especificado'}</p>
                                                 <p className="text-gray-600">Habitación: {selectedHotel?.room?.type || 'No especificada'}</p>
-                                                <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price.toLocaleString()}</p>
+                                                <p className="text-gray-600">Precio: COP {selectedHotel?.room?.price ? selectedHotel.room.price.toLocaleString() : 'No disponible'}</p>
                                             </div>
                                         )}
 
@@ -160,42 +158,32 @@ export default function NavbarSelect() {
                                             <div className="mt-4">
                                                 <h3 className="text-md font-semibold">Vuelo de Ida</h3>
                                                 <p className="text-gray-600">Aerolínea: {reserva.vueloIda.airline}</p>
-                                                <p className="text-gray-600">Hora de salida: {reserva.vueloIda.departureTime}</p>
-                                                <p className="text-gray-600">Hora de llegada: {reserva.vueloIda.arrivalTime}</p>
-                                                <p className="text-gray-600">Duración: {reserva.vueloIda.duration}</p>
-                                                <p className="text-gray-600">Precio: COP {reserva.vueloIda.price.toLocaleString()}</p>
+                                                <p className="text-gray-600">Precio: COP {reserva.vueloIda.price ? reserva.vueloIda.price.toLocaleString() : 'No disponible'}</p>
                                             </div>
                                         )}
                                         {reserva.vueloVuelta && (
                                             <div className="mt-4">
-                                                <h3 className="text-md font-semibold">Vuelo de Vuelta</h3>
+                                                <h3 className="text-md font-semibold">Vuelo de Regreso</h3>
                                                 <p className="text-gray-600">Aerolínea: {reserva.vueloVuelta.airline}</p>
-                                                <p className="text-gray-600">Hora de salida: {reserva.vueloVuelta.departureTime}</p>
-                                                <p className="text-gray-600">Hora de llegada: {reserva.vueloVuelta.arrivalTime}</p>
-                                                <p className="text-gray-600">Duración: {reserva.vueloVuelta.duration}</p>
-                                                <p className="text-gray-600">Precio: COP {reserva.vueloVuelta.price.toLocaleString()}</p>
+                                                <p className="text-gray-600">Precio: COP {reserva.vueloVuelta.price ? reserva.vueloVuelta.price.toLocaleString() : 'No disponible'}</p>
                                             </div>
                                         )}
-
-                                        {/* Detalles de tours */}
                                         {reserva.tours && reserva.tours.length > 0 && (
                                             <div className="mt-4">
                                                 <h3 className="text-md font-semibold">Tours</h3>
                                                 {reserva.tours.map((tour, index) => (
                                                     <div key={index} className="mb-2">
-                                                        <p className="text-gray-600">Nombre: {tour.name}</p>
-                                                        <p className="text-gray-600">Fecha: {tour.date}</p>
-                                                        <p className="text-gray-600">Descripción: {tour.description}</p>
-                                                        <p className="text-gray-600">Precio: COP {tour.price.toLocaleString()}</p>
+                                                        <p className="text-gray-600">Tour: {tour.name}</p>
+                                                        <p className="text-gray-600">Precio: COP {tour.price ? tour.price.toLocaleString() : 'No disponible'}</p>
                                                     </div>
                                                 ))}
                                             </div>
                                         )}
 
-                                        {/* Total */}
-                                        <div className="mt-4">
-                                            <h3 className="text-md font-semibold">Total</h3>
-                                            <p className="text-gray-600">Precio: COP {reserva.valorTotal.toLocaleString()}</p>
+                                        {/* Valor Total */}
+                                        <div className="mt-4 border-t border-gray-200 pt-4">
+                                            <h3 className="text-lg font-semibold">Valor Total</h3>
+                                            <p className="text-gray-600">COP {reserva.valorTotal ? reserva.valorTotal.toLocaleString() : 'No disponible'}</p>
                                         </div>
                                     </div>
                                 </div>
