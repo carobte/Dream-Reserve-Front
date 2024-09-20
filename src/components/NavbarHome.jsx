@@ -28,52 +28,50 @@ export default function NavbarHome() {
   const registerPath = '/register';
 
   return (
-    <>
-      <div className="flex flex-col sm:flex-row items-center justify-between w-full mb-4 sm:mb-8 md:mb-12 lg:mb-16">
-        <div className="flex items-center space-x-4 mb-4 sm:mb-0">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-custom-green rounded-full flex items-center justify-center">
-            <span className="text-white text-lg sm:text-xl">U</span>
-          </div>
-          {user ? (
+    <nav className="w-full flex flex-row flex-wrap space-x-4 mb-8   sm:flex-row gap-4 items-center pace-y-0  ">
+      <div className="flex flex-row flex-wrap items-center space-x-4">
+        <div className="w-12 h-12 bg-custom-green rounded-full flex items-center justify-center">
+          <span className="text-white text-xl">U</span>
+        </div>
+        {user ? (
+          <button 
+            className="bg-custom-green text-white py-2 px-4 rounded"
+            onClick={() => {
+              logout();
+              navigate('/');
+            }}
+          >
+            Cerrar sesión
+          </button>
+        ) : (
+          <div className="flex space-x-2">
             <button 
-              className="bg-custom-green text-white py-2 px-4 rounded text-sm sm:text-base"
-              onClick={() => {
-                logout();
-                navigate('/');
-              }}
+              className="bg-custom-green text-white py-2 px-4 rounded"
+              onClick={() => handleButtonClick(loginPath)}
             >
-              Cerrar sesión
+              Iniciar sesión
             </button>
-          ) : (
-            <div className="flex space-x-2">
-              <button 
-                className="bg-custom-green text-white py-2 px-4 rounded text-sm sm:text-base"
-                onClick={() => handleButtonClick(loginPath)}
-              >
-                Iniciar sesión
-              </button>
-              <button 
-                className="bg-custom-green text-white py-2 px-4 rounded text-sm sm:text-base"
-                onClick={() => handleButtonClick(registerPath)}
-              >
-                Registrar
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-wrap justify-center sm:justify-end space-x-2 space-y-2 sm:space-y-0">
-          {buttonOptions.map((option) => (
-            <button
-              key={option.id}
-              className={`${option.className} text-sm sm:text-base`}
-              onClick={() => handleButtonClick(option.path)}
+            <button 
+              className="bg-custom-green text-white py-2 px-4 rounded"
+              onClick={() => handleButtonClick(registerPath)}
             >
-              {option.text}
+              Registrar
             </button>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
-    </>
+
+      <div className="flex space-x-2">
+        {buttonOptions.map((option) => (
+          <button
+            key={option.id}
+            className={option.className}
+            onClick={() => handleButtonClick(option.path)}
+          >
+            {option.text}
+          </button>
+        ))}
+      </div>
+    </nav>
   );
 }

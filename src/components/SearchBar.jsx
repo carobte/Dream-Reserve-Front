@@ -30,7 +30,7 @@ export default function SearchBar() {
     setPlanType(value);  
   };
 
-  // validaciones de opcion selecionada 
+  // validaciones de opcon selecionada 
   const validateForm = () => {
     if (!selectedOption) {
       setError('Por favor, selecciona una opción.');
@@ -131,7 +131,7 @@ export default function SearchBar() {
   return (
     <>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      <div className="flex flex-wrap items-center justify-center space-x-2 space-y-2 mb-4 sm:mb-8 w-full  md:mb-12 lg:mb-16 ">
+      <div className="flex flex-wrap justify-center items-center space-x-4 mb-8 md:mb-12 lg:mb-16 sm:mb-20 justify-start "> 
         {/* Checkbox options */}
         {['paquete-completo', 'solo-hotel', 'vuelos', 'tours'].map((option) => (
           <div key={option} className="flex items-center space-x-2">
@@ -146,7 +146,7 @@ export default function SearchBar() {
             />
             <label
               htmlFor={option}
-              className="flex items-center cursor-pointer text-white space-x-2 text-sm sm:text-base"
+              className="flex items-center px-3 py-2 cursor-pointer text-white space-x-2 text-sm sm:text-base"
             >
               <div className="w-5 h-5 flex items-center justify-center border-2 border-white rounded-md peer-checked:bg-blue-500 peer-checked:border-transparent">
                 <svg
@@ -170,7 +170,7 @@ export default function SearchBar() {
         ))}
       </div>
 
-      <div className="bg-custom-navy-blue-opacity bg-opacity-75 p-4 rounded-lg sm:rounded-full w-auto max-w-4xl mx-auto">
+      <div className="bg-custom-navy-blue-opacity bg-opacity-75 p-4 rounded-lg sm:rounded-full w-full max-w-4xl mx-auto">
         <form className="flex flex-col sm:flex-row items-center gap-4 w-full" onSubmit={handleSearch}>
           {selectedOption !== 'solo-hotel' && selectedOption !== 'tours' && (
             <div className="relative flex-1 w-full sm:w-auto">
