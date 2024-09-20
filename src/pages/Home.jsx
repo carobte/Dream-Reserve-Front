@@ -19,10 +19,10 @@ export default function Home() {
           backgroundColor: "rgba(0, 0, 0, 0.5)" 
         }}
       />
-      <div className="relative gap-4 z-10 flex flex-col min-h-screen p-4 sm:p-8 md:p-16 lg:p-32">
+      <div className="relative gap-4 z-10 flex flex-col min-h-screen w-full p-4 sm:p-8 md:p-16 lg:p-32">
         <NavbarHome />
         <div className="flex-grow flex items-center">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-5xl">
             <div className="space-y-2 mb-4 sm:mb-8 md:mb-12 lg:mb-16 text-white">
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
                 <span className="text-custom-navy-blue">D</span>ream <span className="text-custom-navy-blue">R</span>eserve
