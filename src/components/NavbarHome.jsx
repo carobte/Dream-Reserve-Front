@@ -28,14 +28,14 @@ export default function NavbarHome() {
   const registerPath = '/register';
 
   return (
-    <nav className="w-full flex flex-row flex-wrap space-x-4 mb-8   sm:flex-row gap-4 items-center pace-y-0  ">
-      <div className="flex flex-row flex-wrap items-center space-x-4">
+    <nav className="w-full  flex flex-col gap-12 sm:flex-col items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+      <div className="flex flex-wrap justify-center sm:justify-start items-center space-x-2 sm:space-x-4">
         <div className="w-12 h-12 bg-custom-green rounded-full flex items-center justify-center">
           <span className="text-white text-xl">U</span>
         </div>
         {user ? (
           <button 
-            className="bg-custom-green text-white py-2 px-4 rounded"
+            className="bg-custom-green text-white py-2 px-4 rounded mt-2 sm:mt-0"
             onClick={() => {
               logout();
               navigate('/');
@@ -44,7 +44,7 @@ export default function NavbarHome() {
             Cerrar sesión
           </button>
         ) : (
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 mt-2 sm:mt-0">
             <button 
               className="bg-custom-green text-white py-2 px-4 rounded"
               onClick={() => handleButtonClick(loginPath)}
@@ -61,7 +61,7 @@ export default function NavbarHome() {
         )}
       </div>
 
-      <div className="flex space-x-2">
+      <div className="flex flex-wrap justify-center sm:justify-end space-x-2 sm:space-x-4">
         {buttonOptions.map((option) => (
           <button
             key={option.id}
