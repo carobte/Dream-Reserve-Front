@@ -8,17 +8,48 @@ export default function DetallesReserva() {
   const navigate = useNavigate();
   const { reserva } = useReserva();
   
-  // Busqeuda de como llega reserva para posible error
+  // Log buscando errores estado 
   console.log("Reserva data:", reserva);
+
+  const handleConfirmReserve = async () => {
+    const payload = {
+      personId: reserva.persona?.id || 7, 
+      roomId: reserva.habitacion?.id || null, 
+      foodId: reserva.alimentacion?.id || null, 
+      flightId: reserva.vueloIda?.id || null, 
+      tourId: reserva.tours?.[0]?.id || null, 
+      checkIn: reserva.startDate || "2024-09-20T03:09:27.143Z", 
+      checkOut: reserva.endDate || "2024-09-20T03:09:27.143Z", 
+      peopleCuantity: reserva.personas || 1, 
+      total: reserva.valorTotal || 1, 
+    };
   
+    try {
+      const response = await fetch("https://dreamreserve.azurewebsites.net/api/V1/Reserves", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (response.ok) {
+        alert("Reserva confirmada con éxito");
+        navigate("/my-reservations");
+      } else {
+        // Si la respuesta no es exitosa, muestra el estado y texto de la respuesta
+        const errorText = await response.text();
+        console.log("Error en la respuesta del servidor:", response.status, response.statusText);
+        console.log("Detalles del error:", errorText);
+        alert("Error al confirmar la reserva. Inténtalo de nuevo.");
+      }
+    } catch (error) {
+      // Si hay un error en el proceso de la solicitud (red, conexión, etc.)
+      console.error("Error en la solicitud de reserva:", error);
+      alert("Hubo un problema al confirmar la reserva.");
+    }
+  };
 
-  const handleConfirmReserve = (reserva) => {
-
-    //Aca hay una alerta para estilar 
-    alert("Reserva confirmada");
-
-    navigate("/my-reservations");
-  }
   const formatoFecha = (fecha) => {
     if (!fecha) return "Fecha no disponible"; 
     return new Date(fecha).toLocaleString('es-CO', { 
@@ -138,33 +169,13 @@ export default function DetallesReserva() {
             <button className="border border-gray-300 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100">Cancelar</button>
             <button 
               className="bg-custom-green text-white px-4 py-2 rounded-lg hover:bg-custom-green-form pointer"
-                onClick={handleConfirmReserve}
+              onClick={handleConfirmReserve}
             >
               Confirmar
             </button>
           </div>
         </div>
-
-        {/* Sección de Próximos Pasos */}
-        <div className="mt-8 w-full max-w-4xl mx-auto bg-white/90 backdrop-blur-sm shadow-xl p-6 rounded-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Próximos Pasos</h2>
-          <ol className="list-decimal list-inside space-y-2">
-            <li className="flex items-center space-x-2">
-              <LuggageIcon className="text-blue-500" />
-              <span>Prepara tu equipaje según el clima de tu destino.</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <UmbrellaIcon className="text-orange-500" />
-              <span>Verifica las condiciones climáticas antes de tu viaje.</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <PlaneIcon className="text-green-500" />
-              <span>Realiza el check-in en línea 24 horas antes de tu vuelo.</span>
-            </li>
-          </ol>
-        </div>
       </main>
-
       <Footer />
     </div>
   );
