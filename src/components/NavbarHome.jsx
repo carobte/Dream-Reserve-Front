@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Asegúrate de ajustar la ruta según tu estructura de archivos
+import { useAuth } from '../context/AuthContext';
 
 const buttonOptions = [
   {
@@ -16,63 +16,63 @@ const buttonOptions = [
   }
 ];
 
-export default function Home() {
-  const navigate = useNavigate(); 
-  const { user, logout } = useAuth(); // Desestructuramos user y logout del contexto de autenticación
+export default function NavbarHome() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const handleButtonClick = (path) => {
     navigate(path);
   };
 
   const loginPath = '/login';
-  const registerPath = '/register'; 
+  const registerPath = '/register';
 
   return (
     <>
-      {/* Sección botón para login/logout */}
-      <div className="flex items-center space-x-4 mb-8 md:mb-12 lg:mb-16">
-        <div className="w-16 h-16 bg-custom-green rounded-full flex items-center justify-center">
-          <span className="text-white text-xl">U</span>
+      <div className="flex flex-col sm:flex-row items-center justify-between w-full mb-4 sm:mb-8 md:mb-12 lg:mb-16">
+        <div className="flex items-center space-x-4 mb-4 sm:mb-0">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-custom-green rounded-full flex items-center justify-center">
+            <span className="text-white text-lg sm:text-xl">U</span>
+          </div>
+          {user ? (
+            <button 
+              className="bg-custom-green text-white py-2 px-4 rounded text-sm sm:text-base"
+              onClick={() => {
+                logout();
+                navigate('/');
+              }}
+            >
+              Cerrar sesión
+            </button>
+          ) : (
+            <div className="flex space-x-2">
+              <button 
+                className="bg-custom-green text-white py-2 px-4 rounded text-sm sm:text-base"
+                onClick={() => handleButtonClick(loginPath)}
+              >
+                Iniciar sesión
+              </button>
+              <button 
+                className="bg-custom-green text-white py-2 px-4 rounded text-sm sm:text-base"
+                onClick={() => handleButtonClick(registerPath)}
+              >
+                Registrar
+              </button>
+            </div>
+          )}
         </div>
-        {user ? (
-          <button 
-            className="bg-custom-green text-white py-2 px-4 rounded"
-            onClick={() => {
-              logout();
-              navigate('/'); 
-            }}
-          >
-            Cerrar sesión
-          </button>
-        ) : (
-          <>
-            <button 
-              className="bg-custom-green text-white py-2 px-4 rounded"
-              onClick={() => handleButtonClick(loginPath)}
-            >
-              Iniciar sesión
-            </button>
-            <button 
-              className="bg-custom-green text-white py-2 px-4 rounded"
-              onClick={() => handleButtonClick(registerPath)}
-            >
-              Registrar
-            </button>
-          </>
-        )}
-      </div>
 
-      {/* Navbar con los botones */}
-      <div className="space-y-8 space-x-4 mb-8 md:mb-12 lg:mb-16">
-        {buttonOptions.map((option) => (
-          <button
-            key={option.id}
-            className={option.className}
-            onClick={() => handleButtonClick(option.path)}
-          >
-            {option.text}
-          </button>
-        ))}
+        <div className="flex flex-wrap justify-center sm:justify-end space-x-2 space-y-2 sm:space-y-0">
+          {buttonOptions.map((option) => (
+            <button
+              key={option.id}
+              className={`${option.className} text-sm sm:text-base`}
+              onClick={() => handleButtonClick(option.path)}
+            >
+              {option.text}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
