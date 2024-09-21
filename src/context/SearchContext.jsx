@@ -13,8 +13,8 @@ export const SearchProvider = ({ children }) => {
   const [totalPeople, setTotalPeople] = useState(2);
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [planType, setPlanType] = useState('');
+  const [selectedOption, setSelectedOption] = useState('paquete-completo');
+  const [planType, setPlanType] = useState('paquete-completo');
 
   // Calcular el número de noches
   const numberOfNights = startDate && endDate ? Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) : 0;

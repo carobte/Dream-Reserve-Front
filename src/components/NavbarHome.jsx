@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Asegúrate de ajustar la ruta según tu estructura de archivos
+import { useAuth } from '../context/AuthContext';
 
 const buttonOptions = [
   {
@@ -16,36 +16,35 @@ const buttonOptions = [
   }
 ];
 
-export default function Home() {
-  const navigate = useNavigate(); 
-  const { user, logout } = useAuth(); // Desestructuramos user y logout del contexto de autenticación
+export default function NavbarHome() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const handleButtonClick = (path) => {
     navigate(path);
   };
 
   const loginPath = '/login';
-  const registerPath = '/register'; 
+  const registerPath = '/register';
 
   return (
-    <>
-      {/* Sección botón para login/logout */}
-      <div className="flex items-center space-x-4 mb-8 md:mb-12 lg:mb-16">
-        <div className="w-16 h-16 bg-custom-green rounded-full flex items-center justify-center">
+    <nav className="w-full  flex flex-col gap-12 sm:flex-col items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+      <div className="flex flex-wrap justify-center sm:justify-start items-center space-x-2 sm:space-x-4">
+        <div className="w-12 h-12 bg-custom-green rounded-full flex items-center justify-center">
           <span className="text-white text-xl">U</span>
         </div>
         {user ? (
           <button 
-            className="bg-custom-green text-white py-2 px-4 rounded"
+            className="bg-custom-green text-white py-2 px-4 rounded mt-2 sm:mt-0"
             onClick={() => {
               logout();
-              navigate('/'); 
+              navigate('/');
             }}
           >
             Cerrar sesión
           </button>
         ) : (
-          <>
+          <div className="flex space-x-2 mt-2 sm:mt-0">
             <button 
               className="bg-custom-green text-white py-2 px-4 rounded"
               onClick={() => handleButtonClick(loginPath)}
@@ -58,12 +57,11 @@ export default function Home() {
             >
               Registrar
             </button>
-          </>
+          </div>
         )}
       </div>
 
-      {/* Navbar con los botones */}
-      <div className="space-y-8 space-x-4 mb-8 md:mb-12 lg:mb-16">
+      <div className="flex flex-wrap justify-center sm:justify-end space-x-2 sm:space-x-4">
         {buttonOptions.map((option) => (
           <button
             key={option.id}
@@ -74,6 +72,6 @@ export default function Home() {
           </button>
         ))}
       </div>
-    </>
+    </nav>
   );
 }
