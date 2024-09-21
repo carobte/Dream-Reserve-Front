@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Register() {
@@ -9,13 +10,13 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [documentTypeId, setDocumentTypeId] = useState(1); // Voy asumir el valor del TypeDocument porque no se aun como se manejara 
+  const [documentTypeId, setDocumentTypeId] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const checkEmailExists = async (email) => {
     try {
@@ -27,7 +28,6 @@ export default function Register() {
       });
 
       const data = await response.json();
-
       
       if (response.ok && data.length > 0) {
         return true; 
@@ -45,24 +45,20 @@ export default function Register() {
     setLoading(true);
     setError('');
 
-    // Validación básica de campos
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden');
       setLoading(false);
       return;
     }
 
-    // Verificar si el correo electrónico ya existe
     const emailExists = await checkEmailExists(email);
     if (emailExists) {
       setError('El correo electrónico ya está registrado');
-      alert('El correo electrónico ya está registrado');
       setLoading(false);
       return;
     }
 
     try {
-      // Solicitud al endpoint de registro
       const response = await fetch('http://localhost:3000/person', {
         method: 'POST',
         headers: {
@@ -82,15 +78,12 @@ export default function Register() {
 
       if (response.ok) {
         alert('Registro exitoso');
-        // Redirige a la página de inicio de sesión para que cuando registre pueda ir a login y probar a iniciar sesión
         navigate('/login');
       } else {
         setError(data.message || 'Error al registrar');
-        alert(data.message || 'Error al registrar');
       }
     } catch (error) {
       setError('Error al conectar con el servidor');
-      alert('Error al conectar con el servidor');
       console.error('Error:', error);
     } finally {
       setLoading(false);
@@ -98,173 +91,117 @@ export default function Register() {
   };
 
   return (
-    <div
-      className="relative w-full h-screen flex items-center justify-center text-black"
-      style={{
-        backgroundImage: "url(https://images.unsplash.com/photo-1578115172582-b27c8cd114bb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-      }}
-    >
-      {/* Pseudo-element overlay */}
+    <div className="relative w-full min-h-screen flex flex-col lg:flex-row text-black">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url(../ImagenFondo.webp)",
+        }}
+      />
       <div
         className="absolute inset-0"
         style={{
           clipPath: "polygon(75% 0%, 50% 50%, 75% 100%, 0% 100%, 0% 0%)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)"
+          backgroundColor: "rgba(0, 0, 0, 0.5)" 
         }}
       />
       {/* Left Pane */}
-      <div
-        className="relative w-full lg:w-1/2 flex items-center justify-center bg-transparent text-black px-4"
-      >
-        <div className="max-w-md text-center">
-          <div className="flex-1 flex items-center justify-center max-w-screen-lg px-4">
-            <div className="text-white text-center lg:text-left max-w-full lg:max-w-screen-lg">
-              <div className="pb-10">
-                <button
-                  type="button"
-                  onClick={() => navigate('/')} 
-                  className="bg-custom-green text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
-                >
-                  Volver al inicio
-                </button>
-              </div>
-
-              <h1 className="text-2xl font-bold md:text-3xl lg:text-4xl">
-                <span className="text-custom-navy-blue">D</span>reams
-                <span className="text-custom-navy-blue">R</span>eserve
-              </h1>
-              <h2 className="max-w-md text-4xl font-bold md:text-4xl lg:text-7xl mt-4 break-words">
-                ¿Listo para <span className="text-custom-navy-blue">comenzar</span> tu
-                <span className="text-custom-navy-blue"> aventura</span> ?
-              </h2>
-            </div>
+      <div className="relative w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
+        <div className="text-white text-center lg:text-left max-w-lg">
+          <div className="mb-8">
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className="bg-custom-green text-white px-4 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+            >
+              Volver al inicio
+            </button>
           </div>
+          <h1 className="text-4xl font-bold mb-4">
+            <span className="text-custom-navy-blue">D</span>ream
+            <span className="text-custom-navy-blue">R</span>eserve
+          </h1>
+          <h2 className="text-3xl lg:text-7xl font-bold mb-4">
+            ¿Listo para <span className="text-custom-navy-blue"> <br />comenzar</span> <br /> tu 
+            <span className="text-custom-navy-blue"> aventura</span>?
+          </h2>
         </div>
       </div>
       {/* Right Pane */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center z-10">
-        <div
-          className="max-w-md w-full p-6 bg-custom-green-form rounded-2xl"
-          style={{
-            backgroundColor: 'rgba(39, 111, 98, 0.85)'
-          }}
-        >
+      <div className="relative w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
+        <div className="w-full max-w-md bg-custom-green-form bg-opacity-85 p-8 rounded-2xl">
           <h1 className="text-3xl font-semibold mb-6 text-white text-center">Registrarse</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-white">Nombre</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-white">Apellido</label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="documentNumber" className="block text-sm font-medium text-white">Número de Documento</label>
-              <input
-                type="text"
-                id="documentNumber"
-                name="documentNumber"
-                value={documentNumber}
-                onChange={(e) => setDocumentNumber(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-white">Correo</label>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-white">Contraseña</label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                required
-              />
-              <div className="mt-2 flex items-center">
-                <input
-                  type="checkbox"
-                  id="showPassword"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                  className="mr-2"
-                />
-                <label htmlFor="showPassword" className="text-sm text-white">Mostrar contraseña</label>
-              </div>
-            </div>
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-white">Confirmar Contraseña</label>
-              <input
-                type={showConfirmPassword ? 'text' : 'password'}
-                id="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                required
-              />
-              <div className="mt-2 flex items-center">
-                <input
-                  type="checkbox"
-                  id="showConfirmPassword"
-                  checked={showConfirmPassword}
-                  onChange={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="mr-2"
-                />
-                <label htmlFor="showConfirmPassword" className="text-sm text-white">Mostrar contraseña</label>
-              </div>
-            </div>
-            <div>
-              <button
-                type="submit"
-                className={`w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                disabled={loading}
-              >
-                {loading ? 'Cargando...' : 'Registrarse'}
-              </button>
-            </div>
-            {error && (
-              <div className="text-red-500 text-sm text-center">
-                {error}
-              </div>
-            )}
+            <InputField label="Nombre" id="name" value={name} onChange={setName} />
+            <InputField label="Apellido" id="lastName" value={lastName} onChange={setLastName} />
+            <InputField label="Número de Documento" id="documentNumber" value={documentNumber} onChange={setDocumentNumber} />
+            <InputField label="Correo" id="email" type="email" value={email} onChange={setEmail} />
+            <PasswordField label="Contraseña" id="password" value={password} onChange={setPassword} showPassword={showPassword} setShowPassword={setShowPassword} />
+            <PasswordField label="Confirmar Contraseña" id="confirmPassword" value={confirmPassword} onChange={setConfirmPassword} showPassword={showConfirmPassword} setShowPassword={setShowConfirmPassword} />
+            <button
+              type="submit"
+              className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading}
+            >
+              {loading ? 'Cargando...' : 'Registrarse'}
+            </button>
           </form>
+          {error && (
+            <div className="mt-4 text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
           <div className="mt-4 text-sm text-white text-center">
             <p>¿Ya tienes una cuenta? <a href="/login" className="text-custom-navy-blue hover:underline">Inicia sesión aquí</a></p>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function InputField({ label, id, type = "text", value, onChange }) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-white mb-1">{label}</label>
+      <input
+        type={type}
+        id={id}
+        name={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom-navy-blue focus:border-transparent transition-colors duration-300"
+        required
+      />
+    </div>
+  );
+}
+
+function PasswordField({ label, id, value, onChange, showPassword, setShowPassword }) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-white mb-1">{label}</label>
+      <div className="relative">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          id={id}
+          name={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom-navy-blue focus:border-transparent transition-colors duration-300"
+          required
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-white focus:outline-none"
+        >
+          {showPassword ? (
+            <EyeOff className="h-5 w-5" />
+          ) : (
+            <Eye className="h-5 w-5" />
+          )}
+        </button>
       </div>
     </div>
   );
