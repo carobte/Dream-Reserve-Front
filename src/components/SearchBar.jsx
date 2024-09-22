@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Search } from 'lucide-react';
 import { SearchContext } from '../context/SearchContext';
 
 export default function SearchBar() {
@@ -127,7 +128,7 @@ export default function SearchBar() {
   return (
     <>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      <div className="flex flex-wrap justify-center sm:justify-start items-center space-x-2 sm:space-x-4 mb-4 sm:mb-8">
+      <div className="flex flex-wrap justify-center sm:justify-start items-center space-x-2 sm:space-x-4 mb-4 sm:mb-8 ">
         {/* Checkbox options */}
         {['paquete-completo', 'solo-hotel', 'vuelos', 'tours'].map((option) => (
           <div key={option} className="flex items-center space-x-2 mb-2 sm:mb-0">
@@ -166,7 +167,7 @@ export default function SearchBar() {
         ))}
       </div>
 
-      <div className="bg-custom-navy-blue-opacity bg-opacity-75 max-w-5xl p-2 sm:p-4 rounded-lg sm:rounded-full w-full max-w-4xl mx-auto">
+      <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-none p-2 flex flex-col sm:flex-row md:rounded-full">
         <form className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full" onSubmit={handleSearch}>
           {selectedOption !== 'solo-hotel' && selectedOption !== 'tours' && (
             <div className="relative flex-1 w-full sm:w-auto">
@@ -257,9 +258,7 @@ export default function SearchBar() {
             type="submit"
             className="bg-custom-green text-white py-2 px-4 rounded-full w-full sm:w-12 h-12 flex items-center justify-center mt-2 sm:mt-0"
           >
-            <svg width="24" height="24" viewBox="0 0 48 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M43.6333 51.5L27.3583 33.65C26.0667 34.7833 24.5812 35.6806 22.9021 36.3417C21.2229 37.0028 19.4361 37.3333 17.5417 37.3333C12.8486 37.3333 8.87674 35.5507 5.62604 31.9854C2.37535 28.4201 0.75 24.0639 0.75 18.9167C0.75 13.7694 2.37535 9.41319 5.62604 5.84792C8.87674 2.28264 12.8486 0.5 17.5417 0.5C22.2347 0.5 26.2066 2.28264 29.4573 5.84792C32.708 9.41319 34.3333 13.7694 34.3333 18.9167C34.3333 20.9944 34.0319 22.9542 33.4292 24.7958C32.8264 26.6375 32.0083 28.2667 30.975 29.6833L47.25 47.5333L43.6333 51.5ZM17.5417 31.6667C20.7708 31.6667 23.5156 30.4271 25.776 27.9479C28.0365 25.4687 29.1667 22.4583 29.1667 18.9167C29.1667 15.375 28.0365 12.3646 25.776 9.88542C23.5156 7.40625 20.7708 6.16667 17.5417 6.16667C14.3125 6.16667 11.5677 7.40625 9.30729 9.88542C7.04687 12.3646 5.91667 15.375 5.91667 18.9167C5.91667 22.4583 7.04687 25.4687 9.30729 27.9479C11.5677 30.4271 14.3125 31.6667 17.5417 31.6667Z" fill="#ABF5E8" />
-            </svg>
+            <Search />
           </button>
         </form>
       </div>

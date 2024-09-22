@@ -1,171 +1,144 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { Eye, EyeOff } from 'lucide-react';
-import 'react-datepicker/dist/react-datepicker.css';
+import { useState } from "react";
+import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const navigate = useNavigate(); // Hook para navegar
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setError('');
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validación
+    if (!validateEmail(email)) {
+      setErrorMessage("Por favor ingresa un correo electrónico válido.");
+      return;
+    }
+    if (password.length < 6) {
+      setErrorMessage("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
 
     try {
-      const response = await fetch('http://localhost:3000/person', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await axios.post("https://dream-reserve.azurewebsites.net/api/V1/People", {
+        email,
+        password,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        const user = data.find(person => person.email === email && person.password === password);
-
-        if (user) {
-          login(user);
-          navigate('/');
-        } else {
-          setError('Email o contraseña incorrectos');
-        }
-      } else {
-        setError(data.message || 'Error al iniciar sesión');
+      if (response.data) {
+        // A guardar token
+        console.log("Inicio de sesión exitoso:", response.data);
       }
     } catch (error) {
-      setError('Error al conectar con el servidor');
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
+      setErrorMessage("Error en el inicio de sesión. Por favor, verifica tus credenciales.");
     }
   };
 
+  const handleRegister = () => {
+    navigate("/register"); // Navegar a la página de registro
+  };
+
+  const handleGoBack = () => {
+    navigate("/"); // Navegar a la página de inicio
+  };
+
   return (
-    <div className="relative w-full min-h-screen flex flex-col lg:flex-row text-black">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url(../ImagenFondo.webp)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          clipPath: "polygon(75% 0%, 50% 50%, 75% 100%, 0% 100%, 0% 0%)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)" 
-        }}
-      />
-      {/* Left Pane */}
-      <div className="relative w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
-        <div className="text-white text-center lg:text-left max-w-lg">
-          <div className="mb-8">
-            <button
-              type="button"
-              onClick={() => navigate('/')}
-              className="bg-custom-green text-white px-4 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
-            >
-              Volver al inicio
-            </button>
-          </div>
-          <h1 className="text-4xl font-bold mb-4">
-            <span className="text-custom-navy-blue">D</span>reams
-            <span className="text-custom-navy-blue">R</span>eserve
-          </h1>
-          <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-            ¿Dónde te llevará tu <span className="text-custom-navy-blue">próxima aventura</span>?
-          </h2>
+    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1578115172582-b27c8cd114bb?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}>
+      <div className="absolute inset-0 bg-black opacity-40"></div>
+      
+      <div className="relative z-10 w-full max-w-6xl flex flex-col md:flex-row items-center justify-between">
+        <div className="text-white mb-8 md:mb-0 md:mr-8 text-center md:text-left">
+          <h2 className="text-xl sm:text-2xl mb-2 text-white font-bold"> <span className="text-teal-300">D</span>ream <span className="text-teal-300">R</span>eserve</h2>
+          <p className="text-4xl sm:text-6xl font-bold mb-4">¿A dónde te llevará tu próxima <span className=" text-teal-300">aventura</span>?</p>
         </div>
-      </div>
-      {/* Right Pane */}
-      <div className="relative w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
-        <div className="w-full max-w-md bg-custom-green-form bg-opacity-85 p-8 rounded-2xl">
-          <h1 className="text-3xl font-semibold mb-6 text-white text-center">Iniciar sesión</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <InputField label="Correo" id="email" type="email" value={email} onChange={setEmail} />
-            <PasswordField label="Contraseña" id="password" value={password} onChange={setPassword} showPassword={showPassword} setShowPassword={setShowPassword} />
-            <button
-              type="submit"
-              className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={loading}
-            >
-              {loading ? 'Cargando...' : 'Iniciar sesión'}
-            </button>
-          </form>
-          {error && (
-            <div className="mt-4 text-red-500 text-sm text-center">
-              {error}
+
+        <div className="w-full max-w-md">
+          <button onClick={handleGoBack} className="text-white hover:text-teal-300 flex items-center mb-8">
+            <ArrowLeft className="mr-2" />
+            Volver a la página principal
+          </button>
+          
+          <form onSubmit={handleSubmit} className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 shadow-xl">
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">Iniciar Sesión</h2>
+            
+            {errorMessage && (
+              <div className="text-red-500 text-center mb-4">
+                {errorMessage}
+              </div>
+            )}
+
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-teal-300 mb-1">
+                  Correo Electrónico
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  placeholder="tu@email.com"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-teal-300 mb-1">
+                  Contraseña
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-teal-300 hover:text-teal-500"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+              </div>
             </div>
-          )}
-          <div className="mt-4 text-sm text-white text-center">
-            <p>¿Aún no tienes una cuenta?{' '}
+            
+            <div className="mt-6">
               <button
-                onClick={() => navigate('/register')}
-                className="text-custom-navy-blue hover:underline"
+                type="submit"
+                className="w-full bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-gray-800"
               >
-                Regístrate aquí
+                Iniciar Sesión
               </button>
-            </p>
-          </div>
+            </div>
+            
+            <div className="mt-6 text-center">
+              <p className="text-white">
+                ¿No tienes una cuenta?{" "}
+                <span onClick={handleRegister} className="text-teal-300 hover:text-teal-500 font-medium cursor-pointer">
+                  Regístrate
+                </span>
+              </p>
+            </div>
+          </form>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function InputField({ label, id, type = "text", value, onChange }) {
-  return (
-    <div>
-      <label htmlFor={id} className="block text-sm font-medium text-white mb-1">{label}</label>
-      <input
-        type={type}
-        id={id}
-        name={id}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom-navy-blue focus:border-transparent transition-colors duration-300"
-        required
-      />
-    </div>
-  );
-}
-
-function PasswordField({ label, id, value, onChange, showPassword, setShowPassword }) {
-  return (
-    <div>
-      <label htmlFor={id} className="block text-sm font-medium text-white mb-1">{label}</label>
-      <div className="relative">
-        <input
-          type={showPassword ? 'text' : 'password'}
-          id={id}
-          name={id}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom-navy-blue focus:border-transparent transition-colors duration-300"
-          required
-        />
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-white focus:outline-none"
-        >
-          {showPassword ? (
-            <EyeOff className="h-5 w-5" />
-          ) : (
-            <Eye className="h-5 w-5" />
-          )}
-        </button>
       </div>
     </div>
   );
