@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, Lightbulb, Tag, Star, MapPin } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Lightbulb, Tag } from 'lucide-react'
 
 const destinations = [
   { id: 1, name: 'Cartagena', image: 'https://media.istockphoto.com/id/466497932/es/foto/torre-del-reloj-de-puerta.jpg?s=612x612&w=0&k=20&c=iDG3eUSoQHWvWFwwDmGlWOK0o0KFZ_Xfnw7tR9UdinI=', description: 'Ciudad histórica con playas caribeñas' },
@@ -24,7 +24,7 @@ function PromotionalSidebar() {
   }
 
   return (
-    <div className="w-64 space-y-6">
+    <div className=" w-60 space-y-6">
       <div className="bg-white shadow rounded-lg p-4">
         <h2 className="text-lg font-bold text-green-800 mb-2">Proximamente nuevos destinos</h2>
         <div className="relative">
@@ -50,7 +50,7 @@ function PromotionalSidebar() {
         <p className="text-sm text-gray-600">{destinations[currentDestination].description}</p>
       </div>
   
-      <div className="bg-white shadow rounded-lg p-4">
+      <div className="bg-white shadow rounded-lg p-4 w-full">
         <h2 className="text-lg font-bold text-green-800 mb-2">Consejos de Viaje</h2>
         <ul className="space-y-2">
           {tips.map((tip, index) => (
