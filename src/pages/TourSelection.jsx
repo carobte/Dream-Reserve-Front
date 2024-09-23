@@ -75,31 +75,29 @@ export default function Component() {
   return (
     <div className="min-h-screen flex flex-col">
       <NavbarSelect />
-      <main className="flex-grow container mx-auto my-8 px-4 py-5">
-        <div className='flex justify-between items-center'>
-          <h2 className="text-3xl font-bold mb-6 text-custom-green">Tours Disponibles</h2>
+      <main className="flex-grow container mx-auto my-8 px-4 py-6">
+        <div className='flex flex-col sm:flex-row justify-between items-center mb-6'>
+          <h2 className="text-3xl font-bold text-custom-green mt-10">Tours Disponibles</h2>
           {selectedTours.length > 0 && (
-            <div className="text-center">
-              <button
-                className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold"
-                onClick={handleConfirm}
-              >
-                Confirmar
-              </button>
-            </div>
+            <button
+              className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold mt-4 sm:mt-0"
+              onClick={handleConfirm}
+            >
+              Confirmar
+            </button>
           )}
         </div>
-        <div className="flex md:flex-row gap-4">
-          <Advertising />
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="lg:w-1/4 mb-4 lg:mb-0">
+            <Advertising />
+          </div>
+          <div className="lg:w-3/4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {tours.map((tour) => (
               <div key={tour.id} className="border rounded-lg overflow-hidden flex flex-col justify-between">
                 <div className="p-4 flex-grow">
                   <h3 className="text-lg font-semibold">{tour.name}</h3>
                   <img src={tour.urlImages} alt={tour.name} className="w-full h-48 object-cover mb-4 rounded-md" />
                   <p className="text-sm text-gray-600 mb-4">{tour.description}</p>
-                  {/* Mostrar información personalizada del tour */}
                   {tourInfo[tour.id] && tourInfo[tour.id].map((info, index) => (
                     <div key={index} className="flex items-center space-x-2">
                       <p>{info}</p>
