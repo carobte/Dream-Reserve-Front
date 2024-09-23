@@ -30,8 +30,8 @@ function PromotionalSidebar() {
   }
 
   return (
-    <div className=" w-60 space-y-6">
-      <div className="bg-white shadow rounded-lg p-4 transition-all duration-300 ease-in-out hover:scale-105">
+    <div className="lg:w-full lg:space-y-6 flex flex-col lg:flex-col">
+      <div className="bg-white shadow rounded-lg p-4 transition-all duration-300 ease-in-out hover:scale-105 mb-4 lg:mb-0">
         <h2 className="text-lg font-bold text-green-800 mb-2">Proximamente nuevos destinos</h2>
         <div className="relative">
           <img 
@@ -56,7 +56,7 @@ function PromotionalSidebar() {
         <p className="text-sm text-gray-600">{destinations[currentDestination].description}</p>
       </div>
   
-      <div className="bg-white shadow rounded-lg p-4 w-full transition-all duration-300 ease-in-out hover:scale-105">
+      <div className="bg-white shadow rounded-lg p-4 w-full transition-all duration-300 ease-in-out hover:scale-105 mb-4 lg:mb-0">
         <h2 className="text-lg font-bold text-green-800 mb-2">Consejos de Viaje</h2>
         <ul className="space-y-2">
           {tips.map((tip, index) => (
