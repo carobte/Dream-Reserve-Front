@@ -1,15 +1,19 @@
-import { useState } from "react";
+// LoginPage.js
+import { useState, useContext } from "react";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from '../context/AuthContext';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); // Hook para navegar
+  const navigate = useNavigate(); 
+  const { login } = useContext(AuthContext); 
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,7 +23,6 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación
     if (!validateEmail(email)) {
       setErrorMessage("Por favor ingresa un correo electrónico válido.");
       return;
@@ -29,27 +32,41 @@ export default function LoginPage() {
       return;
     }
 
+    setLoading(true); 
+
     try {
-      const response = await axios.post("https://dream-reserve.azurewebsites.net/api/V1/People", {
+      const response = await axios.post("https://dream-reserve.azurewebsites.net/api/V1/Auth/login", {
         email,
         password,
       });
 
       if (response.data) {
-        // A guardar token
-        console.log("Inicio de sesión exitoso:", response.data);
+        const userData = {
+          name: response.data.userLogged.name,
+          lastName: response.data.userLogged.lastName,
+          documentNumber: response.data.userLogged.documentNumber,
+          documentTypeId: response.data.userLogged.documentTypeId,
+          urlAvatar: response.data.userLogged.urlAvatar,
+          id: response.data.userLogged.id,
+        };
+
+        localStorage.setItem("token", response.data.jwt);
+        login(userData); // Envía los datos al contexto
+        navigate("/"); 
       }
     } catch (error) {
       setErrorMessage("Error en el inicio de sesión. Por favor, verifica tus credenciales.");
+    } finally {
+      setLoading(false); 
     }
   };
 
   const handleRegister = () => {
-    navigate("/register"); // Navegar a la página de registro
+    navigate("/register"); 
   };
 
   const handleGoBack = () => {
-    navigate("/"); // Navegar a la página de inicio
+    navigate("/"); 
   };
 
   return (
@@ -124,8 +141,9 @@ export default function LoginPage() {
               <button
                 type="submit"
                 className="w-full bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                disabled={loading}
               >
-                Iniciar Sesión
+                {loading ? "Cargando..." : "Iniciar Sesión"}
               </button>
             </div>
             

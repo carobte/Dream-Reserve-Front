@@ -167,7 +167,7 @@ export default function SearchBar() {
         ))}
       </div>
 
-      <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-none p-2 flex flex-col sm:flex-row md:rounded-full">
+      <div className="bg-opacity-60 backdrop-blur-md rounded-none p-2 flex flex-col sm:flex-row md:rounded-full bg-custom-green">
         <form className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full" onSubmit={handleSearch}>
           {selectedOption !== 'solo-hotel' && selectedOption !== 'tours' && (
             <div className="relative flex-1 w-full sm:w-auto">

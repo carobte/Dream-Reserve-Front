@@ -32,12 +32,10 @@ export const ReservaProvider = ({ children }) => {
     personas: totalPeople,
     origen: origin,
     destino: destination,
-    vueloIda: null,
-    vueloVuelta: null,
+    vueloIda: startDate,
+    vueloVuelta: endDate,
     tours: [],
-    valorTotal: totalPrice,
-    startDate, 
-    endDate      
+    valorTotal: totalPrice,  
   });
 
   // Actualiza reserva cuando cambian los datos de los contextos
