@@ -39,10 +39,10 @@ export default function NavbarHome() {
             <img 
               src={user.urlAvatar} 
               alt="Avatar" 
-              className="h-6 w-6 rounded-full" 
+              className="h-11 w-11 rounded-full" 
             />
           ) : (
-            <User className="h-6 w-6" />
+            <User className="h-8 w-8" />
           )}
           {user ? (
             <button 

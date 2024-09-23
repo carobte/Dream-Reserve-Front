@@ -88,7 +88,7 @@ export default function RegisterPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4" style={{ backgroundImage: "url('https://images.pexels.com/photos/12470916/pexels-photo-12470916.jpeg')" }}>
+    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4" style={{ backgroundImage: "url('../public/ImagenFondo.webp')" }}>
       <div className="absolute inset-0 bg-black opacity-40"></div>
       
       <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between">
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                   name="nombre"
                   value={formData.nombre}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Tu nombre"
                 />
                 {errors.nombre && <p className="text-red-500 text-xs mt-1">{errors.nombre}</p>}
@@ -130,7 +130,7 @@ export default function RegisterPage() {
                   name="apellido"
                   value={formData.apellido}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Tu apellido"
                 />
                 {errors.apellido && <p className="text-red-500 text-xs mt-1">{errors.apellido}</p>}
@@ -145,8 +145,9 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
-                  <option value="cedula">Cédula</option>
-                  <option value="pasaporte">Pasaporte</option>
+                  <option value="" disabled selected hidden>Selecciona un documento</option>
+                  <option className="text-gray-700" value="cedula">Cédula</option>
+                  <option className="text-gray-700" value="pasaporte">Pasaporte</option>
                 </select>
               </div>
 
@@ -158,7 +159,7 @@ export default function RegisterPage() {
                   name="numeroDocumento"
                   value={formData.numeroDocumento}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Tu número de documento"
                 />
                 {errors.numeroDocumento && <p className="text-red-500 text-xs mt-1">{errors.numeroDocumento}</p>}
@@ -172,7 +173,7 @@ export default function RegisterPage() {
                   name="correo"
                   value={formData.correo}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Tu correo"
                 />
                 {errors.correo && <p className="text-red-500 text-xs mt-1">{errors.correo}</p>}
@@ -187,7 +188,7 @@ export default function RegisterPage() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="Tu contraseña"
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -206,7 +207,7 @@ export default function RegisterPage() {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 bg-white bg-opacity-20 border border-teal-500 rounded-md text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="Confirma tu contraseña"
                   />
                   <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 transform -translate-y-1/2">

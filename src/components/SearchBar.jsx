@@ -241,12 +241,12 @@ export default function SearchBar() {
               {showPeopleSelector && (
                 <div className="absolute bottom-full z-10 bg-white rounded-md shadow-lg p-2 w-full sm:w-[230px]">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Total de personas</span>
+                    <span className="text-sm text-gray-700 font-medium">Total de personas</span>
                     <input
                       type="number"
                       value={totalPeople}
                       onChange={(e) => setTotalPeople(parseInt(e.target.value, 10))}
-                      className="bg-gray-100 border border-gray-300 rounded-md p-1 w-16 text-center"
+                      className="bg-gray-100 border border-gray-300 rounded-md p-1 w-16 text-center text-gray-500"
                     />
                   </div>
                 </div>
