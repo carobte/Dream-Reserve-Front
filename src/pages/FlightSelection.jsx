@@ -139,11 +139,13 @@ export default function FlightSelection() {
       <NavbarSelect />
       <main className="flex-grow container mx-auto my-8 px-4 py-5">
         <h2 className="text-3xl font-bold mb-6 text-custom-green">Vuelos Disponibles</h2>
-        <div className="flex flex-col md:flex-row gap-8">
-          <Advertising />
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-1/4 mb-4 lg:mb-0">
+            <Advertising />
+          </div>
 
-          <div className="flex-grow space-y-6">
-            <div className="w-full max-w-4xl mx-auto border rounded-lg shadow-lg">
+          <div className="lg:w-3/4 space-y-6">
+            <div className="w-full mx-auto border rounded-lg shadow-lg">
               <div className="p-4">
                 <div className="mb-8">
                   <h2 className="text-xl font-semibold mb-4 flex items-center">
@@ -185,37 +187,39 @@ export default function FlightSelection() {
                       <Info className="mr-2" />
                       Tarifa
                     </h2>
-                    {tariffs.map((tariff) => (
-                      <div key={tariff.name} className={`p-2 border rounded-lg mb-4 ${selectedTariff === tariff.name ? 'border-custom-green border-2' : ''}`}>
-                        <div className="flex justify-between items-center">
-                          <span>{tariff.name}</span>
-                          <div className="text-right">
-                            <span className="font-bold text-custom-green">{formatPrice(tariff.price)}</span>
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {tariffs.map((tariff) => (
+                        <div key={tariff.name} className={`p-4 border rounded-lg ${selectedTariff === tariff.name ? 'border-custom-green border-2' : ''}`}>
+                          <div className="flex flex-col h-full">
+                            <div className="flex justify-between items-center mb-2">
+                              <span className="font-semibold">{tariff.name}</span>
+                              <span className="font-bold text-custom-green">{formatPrice(tariff.price)}</span>
+                            </div>
+                            <ul className="text-sm text-gray-600 mb-4 flex-grow">
+                              {tariff.features.map((feature) => (
+                                <li key={feature} className="mb-1">{feature}</li>
+                              ))}
+                            </ul>
                             <button
                               onClick={() => setSelectedTariff(tariff.name)}
-                              className={`ml-2 px-2 py-1 rounded ${selectedTariff === tariff.name ? 'bg-custom-green text-white' : 'border border-custom-green text-custom-green'}`}
+                              className={`w-full px-2 py-1 rounded ${selectedTariff === tariff.name ? 'bg-custom-green text-white' : 'border border-custom-green text-custom-green'}`}
                             >
                               {selectedTariff === tariff.name ? "Seleccionado" : "Seleccionar"}
                             </button>
                           </div>
                         </div>
-                        <ul className="mt-2 text-sm text-gray-600">
-                          {tariff.features.map((feature) => (
-                            <li key={feature}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
 
-                <div className="mt-8 text-right">
+                <div className="mt-8 text-center sm:text-right">
                   <div className="text-2xl font-bold text-custom-green mb-4">
                     Total: {formatPrice(flightTotalPrice)}
                   </div>
                   <button
                     onClick={handleReserve}
-                    className="bg-custom-green text-white px-6 py-2 rounded"
+                    className="bg-custom-green text-white px-6 py-2 rounded w-full sm:w-auto"
                     disabled={!selectedDeparture || !selectedReturn}
                   >
                     Continuar
