@@ -18,12 +18,11 @@ export default function AddToursPrompt() {
   }
 
   const handlePostpone = () => {
-    
-    console.log("Decisión pospuesta...")
+    navigate('/date-reserve')
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 to-custom-green flex items-center justify-center p-4">
+    <div className="min-h-screen bg-custom-green flex items-center justify-center p-4">
       <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-6">
           <div className="space-y-6">
@@ -48,7 +47,7 @@ export default function AddToursPrompt() {
               >
                 <button
                   onClick={handleExplore}
-                  className="text-lg px-8 py-3 bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out flex items-center"
+                  className="text-lg px-8 py-3 bg-custom-green hover:bg-green-500 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out flex items-center"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -62,7 +61,7 @@ export default function AddToursPrompt() {
               >
                 <button
                   onClick={handlePostpone}
-                  className="text-lg px-8 py-3 bg-white text-gray-600 hover:bg-gray-100 border border-gray-300 rounded-full shadow-lg transition-all duration-300 ease-in-out flex items-center"
+                  className="text-lg px-8 py-3 bg-white text-gray-600 hover:bg-gray-200 border border-gray-300 hover:border-gray-500 hover:text-gray-800 rounded-full shadow-lg transition-all duration-300 ease-in-out flex items-center"
                 >
                   <Clock className="mr-2 h-5 w-5" />
                   <span>Añadir despues</span>
