@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 export default function RegisterPage() {
+  
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -84,6 +86,7 @@ export default function RegisterPage() {
   const avatarOptions = [
     "https://img.freepik.com/premium-vector/adorable-panda-avatar-logo-playful-branding_1219282-43647.jpg",
     "https://i.pinimg.com/564x/2b/ed/95/2bed95b5d11eb748fdb1c9e1f007378f.jpg",
+    "https://img.freepik.com/foto-gratis/leon-gafas-estudio_23-2150813334.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723248000&semt=ais_hybrid"
     // Agrega más avatares según sea necesario
   ];
 
