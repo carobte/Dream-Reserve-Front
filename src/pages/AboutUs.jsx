@@ -50,21 +50,21 @@ export default function AboutUs() {
 
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-custom-green mb-8 text-center">Nuestros Fundadores</h2>
-          <div className="relative rounded-xl overflow-hidden shadow-2xl">
+          <div className="relative rounded-xl overflow-hidden shadow-2xl w-[80%] m-auto">
             <img 
               src="/FotoCoder1.png" 
               alt="Fundadores de Dream Reserve" 
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
               <div className="p-8 text-white">
-                <p className="text-lg mb-4 leading-relaxed">
+                <p className="text-md mb-4 leading-relaxed">
                   Dream Reserve fue fundada por un grupo de apasionados viajeros y expertos en tecnología 
                   que compartían un sueño común: revolucionar la industria de los viajes. Nuestros fundadores 
                   combinan años de experiencia en el sector turístico con un profundo conocimiento de las 
                   últimas innovaciones tecnológicas.
                 </p>
-                <p className="text-lg leading-relaxed">
+                <p className="text-md leading-relaxed">
                   Juntos, han creado una plataforma que no solo simplifica la planificación y reserva de 
                   viajes, sino que también añade un toque personal y mágico a cada experiencia. Su visión 
                   es hacer que cada viaje sea una aventura inolvidable, accesible y perfectamente adaptada 
