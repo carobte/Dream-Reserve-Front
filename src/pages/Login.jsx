@@ -44,6 +44,7 @@ export default function LoginPage() {
         const userData = {
           name: response.data.userLogged.name,
           lastName: response.data.userLogged.lastName,
+          email: response.data.userLogged.email,
           documentNumber: response.data.userLogged.documentNumber,
           documentTypeId: response.data.userLogged.documentTypeId,
           urlAvatar: response.data.userLogged.urlAvatar,

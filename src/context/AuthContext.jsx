@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     setUser({
       name: userData.name,
       lastName: userData.lastName,
+      email: userData.email,
       documentNumber: userData.documentNumber,
       documentTypeId: userData.documentTypeId,
       urlAvatar: userData.urlAvatar,

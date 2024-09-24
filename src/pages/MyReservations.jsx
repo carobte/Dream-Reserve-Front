@@ -1,9 +1,11 @@
 'use client'
 
-import{ useState } from 'react'
+import { useState } from 'react'
 import { Hotel, Utensils, Bed, Calendar, Plane, Clock, MapPin, DollarSign } from "lucide-react"
 import NavbarSelect from '../layout/NavbarSelect'
 import Footer from '../layout/Footer'
+import { useAuth } from '../context/AuthContext';
+
 
 // pendiente por compoetizar
 const Card = ({ children, className = '' }) => (
@@ -28,7 +30,7 @@ function DetallesReserva({ reserva }) {
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-center text-[#276F62]">Detalles de la Reserva</h2>
       <Badge className="block w-max mx-auto mb-6 text-lg py-1 px-3">Reserva #{reserva.id}</Badge>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <div className="p-4">
@@ -120,7 +122,7 @@ function DetallesReserva({ reserva }) {
               <DollarSign className="h-6 w-6" />
               Precio Total
             </h3>
-            <p className="text-2xl font-bold">${reserva.precioTotal.toFixed(2)}</p>
+            <p className="text-2xl font-bold">${reserva.precioTotal}</p>
           </div>
         </Card>
       </div>
@@ -130,24 +132,38 @@ function DetallesReserva({ reserva }) {
 
 // Componente principal 
 export default function MisReservas() {
+
+  const { user } = useAuth();
+
+  if (!user) return (
+    <>
+        <NavbarSelect />
+        <div className="flex flex-col items-center justify-center h-screen">
+          <h1 className="text-2xl font-bold text-center text-[#276F62]">Debes iniciar sesión para ver los detalles de la reserva</h1>
+          <a href="../Login"><button className="mt-4 w-28 h-8 bg-custom-green text-white font-semibold rounded-md hover:bg-custom-green">Iniciar Sesión</button></a>
+        </div>
+        <Footer />
+    </>
+  )
+
+
   const [reservas, setReservas] = useState([
     {
       id: "RES123456",
-      hotel: "Gran Hotel Playa del Carmen",
-      destino: "Playa del Carmen, México",
-      alimentacion: "Todo Incluido",
-      habitacion: "Suite Deluxe Vista al Mar",
-      fechaLlegada: "2023-07-15",
-      fechaSalida: "2023-07-22",
+      hotel: "San Fernando",
+      destino: "Medellín",
+      alimentacion: "Desayuno y almuerzo",
+      habitacion: "Doble",
+      fechaLlegada: "2024-09-24",
+      fechaSalida: "2024-09-27",
       vuelos: [
-        { tipo: "Ida", numero: "AV1234", salida: "2023-07-15 10:00", llegada: "2023-07-15 13:30" },
-        { tipo: "Vuelta", numero: "AV1235", salida: "2023-07-22 15:00", llegada: "2023-07-22 18:30" }
+        { tipo: "Ida", numero: "AV1234", salida: "2024-09-24 10:00", llegada: "2024-09-24 13:30" },
+        { tipo: "Vuelta", numero: "AV1235", salida: "2024-09-27 15:00", llegada: "2024-09-27 18:30" }
       ],
       tours: [
-        { nombre: "Excursión a Chichen Itzá", fecha: "2023-07-17", duracion: "8 horas" },
-        { nombre: "Snorkel en arrecifes de coral", fecha: "2023-07-19", duracion: "4 horas" }
+        { nombre: "Tour Comuna 13", fecha: "Graffiti tour", duracion: "$ 50000" },
       ],
-      precioTotal: 2500.00
+      precioTotal: "2'500.000"
     }
   ])
   const [reservaSeleccionada, setReservaSeleccionada] = useState(null)
@@ -157,7 +173,7 @@ export default function MisReservas() {
       <NavbarSelect />
       <main className="flex-grow container mx-auto my-8 px-4 py-5">
         <h1 className="text-3xl font-bold text-center mb-6 text-[#276F62]">Mis Reservas</h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="lg:col-span-1">
             <div className="p-4">
@@ -178,7 +194,7 @@ export default function MisReservas() {
               </div>
             </div>
           </Card>
-          
+
           <Card className="lg:col-span-2">
             <div className="p-4">
               {reservaSeleccionada ? (

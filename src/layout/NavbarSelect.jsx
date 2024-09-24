@@ -31,7 +31,7 @@ export default function NavbarSelect() {
 
     const toggleMenu = () => setMenuOpen(prev => !prev);
     const toggleItinerary = () => setItineraryOpen(prev => !prev);
-    
+
     return (
         <>
             {/* Navbar */}
@@ -41,9 +41,9 @@ export default function NavbarSelect() {
                     <ul className="flex justify-start space-x-4 text-sm">
                         <li><a href="/" className="hover:underline">Inicio</a></li>
                         <li>|</li>
-                        <li><a href="#" className="hover:underline">Mis Reservas</a></li>
+                        <li><a href="../../my-reservations" className="hover:underline">Mis Reservas</a></li>
                         <li>|</li>
-                        <li><a href=" ../../About-us" className="hover:underline">Sobre Nosotros</a></li>
+                        <li><a href="../../About-us" className="hover:underline">Sobre Nosotros</a></li>
                         <li>|</li>
                         <li>
                             <button 
@@ -74,7 +74,7 @@ export default function NavbarSelect() {
                             <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
                                 {user ? (
                                     <img
-                                        src={user.photoURL || "https://img.freepik.com/foto-gratis/leon-gafas-estudio_23-2150813334.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723248000&semt=ais_hybrid"}
+                                        src={user.urlAvatar || "https://img.freepik.com/foto-gratis/leon-gafas-estudio_23-2150813334.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723248000&semt=ais_hybrid"}
                                         alt="Foto de perfil"
                                         className="rounded-full"
                                         width={32}
@@ -92,7 +92,7 @@ export default function NavbarSelect() {
                                 <div className="py-2">
                                     {user ? (
                                         <div className="px-4 py-2">
-                                            <p className="text-sm font-medium leading-none text-custom-green">Usuario</p>
+                                            <p className="text-sm font-medium leading-none text-custom-green">{user.name} {user.lastName}</p>
                                             <p className="text-xs text-gray-500">{user.email || 'usuario@ejemplo.com'}</p>
                                         </div>
                                     ) : (
@@ -116,10 +116,10 @@ export default function NavbarSelect() {
                                                 <Settings className="mr-2 h-4 w-4" />
                                                 Configuración
                                             </button>
-                                            <button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                                            <a href="../Login"><button className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
                                                 <LogOut className="mr-2 h-4 w-4" />
                                                 Iniciar sesión
-                                            </button>
+                                            </button></a>
                                         </>
                                     )}
                                 </div>

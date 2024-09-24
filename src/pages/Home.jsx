@@ -5,7 +5,7 @@ export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/12470916/pexels-photo-12470916.jpeg')" }}>
+    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/ImagenFondo.webp')" }}>
       <div className="absolute inset-0 bg-black opacity-40"></div>
       <div className="relative z-10 min-h-screen flex flex-col p-4 sm:p-6">
         <NavbarHome />
