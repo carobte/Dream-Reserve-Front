@@ -88,7 +88,7 @@ export default function RegisterPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4" style={{ backgroundImage: "url('../public/ImagenFondo.webp')" }}>
+    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4" style={{ backgroundImage: "url('../../public/ImagenFondo.webp')" }}>
       <div className="absolute inset-0 bg-black opacity-40"></div>
       
       <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between">

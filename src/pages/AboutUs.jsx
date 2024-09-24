@@ -52,7 +52,7 @@ export default function AboutUs() {
           <h2 className="text-3xl font-bold text-custom-green mb-8 text-center">Nuestros Fundadores</h2>
           <div className="relative rounded-xl overflow-hidden shadow-2xl">
             <img 
-              src="/public/Foto Coder 1.png" 
+              src="/public/FotoCoder1.png" 
               alt="Fundadores de Dream Reserve" 
               className="w-full h-auto object-cover"
             />
