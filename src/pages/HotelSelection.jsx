@@ -260,11 +260,7 @@ export default function HotelListingPage() {
                               </div>
                               <div className="mt-2 flex flex-col md:flex-row justify-between items-center">
                                 <div className='flex gap-2 mb-2 md:mb-0'>
-                                  <button
-                                    className="text-white border bg-custom-green border-green-800 rounded px-4 py-2 text-sm"
-                                  >
-                                    Ver Fotos
-                                  </button>
+
                                   <button
                                     className="text-white border bg-custom-green rounded px-4 py-2 text-sm"
                                     onClick={() => handleReserveClick(hotel.id, room)}
