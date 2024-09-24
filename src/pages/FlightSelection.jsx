@@ -40,7 +40,7 @@ export default function FlightSelection() {
   useEffect(() => {
     const fetchFlights = async () => {
       try {
-        const response = await axios.get('https://dreamreserve.azurewebsites.net/api/V1/Flight');
+        const response = await axios.get('https://dream-reserve.azurewebsites.net/api/V1/Flight');
         const flightsWithTimes = response.data.map(flight => ({
           ...flight,
           randomTime: generateRandomMorningTime(),
@@ -81,7 +81,8 @@ export default function FlightSelection() {
   const selectedReturnFlight = returnFlights.find(flight => flight.id === selectedReturn);
   const selectedTariffDetails = tariffs.find(tariff => tariff.name === selectedTariff);
 
-  const flightTotalPrice = (selectedDepartureFlight?.flightTypePrice || 0) + (selectedReturnFlight?.flightTypePrice || 0) + (selectedTariffDetails?.price || 0);
+  // Calcular el precio total del vuelo usando el precio base
+  const flightTotalPrice = (selectedDepartureFlight?.price || 0) + (selectedReturnFlight?.price || 0) + (selectedTariffDetails?.price || 0);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(price);
@@ -116,7 +117,7 @@ export default function FlightSelection() {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-xl font-bold text-custom-green">{formatPrice(flight.flightTypePrice)}</div>
+          <div className="text-xl font-bold text-custom-green">{formatPrice(flight.price)}</div> {/* Cambiar a 'flight.price' */}
           <button
             onClick={onSelect}
             className={`mt-2 p-2 border rounded ${isSelected ? 'bg-custom-green text-white' : 'bg-white border-custom-green text-custom-green'}`}
@@ -192,19 +193,19 @@ export default function FlightSelection() {
                         <div key={tariff.name} className={`p-4 border rounded-lg ${selectedTariff === tariff.name ? 'border-custom-green border-2' : ''}`}>
                           <div className="flex flex-col h-full">
                             <div className="flex justify-between items-center mb-2">
-                              <span className="font-semibold">{tariff.name}</span>
-                              <span className="font-bold text-custom-green">{formatPrice(tariff.price)}</span>
+                              <h3 className="text-lg font-semibold">{tariff.name}</h3>
+                              <div className="text-xl font-bold text-custom-green">{formatPrice(tariff.price)}</div>
                             </div>
-                            <ul className="text-sm text-gray-600 mb-4 flex-grow">
-                              {tariff.features.map((feature) => (
-                                <li key={feature} className="mb-1">{feature}</li>
+                            <ul className="list-disc pl-4 text-sm">
+                              {tariff.features.map(feature => (
+                                <li key={feature}>{feature}</li>
                               ))}
                             </ul>
                             <button
                               onClick={() => setSelectedTariff(tariff.name)}
-                              className={`w-full px-2 py-1 rounded ${selectedTariff === tariff.name ? 'bg-custom-green text-white' : 'border border-custom-green text-custom-green'}`}
+                              className={`mt-auto p-2 border rounded ${selectedTariff === tariff.name ? 'bg-custom-green text-white' : 'bg-white border-custom-green text-custom-green'}`}
                             >
-                              {selectedTariff === tariff.name ? "Seleccionado" : "Seleccionar"}
+                              {selectedTariff === tariff.name ? 'Seleccionado' : 'Seleccionar'}
                             </button>
                           </div>
                         </div>
@@ -212,19 +213,16 @@ export default function FlightSelection() {
                     </div>
                   </div>
                 )}
+              </div>
 
-                <div className="mt-8 text-center sm:text-right">
-                  <div className="text-2xl font-bold text-custom-green mb-4">
-                    Total: {formatPrice(flightTotalPrice)}
-                  </div>
-                  <button
-                    onClick={handleReserve}
-                    className="bg-custom-green text-white px-6 py-2 rounded w-full sm:w-auto"
-                    disabled={!selectedDeparture || !selectedReturn}
-                  >
-                    Continuar
-                  </button>
-                </div>
+              <div className="p-4">
+                <button
+                  onClick={handleReserve}
+                  className="bg-custom-green text-white py-2 px-4 rounded hover:bg-green-600"
+                  disabled={!selectedDeparture || !selectedReturn}
+                >
+                  Reservar Vuelos
+                </button>
               </div>
             </div>
           </div>
