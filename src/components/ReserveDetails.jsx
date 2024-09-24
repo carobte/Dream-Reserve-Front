@@ -5,7 +5,7 @@ import { Card, Badge } from '../components';
 
 export default function ReserveDetails({ reserva }) {
     if (!reserva) return null;
-
+    console.log(reserva);
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold text-center text-[#276F62]">Detalles de la Reserva</h2>
@@ -17,14 +17,14 @@ export default function ReserveDetails({ reserva }) {
                             <Hotel className="h-6 w-6" />
                             Alojamiento
                         </h3>
-                        <p className="font-semibold text-lg">{reserva.hotelName}</p>
+                        <p className="font-semibold text-lg">{reserva.hotel}</p>
                         <div className="flex items-center gap-2 mt-2">
                             <Bed className="h-5 w-5 text-gray-500" />
-                            <span>{reserva.roomType} - {reserva.roomName}</span>
+                            <span>{reserva.habitacion}</span>
                         </div>
                         <div className="flex items-center gap-2 mt-2">
                             <Utensils className="h-5 w-5 text-gray-500" />
-                            <span>{reserva.foodDescription}</span>
+                            <span>{reserva.alimentacion}</span>
                         </div>
                     </div>
                 </Card>
@@ -38,11 +38,11 @@ export default function ReserveDetails({ reserva }) {
                         <div className="flex justify-between">
                             <div>
                                 <p className="font-semibold">Check-In</p>
-                                <p>{reserva.checkIn}</p>
+                                <p>{reserva.fechaLlegada}</p>
                             </div>
                             <div>
                                 <p className="font-semibold">Check-Out</p>
-                                <p>{reserva.checkOut}</p>
+                                <p>{reserva.fechaSalida}</p>
                             </div>
                         </div>
                     </div>
@@ -54,13 +54,33 @@ export default function ReserveDetails({ reserva }) {
                             <Plane className="h-6 w-6" />
                             Vuelos
                         </h3>
-                        <div className="space-y-4">
-                            <div>
-                                <h4 className="font-semibold">Vuelo: {reserva.flightName}</h4>
-                                <div className="flex justify-between mt-2">
-                                    <div className="flex items-center gap-2">
-                                        <Clock className="h-5 w-5 text-gray-500" />
-                                        <span>Duración: {reserva.flightDuration}</span>
+                        <div className="flex justify-between">
+                            <div className="space-y-4 mb-5">
+                                <div>
+                                    <h4 className="font-semibold">Vuelo: {reserva.vuelos[0].numero}</h4>
+                                    <div className="flex justify-between mt-2">
+                                        <div className="flex items-center gap-2">
+                                            <Clock className="h-5 w-5 text-gray-500" />
+                                            <span>Duración (bd): 8h 15 </span>
+                                            <div>
+                                                <p>{reserva.fechaLlegada}</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-4">
+                                <div>
+                                    <h4 className="font-semibold">Vuelo: {reserva.vuelos[1].numero}</h4>
+                                    <div className="flex justify-between mt-2">
+                                        <div className="flex items-center gap-2">
+                                            <Clock className="h-5 w-5 text-gray-500" />
+                                            <span>Duración (bd): 8h 15 </span>
+                                            <div>
+                                                <p>{reserva.fechaSalida}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,10 +96,10 @@ export default function ReserveDetails({ reserva }) {
                         </h3>
                         <div className="flex justify-between items-center">
                             <div>
-                                <h4 className="font-semibold">{reserva.tourName}</h4>
-                                <p className="text-sm text-gray-500">Duración: {reserva.tourPrice}</p>
+                                <h4 className="font-semibold">{reserva.tours[0].nombre}</h4>
+                                <p className="text-sm text-gray-500">Descripción: {reserva.tours[0].descripcion}</p>
                             </div>
-                            <Badge>${reserva.tourPrice}</Badge>
+                            <Badge>${reserva.tours[0].precio}</Badge>
                         </div>
                     </div>
                 </Card>
@@ -90,7 +110,7 @@ export default function ReserveDetails({ reserva }) {
                             <DollarSign className="h-6 w-6" />
                             Precio Total
                         </h3>
-                        <p className="text-2xl font-bold">${reserva.total.toLocaleString('es-CO')}</p>
+                        <p className="text-2xl font-bold">{reserva.precioTotal}</p>
                     </div>
                 </Card>
             </div>

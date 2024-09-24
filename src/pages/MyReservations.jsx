@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import NavbarSelect from '../layout/NavbarSelect';
 import Footer from '../layout/Footer';
 import { Card, Badge, ReserveDetails } from '../components';
+import { useAuth } from '../context/AuthContext';
 
 // Componente principal 
 export default function MisReservas() {
 
-  const { user } = useAuth();
+/*   const { user } = useAuth();
 
   if (!user) return (
     <>
@@ -17,8 +18,7 @@ export default function MisReservas() {
         </div>
         <Footer />
     </>
-  )
-
+  ) */
 
   const [reservas, setReservas] = useState([
     {
@@ -34,11 +34,12 @@ export default function MisReservas() {
         { tipo: "Vuelta", numero: "AV1235", salida: "2024-09-27 15:00", llegada: "2024-09-27 18:30" }
       ],
       tours: [
-        { nombre: "Tour Comuna 13", fecha: "Graffiti tour", duracion: "$ 50000" },
+        { nombre: "Tour Comuna 13", descripcion: "Graffiti tour", precio: " 50000" },
       ],
       precioTotal: "2'500.000"
     }
   ])
+  
   const [reservaSeleccionada, setReservaSeleccionada] = useState(null)
 
   return (
