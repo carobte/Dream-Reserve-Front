@@ -12,6 +12,48 @@ With Dream Reserve, users can optimize their time and effort by booking everythi
 
 The objective of Dream Reserve is to provide a comprehensive and accessible solution for travel planning and booking. The platform aims to simplify the search and reservation process, allowing users to compare options, customize their travel experience, and access all the necessary information to make informed decisions. Dream Reserve aspires to be the perfect partner for those looking to enjoy their vacations or business trips hassle-free, ensuring a satisfying and secure user experience.
 
+## Technologies Used
+
+### Frontend
+- **React:** Main library for developing the user interface.
+- **Tailwind CSS:** For styling and layout of the page.
+- **Context API:** Global state management for authentication, bookings, and pricing.
+- **React Router:** Handling navigation and redirects between different views.
+- **JavaScript:** Programming language used for frontend development.
+
+### Target Audience
+
+For all individuals who wish to engage in tourism in the city of Medellín, Colombia.
+
+### Chosen Theme: 
+Tourism
+
+### Authors: 
+
+- [Camilo Barreneche](https://www.github.com/camilobarre)
+- [Carolina Bustamante](https://www.github.com/carobte)
+- [Camilo Campillo](https://www.github.com/J-CamiloG)
+- [Valeria Piedrahita](https://www.github.com/valeria2508)
+- [Santiago Pineda](https://www.github.com/santiagopt97)
+- [David Sánchez](https://www.github.com/deilons)
+
+## Installation
+Instructions to clone the repository and run the application locally.
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/dream-reserve.git
+
+# Navigate to the project directory
+cd dream-reserve
+
+# Install dependencies
+npm install
+
+# Run the application
+npm run dev
+
+=======
 ## Design
 You can view the Figma design [here](https://www.figma.com/design/tDc92TgHA17OsU9tCJQPoR/Dream-Reserve?node-id=2-62&node-type=canvas&t=xhR1xppC1BfxQjoh-0).
 
