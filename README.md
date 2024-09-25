@@ -12,6 +12,12 @@ With Dream Reserve, users can optimize their time and effort by booking everythi
 
 The objective of Dream Reserve is to provide a comprehensive and accessible solution for travel planning and booking. The platform aims to simplify the search and reservation process, allowing users to compare options, customize their travel experience, and access all the necessary information to make informed decisions. Dream Reserve aspires to be the perfect partner for those looking to enjoy their vacations or business trips hassle-free, ensuring a satisfying and secure user experience.
 
+## Design
+You can view the Figma design [here](https://www.figma.com/design/tDc92TgHA17OsU9tCJQPoR/Dream-Reserve?node-id=2-62&node-type=canvas&t=xhR1xppC1BfxQjoh-0).
+
+<img src="./documentation/Captura de pantalla 2024-09-24 a la(s) 9.23.38 p. m..png" alt="Dream Reserve Logo" width="100%"/>
+
+
 ## Technologies Used
 
 ### Frontend
