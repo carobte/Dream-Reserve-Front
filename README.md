@@ -1,25 +1,57 @@
-# Dream Reserve Front
+# Dream Reserve 
 
-Dream Reserve is a website that allows you to make personalized reservations for your stay and tours in the city of Medellin. This is the frontend repository for the collaborative project.
+Dream Reserve is a web platform designed to simplify travel planning and booking. It allows users to search and book flights, hotels, and tours in one place, providing a complete experience for organizing their vacations or business trips. The platform offers a user-friendly interface where travelers can choose different travel options, select hotel rooms, add tours and additional activities, and manage all the details of their itinerary from a single dashboard. Dream Reserve also allows users to customize their bookings according to their preferences, such as flight class, room type, and meal plans, with updated prices displayed in Colombian pesos.
 
-## Prerequisites
+With Dream Reserve, users can optimize their time and effort by booking everything they need for their trip efficiently and securely.
 
-Make sure you have the following installed before getting started:
+- [BackEnd Repository](https://github.com/carobte/Dream-Reserve-Backend)
+- [API](https://dream-reserve.azurewebsites.net/swagger/index.html)
+- [Web](https://dream-reserve.vercel.app/)
 
-- [Node.js](https://nodejs.org/) (version 14.0 or higher)
-- [Git](https://git-scm.com/)
+### Objective
 
-## To clone this repository:
+The objective of Dream Reserve is to provide a comprehensive and accessible solution for travel planning and booking. The platform aims to simplify the search and reservation process, allowing users to compare options, customize their travel experience, and access all the necessary information to make informed decisions. Dream Reserve aspires to be the perfect partner for those looking to enjoy their vacations or business trips hassle-free, ensuring a satisfying and secure user experience.
 
-- <code> Git clone https://github.com/carobte/Dream-Reserve-Front </code>
+## Technologies Used
 
-## To install dependencies
+### Frontend
+- **React:** Main library for developing the user interface.
+- **Tailwind CSS:** For styling and layout of the page.
+- **Context API:** Global state management for authentication, bookings, and pricing.
+- **React Router:** Handling navigation and redirects between different views.
+- **JavaScript:** Programming language used for frontend development.
 
-- <code> npm install </code>
+### Target Audience
 
-## To run the project in dev mode
+For all individuals who wish to engage in tourism in the city of Medellín, Colombia.
 
-- <code> npm run dev </code>
+### Chosen Theme: 
+Tourism
 
-## To build the project for production 
-- <code> npm run build </code>
+### Authors: 
+
+- [Camilo Barreneche](https://www.github.com/camilobarre)
+- [Carolina Bustamante](https://www.github.com/carobte)
+- [Camilo Campillo](https://www.github.com/J-CamiloG)
+- [Valeria Piedrahita](https://www.github.com/valeria2508)
+- [Santiago Pineda](https://www.github.com/santiagopt97)
+- [David Sánchez](https://www.github.com/deilons)
+
+## Installation
+Instructions to clone the repository and run the application locally.
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/dream-reserve.git
+
+# Navigate to the project directory
+cd dream-reserve
+
+# Install dependencies
+npm install
+
+# Run the application
+npm run dev
+
+
+
