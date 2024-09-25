@@ -37,7 +37,7 @@ Tourism
 - [Santiago Pineda](https://www.github.com/santiagopt97)
 - [David Sánchez](https://www.github.com/deilons)
 
-<img src="./public/FotoCoder1.png" alt="Dream Reserve Logo" width="300"/>
+<img src="./public/FotoCoder1.png" alt="Dream Reserve Logo" width="100%"/>
 
 
 ## Installation
