@@ -6,7 +6,6 @@ import { useReserva } from '../context/ReserveContext';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 
-
 export default function NavbarSelect() {
     const { selectedHotel, totalPrice } = usePrice();
     const { origin, destination, startDate, endDate, totalPeople, planType } = useContext(SearchContext);
@@ -17,7 +16,6 @@ export default function NavbarSelect() {
     const [copyFeedback, setCopyFeedback] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
-
 
     const formattedStartDate = startDate ? startDate.toLocaleDateString() : 'Fecha de inicio';
     const formattedEndDate = endDate ? endDate.toLocaleDateString() : 'Fecha de fin';
@@ -37,15 +35,16 @@ export default function NavbarSelect() {
     /* Handlers for navigation */
     const handleHome = () => {
         navigate("/");
+        setMobileMenuOpen(false);
     };
     const handleMyReservations = () => {
         navigate("/my-reservations");
+        setMobileMenuOpen(false);
     }
-
     const handleAboutUs = () => {
         navigate("/about-us");
+        setMobileMenuOpen(false);
     }
-
 
     const toggleMenu = () => setMenuOpen(prev => !prev);
     const toggleItinerary = () => setItineraryOpen(prev => !prev);
@@ -57,19 +56,19 @@ export default function NavbarSelect() {
             <section className="text-white py-4 px-6 w-full fixed top-0 left-0 z-50 bg-custom-green shadow-lg">
                 <nav className="flex justify-between items-center">
                     {/* Logo and Brand Name */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 hover:text-gray-300 transition duration-300">
                         <button
                             onClick={handleHome}
                             className="flex items-center text-white hover:text-gray-300 transition duration-300 space-x-2">
-                            <img src="/DRLogo.png" alt="Logo" className="h-8 w-8" />
-                            <div className="text-white font-bold text-2xl">
+                            <img src="/DRLogo.png" alt="Logo" className="h-8 w-8 " />
+                            <div className="text-white font-bold text-2xl hover:text-gray-300 transition duration-300">
                                 <span className="text-custom-navy-blue">D</span>ream <span className="text-custom-navy-blue">R</span>eserve
                             </div>
                         </button>
                     </div>
 
                     {/* Desktop menu */}
-                    <ul className="hidden md:flex justify-center space-x-6 text-sm text-custom-navy-blue">
+                    <ul className="hidden lg:flex justify-center space-x-6 text-sm text-custom-navy-blue">
                         <li>
                             <button onClick={handleHome} className="hover:text-gray-300 transition duration-300">
                                 Inicio
@@ -107,7 +106,7 @@ export default function NavbarSelect() {
 
                     {/* User info and buttons */}
                     <div className="flex items-center space-x-4">
-                        <button onClick={toggleItinerary} className="text-sm hover:text-gray-300 transition duration-300">
+                        <button onClick={toggleItinerary} className="text-custom-navy-blue text-sm hover:text-gray-300 transition duration-300">
                             Mi Itinerario
                         </button>
 
@@ -125,7 +124,6 @@ export default function NavbarSelect() {
                                         <User className="h-6 w-6 text-gray-500" />
                                     )}
                                 </div>
-
                             </button>
 
                             {/* Dropdown menu */}
@@ -162,19 +160,19 @@ export default function NavbarSelect() {
                             )}
                         </div>
 
-                       {/* Hamburger menu for mobile */}
+                        {/* Hamburger menu for mobile and tablet */}
                         <button
                             onClick={toggleMobileMenu}
-                            className={`md:hidden text-white focus:outline-none transition-transform duration-300 ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}
+                            className={`lg:hidden text-white focus:outline-none transition-transform duration-300 ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}
                         >
                             <Menu className="h-6 w-6" />
                         </button>
                     </div>
                 </nav>
 
-                {/* Mobile menu */}
+                {/* Mobile and tablet menu */}
                 <div 
-                    className={`md:hidden mt-4 bg-gradient-to-r from-teal-600 to-teal-400 rounded-xl shadow-xl overflow-hidden transition-all transform ease-in-out duration-500 ${
+                    className={`lg:hidden mt-4 bg-gradient-to-r from-teal-600 to-teal-400 rounded-xl shadow-xl overflow-hidden transition-all transform ease-in-out duration-500 ${
                         mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                 >
@@ -226,22 +224,23 @@ export default function NavbarSelect() {
                     <div onClick={toggleItinerary} className="fixed inset-0 bg-black opacity-50 z-40 w-full"></div>
 
                     {/* Panel deslizante con animación */}
-                    <div className={`fixed right-0 top-0 h-full w-80 bg-white shadow-lg z-50 transform ${itineraryOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 ease-in-out overflow-y-auto`}>
-                        <div className="p-6 text-black">
+                    <div className={`bg-gradient-to-r from-custom-green to-teal-600 fixed right-0 top-0 h-full w-80 bg-white shadow-lg z-50 transform ${itineraryOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 ease-in-out overflow-y-auto`}>
+                        <div className="p-6 text-black"> 
+                            {/* Contenido del panel deslizante */}
                             <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-2xl font-bold text-custom-green">Mi Itinerario</h2>
+                                <h2 className="text-2xl font-bold text-custom-navy-blue">Mi Itinerario</h2>
                                 <button onClick={toggleItinerary} className="text-gray-500 hover:text-gray-700 transition duration-300">
                                     <X className="h-6 w-6" />
                                 </button>
                             </div>
 
                             {/* Información del itinerario */}
-                            <div className="space-y-4 mb-6">
-                                <ItineraryItem icon={<MapPin className="h-5 w-5" />} text={origin || 'Desde'} />
-                                <ItineraryItem icon={<Building className="h-5 w-5" />} text={destination || 'Medellín'} />
-                                <ItineraryItem icon={<Calendar className="h-5 w-5" />} text={formattedStartDate} />
-                                <ItineraryItem icon={<Calendar className="h-5 w-5" />} text={formattedEndDate} />
-                                <ItineraryItem icon={<Users className="h-5 w-5" />} text={peopleText} />
+                            <div className=" space-y-4 mb-6">
+                                <ItineraryItem icon={<MapPin className="text-custom-navy-blue h-5 w-5" />} text={origin || 'Desde'} />
+                                <ItineraryItem icon={<Building className="text-custom-navy-blue h-5 w-5" />} text={destination || 'Medellín'} />
+                                <ItineraryItem icon={<Calendar className="text-custom-navy-blue h-5 w-5" />} text={formattedStartDate} />
+                                <ItineraryItem icon={<Calendar className="text-custom-navy-blue h-5 w-5" />} text={formattedEndDate} />
+                                <ItineraryItem icon={<Users className="text-custom-navy-blue h-5 w-5" />} text={peopleText} />
                             </div>
 
                             {/* Detalles del hotel */}
@@ -281,8 +280,8 @@ export default function NavbarSelect() {
 
                             {/* Valor Total */}
                             <div className="mt-6 pt-4 border-t border-gray-200">
-                                <h3 className="text-xl font-semibold text-custom-green">Valor Total</h3>
-                                <p className="text-2xl font-bold text-custom-navy-blue">
+                                <h3 className="text-xl font-semibold text-custom-navy-blue">Valor Total</h3>
+                                <p className="text-2xl font-bold text-white">
                                     COP {reserva.valorTotal ? reserva.valorTotal.toLocaleString() : 'No disponible'}
                                 </p>
                             </div>
@@ -296,7 +295,7 @@ export default function NavbarSelect() {
 
 function ItineraryItem({ icon, text }) {
     return (
-        <div className="flex items-center space-x-3 text-gray-600">
+        <div className="flex items-center space-x-3 text-white">
             <div className="text-custom-green">{icon}</div>
             <span>{text}</span>
         </div>
